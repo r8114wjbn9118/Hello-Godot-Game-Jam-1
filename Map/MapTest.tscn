@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkaiooq3f55u6"]
+
+[ext_resource type="Script" path="res://Map/Map.gd" id="1_5xsil"]
+[ext_resource type="PackedScene" uid="uid://dt5fxc8rajoi8" path="res://MapItems/Eye.tscn" id="2_8i2my"]
+[ext_resource type="PackedScene" uid="uid://rjwfydc7rh45" path="res://MapItems/Worm.tscn" id="3_md2ij"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_5xsil")
+
+[node name="Eye" parent="." instance=ExtResource("2_8i2my")]
+position = Vector2(424, 143)
+
+[node name="Warm" parent="." instance=ExtResource("3_md2ij")]
+position = Vector2(87, 91)
+
+[node name="Eye2" parent="." instance=ExtResource("2_8i2my")]
+position = Vector2(389, 345)
