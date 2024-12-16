@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkeqkk8h16y6"]
+
+[ext_resource type="Texture2D" uid="uid://b2q2ovprd5tvx" path="res://icon.svg" id="1_ttpf8"]
+[ext_resource type="Script" path="res://MapItems/plane.gd" id="1_vaslv"]
+
+[node name="Plane" type="Sprite2D"]
+texture = ExtResource("1_ttpf8")
+region_enabled = true
+region_rect = Rect2(27, 37, 72, 50)
+script = ExtResource("1_vaslv")

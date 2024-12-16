@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://rjwfydc7rh45"]
+[gd_scene load_steps=4 format=3 uid="uid://rjwfydc7rh45"]
 
-[node name="Warm" type="Node2D" groups=["Worm"]]
+[ext_resource type="Script" path="res://Map/worm.gd" id="1_02bw8"]
+[ext_resource type="Texture2D" uid="uid://b2q2ovprd5tvx" path="res://icon.svg" id="2_10d7b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6deea"]
+
+[node name="Warm" type="CharacterBody2D" groups=["Worm"]]
+script = ExtResource("1_02bw8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_10d7b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6deea")

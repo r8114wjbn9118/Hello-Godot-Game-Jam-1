@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbc6chjppmlge"]
+
+[ext_resource type="Script" path="res://Map/Map.gd" id="1_anpjl"]
+[ext_resource type="Script" path="res://Map/plane.gd" id="2_h8emp"]
+[ext_resource type="Script" path="res://Map/point.gd" id="2_n4bwe"]
+[ext_resource type="Script" path="res://Map/edge.gd" id="3_dtuuw"]
+[ext_resource type="Script" path="res://Map/worm.gd" id="4_5oq82"]
+[ext_resource type="Texture2D" uid="uid://b2q2ovprd5tvx" path="res://icon.svg" id="6_jdlih"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6deea"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_anpjl")
+
+[node name="Plane" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_h8emp")
+
+[node name="Edge" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_dtuuw")
+
+[node name="Point" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_n4bwe")
+
+[node name="Eye" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Worm" type="Node2D" parent="."]
+
+[node name="MainWorm" type="CharacterBody2D" parent="Worm" groups=["Worm"]]
+unique_name_in_owner = true
+script = ExtResource("4_5oq82")
+
+[node name="Sprite2D" type="Sprite2D" parent="Worm/MainWorm"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_jdlih")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Worm/MainWorm"]
+shape = SubResource("CircleShape2D_6deea")
+
+[node name="SubWorm" type="CharacterBody2D" parent="Worm" groups=["Worm"]]
+unique_name_in_owner = true
+script = ExtResource("4_5oq82")
+
+[node name="Sprite2D" type="Sprite2D" parent="Worm/SubWorm"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_jdlih")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Worm/SubWorm"]
+shape = SubResource("CircleShape2D_6deea")

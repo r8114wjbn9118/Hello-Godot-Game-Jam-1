@@ -14,6 +14,10 @@ config/name="畫龍點睛"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={
@@ -25,6 +29,8 @@ folder_colors={
 
 Eye="龍眼"
 Worm="蟲"
+Point=""
+Edge=""
 
 [rendering]
 
