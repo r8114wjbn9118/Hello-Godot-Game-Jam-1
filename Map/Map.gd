@@ -34,15 +34,25 @@ func _ready() -> void:
 	_update_childs()
 
 func _update_childs():
+	var tileMap:TileMapLayer
+	for i in get_children():
+		if i.is_in_group("TileMap"):
+			i.position = Vector2.ONE*-50
+			tileMap = i
+	
 	var points:Array[Vector2] = []
-	for i in range(size.x):
-		for j in range(size.y):
-			points.append(Vector2(i, j))
+	if tileMap:
+		for i in tileMap.get_used_cells():
+			points.append(Vector2(i))
+	else:
+		for i in range(size.x):
+			for j in range(size.y):
+				points.append(Vector2(i, j))
 	_build(points)
 	_scan_nodes()
 	
 	for i in get_children():
-		if !(i.is_in_group("Worm") or i.is_in_group("Eye")):
+		if !(i.is_in_group("Worm") or i.is_in_group("Eye") or i.is_in_group("TileMap")):
 			i.queue_free()
 	var root = Node2D.new()
 	add_child(root)
@@ -105,10 +115,11 @@ func _set_eye_point(pos:Vector2):
 		var b_center = (B._p1.getPos() + B._p2.getPos())/2.0
 		return (a_center-pos).length() < (b_center-pos).length()
 	_edges.sort_custom(_comp)
-	_eye_edges.append(_edges[0])
-	_eye_edges.append(_edges[1])
-	_eye_edges.append(_edges[2])
-	_eye_edges.append(_edges[3])
+	if _edges.size()>=4:
+		_eye_edges.append(_edges[0])
+		_eye_edges.append(_edges[1])
+		_eye_edges.append(_edges[2])
+		_eye_edges.append(_edges[3])
 
 
 const CELL_SIZE:Vector2 = Vector2.ONE * 100.0 # 單元格大小

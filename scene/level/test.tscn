@@ -1,3 +1,23 @@
-[gd_scene format=3 uid="uid://mphrbleur0ti"]
+[gd_scene load_steps=5 format=4 uid="uid://mphrbleur0ti"]
+
+[ext_resource type="Script" path="res://Map/Map.gd" id="1_dmlhq"]
+[ext_resource type="PackedScene" uid="uid://cim7e6myooa81" path="res://MapItems/TileMap.tscn" id="2_g4spv"]
+[ext_resource type="PackedScene" uid="uid://rjwfydc7rh45" path="res://MapItems/Worm.tscn" id="3_oi1nq"]
+[ext_resource type="PackedScene" uid="uid://dt5fxc8rajoi8" path="res://MapItems/Eye.tscn" id="4_4hsoh"]
 
 [node name="LevelTest" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("1_dmlhq")
+
+[node name="TileMap" parent="Map" instance=ExtResource("2_g4spv")]
+position = Vector2(-50, -50)
+tile_map_data = PackedByteArray("AAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAA=")
+
+[node name="Warm" parent="Map" instance=ExtResource("3_oi1nq")]
+position = Vector2(659, 451)
+
+[node name="Eye" parent="Map" instance=ExtResource("4_4hsoh")]
+
+[node name="Eye2" parent="Map" instance=ExtResource("4_4hsoh")]
+position = Vector2(910, 413)

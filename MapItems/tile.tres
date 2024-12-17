@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://be2ks1ol3642u"]
+
+[ext_resource type="Texture2D" uid="uid://b1q7mixaty1tr" path="res://MapItems/enableBlock.png" id="1_w4diu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mbrra"]
+resource_name = "enable"
+texture = ExtResource("1_w4diu")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(100, 100)
+sources/0 = SubResource("TileSetAtlasSource_mbrra")
