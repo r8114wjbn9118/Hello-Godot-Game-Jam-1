@@ -1,0 +1,214 @@
+[gd_scene load_steps=18 format=3 uid="uid://csxhl41is4w78"]
+
+[ext_resource type="Texture2D" uid="uid://dtct2131fr665" path="res://image/title/background.png" id="1_ppyqj"]
+[ext_resource type="Script" path="res://script/title.gd" id="1_vvba4"]
+[ext_resource type="Texture2D" uid="uid://wvajv3dbccn" path="res://image/title/start_game.png" id="2_eibid"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chf1w"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kjrcq"]
+animation = &"fadein"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e5sgg"]
+animation = &"fadeout"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8umy1"]
+animation = &"wait"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_slnks"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l326m"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_is5gv"]
+advance_mode = 2
+advance_condition = &"start"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vws2y"]
+states/Start/position = Vector2(155, 100)
+states/fadein/node = SubResource("AnimationNodeAnimation_kjrcq")
+states/fadein/position = Vector2(709, 100)
+states/fadeout/node = SubResource("AnimationNodeAnimation_e5sgg")
+states/fadeout/position = Vector2(344, 100)
+states/wait/node = SubResource("AnimationNodeAnimation_8umy1")
+states/wait/position = Vector2(539, 100)
+transitions = ["Start", "fadeout", SubResource("AnimationNodeStateMachineTransition_slnks"), "fadeout", "wait", SubResource("AnimationNodeStateMachineTransition_l326m"), "wait", "fadein", SubResource("AnimationNodeStateMachineTransition_is5gv")]
+
+[sub_resource type="Animation" id="Animation_5stew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Panel:theme_override_styles/panel:bg_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.498039)]
+}
+
+[sub_resource type="Animation" id="Animation_0fssm"]
+resource_name = "wait"
+length = 2.0
+loop_mode = 2
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Panel:theme_override_styles/panel:bg_color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.498039), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_soke4"]
+resource_name = "fadeout"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xjrts"]
+resource_name = "fadein"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dinci"]
+resource_name = "start"
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83xna"]
+_data = {
+"RESET": SubResource("Animation_5stew"),
+"fadein": SubResource("Animation_xjrts"),
+"fadeout": SubResource("Animation_soke4"),
+"start": SubResource("Animation_dinci"),
+"wait": SubResource("Animation_0fssm")
+}
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vvba4")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="TextureRect" parent="Panel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ppyqj")
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chf1w")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.4
+offset_top = -27.0
+offset_right = 185.4
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eibid")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_vws2y")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/start = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_83xna")
+}
+autoplay = "fadeout"
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
