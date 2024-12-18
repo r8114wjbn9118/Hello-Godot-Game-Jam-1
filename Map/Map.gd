@@ -39,7 +39,7 @@ var old_spacing:Vector2i
 @onready var worm_manager = %Worm
 #endregion
 
-var timer:float = 0.0
+var timer:float = 0.0 # update timer
 var main_worm_pos:Vector2
 var sub_worm_pos:Vector2
 
@@ -56,8 +56,9 @@ func _process(delta: float) -> void:
 		if timer > .5:
 			timer = 0
 			update()
+#region 地圖編輯器
 
-func update():
+func update(): 
 	update_tile()
 	update_child()
 
@@ -105,6 +106,7 @@ func update_child():
 		
 		main_worm_pos = worm_manager.main_worm.position
 		sub_worm_pos = worm_manager.sub_worm.position
+#endregion
 
 
 
