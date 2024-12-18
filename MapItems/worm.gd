@@ -25,7 +25,7 @@ var move_path = [] # TODO
 var body:WormTail
 func _ready() -> void:
 	if !Engine.is_editor_hint():
-		body = WormTail.new(position, 30, 10)
+		body = WormTail.new(position, 70, 10)
 		
 		get_parent().call_deferred("add_child", body)
 
