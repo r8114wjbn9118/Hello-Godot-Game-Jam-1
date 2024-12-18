@@ -5,7 +5,7 @@ var game_pos:Vector2i
 var point_game_pos:Array[Vector2i]
 var direction:Vector2i
 
-func initialize(game_pos,point_pos_list,direction = null):
+func initialize(game_pos, point_pos_list, direction = null):
 	self.game_pos = game_pos
 	if direction:
 		self.direction = direction

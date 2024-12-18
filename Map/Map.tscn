@@ -1,52 +1,58 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbc6chjppmlge"]
+[gd_scene load_steps=9 format=4 uid="uid://5jr077ljxgwi"]
 
 [ext_resource type="Script" path="res://Map/Map.gd" id="1_anpjl"]
-[ext_resource type="Script" path="res://Map/plane.gd" id="2_h8emp"]
-[ext_resource type="Script" path="res://Map/point.gd" id="2_n4bwe"]
-[ext_resource type="Script" path="res://Map/edge.gd" id="3_dtuuw"]
-[ext_resource type="Script" path="res://Map/worm.gd" id="4_5oq82"]
-[ext_resource type="Texture2D" uid="uid://b2q2ovprd5tvx" path="res://icon.svg" id="6_jdlih"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6deea"]
+[ext_resource type="TileSet" uid="uid://dqt36iogsx57j" path="res://Tile/map.tres" id="2_035eu"]
+[ext_resource type="Script" path="res://Map/EyeManager.gd" id="2_h8emp"]
+[ext_resource type="Script" path="res://Map/PointManager.gd" id="2_n4bwe"]
+[ext_resource type="Script" path="res://Map/WormManager.gd" id="4_5oq82"]
+[ext_resource type="Script" path="res://Map/VEdgeManager.gd" id="4_m55aa"]
+[ext_resource type="Script" path="res://Map/HEdgeManager.gd" id="5_phctv"]
+[ext_resource type="PackedScene" uid="uid://rjwfydc7rh45" path="res://MapItems/Worm.tscn" id="6_k3m5s"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
+spacing = Vector2i(100, 100)
 
-[node name="Plane" type="Node2D" parent="."]
+[node name="HEdge" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_h8emp")
+position = Vector2(80, 20)
+tile_map_data = PackedByteArray("AAAFAAEAAQACAAQAAAAEAAEAAQACAAQAAAADAAEAAQACAAQAAAACAAEAAQACAAQAAAACAAMAAQACAAQAAAADAAMAAQACAAQAAAAEAAMAAQACAAQAAAAFAAMAAQACAAQAAAACAAIAAQACAAQAAAAFAAIAAQACAAQAAAAEAAIAAQACAAQAAAADAAIAAQACAAQAAAABAAEAAQACAAQAAAAAAAAAAQACAAQAAAAAAAEAAQACAAQAAAA=")
+tile_set = ExtResource("2_035eu")
+script = ExtResource("5_phctv")
 
-[node name="Edge" type="Node2D" parent="."]
+[node name="VEdge" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_dtuuw")
+position = Vector2(30, 70)
+tile_map_data = PackedByteArray("AAACAAEAAQAEAAMAAAACAAIAAQAEAAMAAAAGAAEAAQAEAAMAAAAGAAIAAQAEAAMAAAAFAAEAAQAEAAMAAAAEAAEAAQAEAAMAAAADAAEAAQAEAAMAAAADAAIAAQAEAAMAAAAEAAIAAQAEAAMAAAAFAAIAAQAEAAMAAAAAAAAAAQAEAAMAAAABAAAAAQAEAAMAAAA=")
+tile_set = ExtResource("2_035eu")
+script = ExtResource("4_m55aa")
 
-[node name="Point" type="Node2D" parent="."]
+[node name="Point" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
+position = Vector2(30, 20)
+tile_map_data = PackedByteArray("AAAGAAEAAQAAAAEAAAAFAAEAAQAAAAEAAAAEAAEAAQAAAAEAAAADAAEAAQAAAAEAAAACAAEAAQAAAAEAAAACAAIAAQAAAAEAAAACAAMAAQAAAAEAAAADAAMAAQAAAAEAAAAEAAMAAQAAAAEAAAAFAAMAAQAAAAEAAAAGAAMAAQAAAAEAAAAGAAIAAQAAAAEAAAAFAAIAAQAAAAEAAAAEAAIAAQAAAAEAAAADAAIAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAABAAAAAQAAAAEAAAABAAEAAQAAAAEAAAA=")
+tile_set = ExtResource("2_035eu")
 script = ExtResource("2_n4bwe")
 
-[node name="Eye" type="Node2D" parent="."]
+[node name="Eye" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
+position = Vector2(80, 70)
+tile_map_data = PackedByteArray("AAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAACAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAADAAIAAQAAAAAAAAACAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAAAAAAAQAAAAAAAAA=")
+tile_set = ExtResource("2_035eu")
+script = ExtResource("2_h8emp")
 
 [node name="Worm" type="Node2D" parent="."]
-
-[node name="MainWorm" type="CharacterBody2D" parent="Worm" groups=["Worm"]]
 unique_name_in_owner = true
 script = ExtResource("4_5oq82")
 
-[node name="Sprite2D" type="Sprite2D" parent="Worm/MainWorm"]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("6_jdlih")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Worm/MainWorm"]
-shape = SubResource("CircleShape2D_6deea")
-
-[node name="SubWorm" type="CharacterBody2D" parent="Worm" groups=["Worm"]]
+[node name="MainWorm" parent="Worm" instance=ExtResource("6_k3m5s")]
 unique_name_in_owner = true
-script = ExtResource("4_5oq82")
+position = Vector2(180, 170)
+rotation = 3.14159
+scale = Vector2(3, 3)
 
-[node name="Sprite2D" type="Sprite2D" parent="Worm/SubWorm"]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("6_jdlih")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Worm/SubWorm"]
-shape = SubResource("CircleShape2D_6deea")
+[node name="SubWorm" parent="Worm" instance=ExtResource("6_k3m5s")]
+unique_name_in_owner = true
+position = Vector2(280, 70)
+scale = Vector2(3, 3)
+animation = &"sub"
