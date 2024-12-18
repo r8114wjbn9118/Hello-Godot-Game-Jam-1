@@ -124,9 +124,13 @@ func check_finish():
 		var h_checked_edge_list:Array[Vector2i] = []
 		var v_checked_edge_list:Array[Vector2i] = []
 		var need_check_list:Array[Vector2i] = [eye_game_pos]
-		for check_count in max_check_finish_distance:
+		
+		var check_count:int = 0
+		while check_count < max_check_finish_distance \
+		or max_check_finish_distance < 0:
 			var new_need_check_list:Array[Vector2i] = []
 			for pos in need_check_list:
+				# 這位置是眼(Eye)
 				if pos in eye_game_pos_list:
 					eye_finish_list.append(pos)
 
@@ -160,6 +164,8 @@ func check_finish():
 
 			if not new_need_check_list.is_empty():
 				need_check_list = new_need_check_list
+				
+			check_count += 1
 		if not need_check_list.is_empty():
 			return false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://5jr077ljxgwi"]
+[gd_scene load_steps=10 format=4 uid="uid://5jr077ljxgwi"]
 
 [ext_resource type="Script" path="res://Map/Map.gd" id="1_anpjl"]
 [ext_resource type="TileSet" uid="uid://dqt36iogsx57j" path="res://Tile/map.tres" id="2_035eu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Map/VEdgeManager.gd" id="4_m55aa"]
 [ext_resource type="Script" path="res://Map/HEdgeManager.gd" id="5_phctv"]
 [ext_resource type="PackedScene" uid="uid://rjwfydc7rh45" path="res://MapItems/Worm.tscn" id="6_k3m5s"]
+[ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Background.tscn" id="9_7p5ys"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
@@ -56,3 +57,6 @@ unique_name_in_owner = true
 position = Vector2(680, 170)
 scale = Vector2(3, 3)
 animation = &"sub"
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("9_7p5ys")]
+animation = &"monochrome"
