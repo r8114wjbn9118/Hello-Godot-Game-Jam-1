@@ -4,7 +4,7 @@ class_name Title
 @onready var anim_tree = $AnimationTree
 
 #var select_level_scene = preload("res://scene/selectLevel.tscn")
-var select_level_scene = preload("res://Map/MapTest.tscn")
+var select_level_scene = preload("res://Map/Map.tscn")
 
 func _ready() -> void:
 	anim_tree["parameters/conditions/start"] = false

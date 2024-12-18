@@ -1,7 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3ur5fbn18y5x"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xbtlj"]
-load_path = "res://.godot/imported/enableBlock.png-01ce811da983362f3894a5b05e336f86.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mbrra"]
 resource_name = "enable"
