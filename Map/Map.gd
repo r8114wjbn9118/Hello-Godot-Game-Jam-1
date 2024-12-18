@@ -39,18 +39,19 @@ var old_spacing:Vector2i
 @onready var worm_manager = %Worm
 #endregion
 
-var build:bool = true
 var timer:float = 0.0
+var main_worm_pos:Vector2
+var sub_worm_pos:Vector2
 
 func _ready():
 	update()
 
 	worm_manager.initialize(max_move_distance)
-	if not build:
+	if not Engine.is_editor_hint():
 		worm_manager.move_finish_signal.connect(_on_worm_move_finish)
 
 func _process(delta: float) -> void:
-	if build:
+	if Engine.is_editor_hint():
 		timer += delta
 		if timer > .5:
 			timer = 0
@@ -97,8 +98,13 @@ func update_child():
 		h_edge_manager.update_child(point_list)
 		v_edge_manager.update_child(point_list)
 		eye_manager.update_child(point_list)
+	
+	if main_worm_pos != worm_manager.main_worm.position \
+	or sub_worm_pos != worm_manager.sub_worm.position:
+		worm_manager.init_pos()
 		
-	worm_manager.init_pos()
+		main_worm_pos = worm_manager.main_worm.position
+		sub_worm_pos = worm_manager.sub_worm.position
 
 
 
@@ -156,6 +162,7 @@ func check_finish():
 			return false
 
 func _on_worm_move_finish():
+	print("Worm Move Finish")
 	check_finish()
 
 

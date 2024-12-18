@@ -46,7 +46,7 @@ func create_cell(vec:Vector2i):
 
 
 func get_game_pos_list():
-	var list:Array = []
+	var list:Array[Vector2i] = []
 	var used_cell_list:Array[Vector2i] = get_used_cells()
 	for pos in used_cell_list:
 		var pos_type:TYPE = coords_type.get(get_cell_atlas_coords(pos))

@@ -46,7 +46,6 @@ func initialize(max_move_distance):
 	main_worm.rotation_degrees = 180
 	
 func init_pos():
-	print("Init Pos")
 	main_worm.game_pos = point_manager.get_point_game_pos(main_worm.position)
 	main_worm.position = point_manager.get_point_position(main_worm.game_pos)
 
@@ -104,11 +103,17 @@ func check_move(direction):
 
 
 func get_move_path():
+	var list:Array[Vector2i] = []
 	pass
+	return list
 func get_move_path_h():
+	var list:Array[Vector2i] = []
 	pass
+	return list
 func get_move_path_v():
+	var list:Array[Vector2i] = []
 	pass
+	return list
 
 
 

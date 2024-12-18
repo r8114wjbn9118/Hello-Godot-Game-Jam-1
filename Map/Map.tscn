@@ -37,7 +37,7 @@ script = ExtResource("2_n4bwe")
 [node name="Eye" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
 position = Vector2(80, 70)
-tile_map_data = PackedByteArray("AAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAACAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAADAAIAAQAAAAAAAAACAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAAAAAAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAMAAAACAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAADAAIAAQAAAAAAAAACAAEAAQAAAAMAAAAFAAIAAQAAAAAAAAAAAAAAAQAAAAAAAAA=")
 tile_set = ExtResource("2_035eu")
 script = ExtResource("2_h8emp")
 
@@ -47,12 +47,12 @@ script = ExtResource("4_5oq82")
 
 [node name="MainWorm" parent="Worm" instance=ExtResource("6_k3m5s")]
 unique_name_in_owner = true
-position = Vector2(180, 170)
+position = Vector2(280, 370)
 rotation = 3.14159
 scale = Vector2(3, 3)
 
 [node name="SubWorm" parent="Worm" instance=ExtResource("6_k3m5s")]
 unique_name_in_owner = true
-position = Vector2(280, 70)
+position = Vector2(680, 170)
 scale = Vector2(3, 3)
 animation = &"sub"

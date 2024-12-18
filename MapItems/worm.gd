@@ -51,7 +51,7 @@ func can_move(direction, map_size):
 	pass
 
 func start_move(target_game_pos, target_pos):
-	printt(target_game_pos, target_pos)
+	printt("Worm Start Move", target_game_pos, target_pos)
 	state = ACTION.MOVE
 	self.target_game_pos = target_game_pos
 	self.target_pos = target_pos
