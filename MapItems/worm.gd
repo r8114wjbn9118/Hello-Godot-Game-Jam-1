@@ -20,11 +20,20 @@ var game_pos:Vector2i
 var target_game_pos
 var target_pos
 
-var move_path = []
+var move_path = [] # TODO
+
+var body:WormTail
+func _ready() -> void:
+	if !Engine.is_editor_hint():
+		body = WormTail.new(position, 30, 10)
+		
+		get_parent().call_deferred("add_child", body)
 
 func _physics_process(delta: float):
 	if state == ACTION.MOVE:
 		move(delta)
+	if !Engine.is_editor_hint():
+		body.setHead(position)
 		
 func move(delta):
 	position += position.direction_to(target_pos) * move_speed * delta

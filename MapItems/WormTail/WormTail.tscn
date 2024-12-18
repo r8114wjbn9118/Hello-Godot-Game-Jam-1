@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs3es4rtkdtr"]
+
+[ext_resource type="Script" path="res://MapItems/WormTail/WormTail.gd" id="1_4kf2x"]
+
+[node name="WormTail" type="Line2D"]
+points = PackedVector2Array(-2, 2, -36, 104, -136, 128)
+default_color = Color(0.768627, 0.231373, 0.466667, 1)
+joint_mode = 2
+script = ExtResource("1_4kf2x")

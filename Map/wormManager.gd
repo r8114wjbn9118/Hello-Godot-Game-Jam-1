@@ -125,6 +125,8 @@ func Do( direction:Vector2i ):
 	_undo_redo.create_action("Move")
 	_undo_redo.add_do_method(move.bind(target, target_sub))
 	_undo_redo.add_undo_method(unmove.bind(unmove_target, unmove_target_sub))
+	_undo_redo.add_undo_property(main_worm.body, "points", main_worm.body.points)
+	_undo_redo.add_undo_property(sub_worm.body, "points", sub_worm.body.points)
 	_undo_redo.commit_action()
 
 func Reset(): # TODO
