@@ -37,7 +37,9 @@ func create_body(max_distance):
 	body = WormTail.new(self, max_distance, %Point)
 	return body
 	
-
+func set_pos(game_pos, target_pos): # NOTE 由UNDO調用
+	self.game_pos = game_pos
+	position = target_pos
 
 func move(delta):
 	position += position.direction_to(target_pos) * move_speed * delta

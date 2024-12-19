@@ -7,8 +7,8 @@ signal move_finish_signal()
 @onready var point_manager = %Point
 @onready var h_edge_manager = %HEdge
 @onready var v_edge_manager = %VEdge
-@onready var main_worm = %MainWorm
-@onready var sub_worm = %SubWorm
+@onready var main_worm := %MainWorm
+@onready var sub_worm := %SubWorm
 
 enum ACTION {
 	WAIT,
@@ -178,18 +178,20 @@ func unmove(target_map_pos, sub_target_map_pos): # NOTE move 的反向操作 (�
 	
 	change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
 	main_worm.rotation = move_rotate - PI / 2
-	main_worm.start_move(
-		target_map_pos,
-		point_manager.get_point_position(target_map_pos)
-	)
+	main_worm.set_pos(target_map_pos, point_manager.get_point_position(target_map_pos))
+	#main_worm.start_move(
+		#target_map_pos,
+		#point_manager.get_point_position(target_map_pos)
+	#)
 	
 	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
 	sub_worm.rotation = move_rotate + PI / 2
-	sub_worm.start_move(
-		sub_target_map_pos,
-		point_manager.get_point_position(sub_target_map_pos)
-	)
-	state = ACTION.MOVE
+	sub_worm.set_pos(sub_target_map_pos, point_manager.get_point_position(sub_target_map_pos))
+	#sub_worm.start_move(
+		#sub_target_map_pos,
+		#point_manager.get_point_position(sub_target_map_pos)
+	#)
+	#state = ACTION.MOVE
 
 var _undo_redo = UndoRedo.new() # 命令模式
 
