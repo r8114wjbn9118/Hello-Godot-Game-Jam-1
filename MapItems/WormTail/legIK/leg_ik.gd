@@ -21,10 +21,11 @@ func FABRIK_F(start:Vector2, end:Vector2):  # 正向
 	for i in range(1, arr.size()):
 		if (arr[i] - arr[i-1]).length() > LENGTH:
 			arr[i] = (arr[i] - arr[i-1]).normalized() * LENGTH + arr[i-1]
-	arr[-1] = end
 	%Line2D.points = arr
+
 func FABRIK_I(start:Vector2, end:Vector2):  # 反向
 	var arr:PackedVector2Array = %Line2D.points
+	arr[-1] = end
 	for i in range(arr.size()-2, -1, -1): # 反向
 			if (arr[i] - arr[i+1]).length() > LENGTH:
 				arr[i] = (arr[i] - arr[i+1]).normalized() * LENGTH + arr[i+1]

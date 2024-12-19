@@ -19,7 +19,7 @@ script = ExtResource("1_aav5k")
 [node name="Node" type="Node" parent="."]
 
 [node name="PathLine" type="Line2D" parent="Node"]
-points = PackedVector2Array(0, 0, 82, 9)
+points = PackedVector2Array(0, 0, 197, 0)
 width = 30.0
 default_color = Color(0.750604, 0.452951, 0.254425, 1)
 script = ExtResource("2_yo5do")
@@ -37,19 +37,19 @@ progress = 54.3416
 
 [node name="LegIk_FR" parent="Node/Body" instance=ExtResource("5_ca66f")]
 z_index = -1
-position = Vector2(123, -1)
+position = Vector2(76, -31)
 
 [node name="LegIk_FL" parent="Node/Body" instance=ExtResource("5_ca66f")]
 z_index = -1
-position = Vector2(-54, 58)
+position = Vector2(38, 40)
 
 [node name="LegIk_BR" parent="Node/Body" instance=ExtResource("5_ca66f")]
 z_index = -1
-position = Vector2(34, 112)
+position = Vector2(58, -4)
 
 [node name="LegIk_BL" parent="Node/Body" instance=ExtResource("5_ca66f")]
 z_index = -1
-position = Vector2(146, 100)
+position = Vector2(130, -34)
 
 [node name="BodyLine" type="Line2D" parent="Node/Body"]
 points = PackedVector2Array(94, 39, 181, 58)
