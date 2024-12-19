@@ -11,7 +11,7 @@ var old_auto_margin
 @export var margin:Vector2i = Vector2i(0, 0)
 var old_margin:Vector2i
 ## 面(Eye)的大小, 以此同時控制線(VEdge/HEdge)和點(Point)的大小和位置
-@export var spacing:Vector2i = Vector2i(50, 50)
+@export var spacing:Vector2i = Vector2i.ONE * 100
 var old_spacing:Vector2i
 #endregion
 

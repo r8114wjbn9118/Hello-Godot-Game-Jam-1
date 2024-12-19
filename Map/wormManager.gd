@@ -102,6 +102,7 @@ func check(direction):
 		return -1
 	
 	# 最大距離限制
+	print(move_path.size(), "/", max_move_distance)
 	if move_path.size() > max_move_distance:
 		return 0
 
