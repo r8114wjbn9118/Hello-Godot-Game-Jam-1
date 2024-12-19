@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dt5fxc8rajoi8"]
 
 [ext_resource type="Script" path="res://MapItems/eye.gd" id="1_ignwh"]
-[ext_resource type="Texture2D" uid="uid://blgd37qk2dlp3" path="res://image/tile.png" id="1_y0qxn"]
+[ext_resource type="Texture2D" uid="uid://blgd37qk2dlp3" path="res://image/tile/tile.png" id="1_y0qxn"]
 
 [node name="Eye" type="Sprite2D" groups=["Eye"]]
 texture = ExtResource("1_y0qxn")

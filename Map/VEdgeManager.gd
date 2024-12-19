@@ -2,8 +2,6 @@
 extends EdgeManager
 class_name VEdgeManager
 
-var list = []
-
 func _ready() -> void:
 	super._ready()
 
@@ -32,3 +30,11 @@ func update_child(point_list:Array[Vector2i]):
 
 func create_cell(vec:Vector2i):
 	set_cell(vec, 1, Vector2i(4, 3))
+
+func get_game_pos_from_two_point(game_pos_1, game_pos_2):
+	var direction = game_pos_2 - game_pos_1
+	if direction == Vector2i.DOWN:
+		return game_pos_1
+	if abs(direction) == Vector2i.DOWN:
+		return game_pos_2
+	return null

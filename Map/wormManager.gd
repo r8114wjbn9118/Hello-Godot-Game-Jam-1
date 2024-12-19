@@ -4,9 +4,9 @@ class_name WormManager
 
 signal move_finish_signal()
 
-@export var move_speed:float = 1
-
 @onready var point_manager = %Point
+@onready var h_edge_manager = %HEdge
+@onready var v_edge_manager = %VEdge
 @onready var main_worm = %MainWorm
 @onready var sub_worm = %SubWorm
 
@@ -16,10 +16,15 @@ enum ACTION {
 	START,
 	END,
 }
-
 var state:int = ACTION.START
 var move_path = []
-var max_move_distance:int
+
+var move_speed:float = 200:
+	set(value):
+		main_worm.move_speed = value
+		sub_worm.move_speed = value
+		move_speed = value
+var max_move_distance:int = 8
 
 var body = []
 
@@ -28,13 +33,17 @@ var body = []
 func _ready() -> void:
 	main_worm.move_finish_signal.connect(_on_worm_move_finish)
 	sub_worm.move_finish_signal.connect(_on_worm_move_finish)
-	pass
 
-func initialize(max_move_distance):
+func initialize(move_speed, max_move_distance):
+	self.move_speed = move_speed
 	self.max_move_distance = max_move_distance
+	
+	init_pos()
+	move_path = [main_worm.game_pos]
+	
+	create_body()
+	
 	state = ACTION.WAIT
-
-	main_worm.rotation_degrees = 180
 	
 func init_pos():
 	main_worm.game_pos = point_manager.get_point_game_pos(main_worm.position)
@@ -43,12 +52,13 @@ func init_pos():
 	sub_worm.game_pos = point_manager.get_point_game_pos(sub_worm.position)
 	sub_worm.position = point_manager.get_point_position(sub_worm.game_pos)
 
-func _physics_process(delta: float) -> void:
-	if state == ACTION.MOVE:
-		if main_worm.state == ACTION.WAIT \
-		and sub_worm.state == ACTION.WAIT:
-			state = ACTION.WAIT
-
+func create_body():
+	var main_worm_body = main_worm.create_body(max_move_distance)
+	add_child(main_worm_body)
+	
+	var sub_worm_body = sub_worm.create_body(max_move_distance)
+	add_child(sub_worm_body)
+	
 
 
 
@@ -56,46 +66,105 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if state == ACTION.WAIT:
-		if Input.is_action_pressed("ui_up") and check(Vector2i.UP):
-			Do(Vector2i.UP)
-		elif Input.is_action_pressed("ui_left") and check(Vector2i.LEFT):
-			Do(Vector2i.LEFT)
-		elif Input.is_action_pressed("ui_right") and check(Vector2i.RIGHT):
-			Do(Vector2i.RIGHT)
-		elif Input.is_action_pressed("ui_down") and check(Vector2i.DOWN):
-			Do(Vector2i.DOWN)
+		if Input.is_action_pressed("ui_up"):
+			return move_input(Vector2i.UP)
+		elif Input.is_action_pressed("ui_left"):
+			return move_input(Vector2i.LEFT)
+		elif Input.is_action_pressed("ui_right"):
+			return move_input(Vector2i.RIGHT)
+		elif Input.is_action_pressed("ui_down"):
+			return move_input(Vector2i.DOWN)
 		elif Input.is_action_pressed("z"):
 			Undo()
+			
+func move_input(direction:Vector2i):
+	var action = check(direction)
+	if action < 0: # 返回
+		Undo()
+		return true
+	if action > 0: # 正常移動
+		Do(direction)
+		return true
+	#if action == 0: # 無法移動
+	return false
 
-func check(direction): 
+func check(direction):
 	var map_point_list = point_manager.get_used_cells()
+	var target_edge_map_pos
 
-	var target_map_pos = main_worm.game_pos + direction # 設定目標點
+	# 設定目標點
+	var target_map_pos = main_worm.game_pos + direction #* main_worm.action_distance
+
+	# 目標位置與最後行動的位置相同, 輸出-1以執行undo
+	# 如果有傳送效果可能需要再改?
+	# 因為往下有路徑檢測, 所以需要先運行
+	if move_path.size() > 1 and target_map_pos == move_path[-2]:
+		return -1
+	
+	# 最大距離限制
+	if move_path.size() > max_move_distance:
+		return 0
+
 	if not target_map_pos in map_point_list:
-		return false
+		return 0
+	if not check_edge_is_passable(main_worm.game_pos, target_map_pos):
+		return 0
+		
 
-	var sub_target_map_pos = sub_worm.game_pos + direction * -1
+	var sub_target_map_pos = sub_worm.game_pos + direction * -1 #* sub_worm.action_distance
 	if not sub_target_map_pos in map_point_list:
-		return false
-	# NOTE 之後移動至Move
-	#if move_path.size() == max_move_distance: 
-		#if target_map_pos == move_path[-1]: # NOTE 意義不明?
-			#move_path.pop_back()
-		#else:
-			#return false
-	#else:
-		#move_path.append(target_map_pos)
-	return true
+		return 0
+	if not check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos):
+		return 0
+	
+	# 相撞
+	if target_map_pos == sub_target_map_pos \
+	or target_map_pos == sub_worm.game_pos \
+	and sub_target_map_pos == main_worm.game_pos:
+		return 0
+		
 
+	return 1
+	
+
+	# NOTE 之後移動至Move
+	
+	#if target_map_pos == move_path[-1]: # undo
+		#move_path.pop_back()
+	#elif move_path.size() < max_move_distance: # do
+		#move_path.append(target_map_pos)
+	#else:
+		#return false
+	return true
+	
+func check_edge_is_passable(p1, p2):
+	var edge_game_pos
+	
+	edge_game_pos = h_edge_manager.get_game_pos_from_two_point(p1, p2)
+	if edge_game_pos != null:
+		return h_edge_manager.is_passable(edge_game_pos)
+
+	edge_game_pos = v_edge_manager.get_game_pos_from_two_point(p1, p2)
+	if edge_game_pos != null:
+		return v_edge_manager.is_passable(edge_game_pos)
+
+	return false
 
 
 
 func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操作 (不應該被直接調用)
+	var move_rotate = Vector2(main_worm.game_pos - target_map_pos).angle()
 	move_path.append(target_map_pos) # NOTE 紀錄路徑
+	
+	change_edge_available_count(main_worm.game_pos, target_map_pos, -1)
+	main_worm.rotation = move_rotate + PI / 2
 	main_worm.start_move(
 		target_map_pos,
 		point_manager.get_point_position(target_map_pos)
 	)
+	
+	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, -1)
+	sub_worm.rotation = move_rotate - PI / 2
 	sub_worm.start_move(
 		sub_target_map_pos,
 		point_manager.get_point_position(sub_target_map_pos)
@@ -103,11 +172,18 @@ func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操�
 	state = ACTION.MOVE
 
 func unmove(target_map_pos, sub_target_map_pos): # NOTE move 的反向操作 (不應該被直接調用)
+	var move_rotate = Vector2(main_worm.game_pos - target_map_pos).angle()
 	move_path.pop_back() # NOTE 紀錄路徑
+	
+	change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
+	main_worm.rotation = move_rotate - PI / 2
 	main_worm.start_move(
 		target_map_pos,
 		point_manager.get_point_position(target_map_pos)
 	)
+	
+	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
+	sub_worm.rotation = move_rotate + PI / 2
 	sub_worm.start_move(
 		sub_target_map_pos,
 		point_manager.get_point_position(sub_target_map_pos)
@@ -120,7 +196,7 @@ func Do( direction:Vector2i ):
 	var target = main_worm.game_pos + direction # 設定目標點
 	var target_sub = sub_worm.game_pos + direction * -1
 	var unmove_target = main_worm.game_pos # 設定回復點
-	var unmove_target_sub = sub_worm.game_pos 
+	var unmove_target_sub = sub_worm.game_pos
 	
 	_undo_redo.create_action("Move")
 	_undo_redo.add_do_method(move.bind(target, target_sub))
@@ -141,25 +217,18 @@ func Redo(): # TODO
 
 
 
+func change_edge_available_count(p1, p2, n):
+	var edge_game_pos
+	
+	edge_game_pos = h_edge_manager.get_game_pos_from_two_point(p1, p2)
+	if edge_game_pos != null:
+		return h_edge_manager.change_available_count(edge_game_pos, n)
 
+	edge_game_pos = v_edge_manager.get_game_pos_from_two_point(p1, p2)
+	if edge_game_pos != null:
+		return v_edge_manager.change_available_count(edge_game_pos, n)
 
-
-
-
-
-
-func get_move_path():
-	var list:Array[Vector2i] = []
-	pass
-	return list
-func get_move_path_h():
-	var list:Array[Vector2i] = []
-	pass
-	return list
-func get_move_path_v():
-	var list:Array[Vector2i] = []
-	pass
-	return list
+	return false
 
 
 

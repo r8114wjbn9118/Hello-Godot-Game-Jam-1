@@ -22,13 +22,13 @@ var old_spacing:Vector2i
 ## 最大檢測範圍(-1=無限).
 ## 從眼(Eye)開始檢查(-1)四個方向的邊, 如果不是關閉的, 則再次檢查(-1)未關閉方向位置的邊.
 ## 直到所有邊完全關閉(完成關卡)或次數用盡
-@export_range(-1, 1000) var max_check_finish_distance = -1
+@export_range(-1, 1000) var max_check_finish_distance:int = -1
 
 @export_subgroup("角色")
 ## 移動速度
-@export var move_speed:float = 1
+@export_range(0, 1000) var move_speed:int = 200
 ## 移動距離(-1=無限)
-@export_range(-1, 1000) var max_move_distance:int = -1
+@export_range(-1, 1000) var max_move_distance:int = 7
 #endregion
 
 #region node
@@ -42,13 +42,20 @@ var old_spacing:Vector2i
 var timer:float = 0.0 # update timer
 var main_worm_pos:Vector2
 var sub_worm_pos:Vector2
+var main_worm_rotate:float
+var sub_worm_rotate:float
 
 func _ready():
-	update()
+	update() ## WARNING 必須更新一次, 否則可能會出現問題
 
-	worm_manager.initialize(max_move_distance)
-	if not Engine.is_editor_hint():
+	if Engine.is_editor_hint():
+		main_worm_rotate = worm_manager.main_worm.rotation
+	else:
+		worm_manager.initialize(move_speed, max_move_distance)
 		worm_manager.move_finish_signal.connect(_on_worm_move_finish)
+
+	# 太大擋住畫面, 編輯時先關閉
+	%Foreground.visible = not Engine.is_editor_hint()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -58,7 +65,7 @@ func _process(delta: float) -> void:
 			update()
 #region 地圖編輯器
 
-func update(): 
+func update():
 	update_tile()
 	update_child()
 
@@ -66,6 +73,7 @@ func update_tile():
 	if auto_margin != old_auto_margin \
 	or margin != old_margin \
 	or spacing != old_spacing:
+		## 編輯器的畫面不等於遊戲畫面大小, 需要用設定的大小調整位置
 		var window_size:Vector2i = Vector2i(
 			ProjectSettings.get_setting("display/window/size/viewport_width"),
 			ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -79,6 +87,9 @@ func update_tile():
 		h_edge_manager.tile_set.tile_size = spacing
 		v_edge_manager.tile_set.tile_size = spacing
 		eye_manager.tile_set.tile_size = spacing
+
+		## 可能需要增加對scale的調整
+		#
 
 		point_manager.position = start_pos
 		h_edge_manager.position = start_pos
@@ -99,22 +110,31 @@ func update_child():
 		h_edge_manager.update_child(point_list)
 		v_edge_manager.update_child(point_list)
 		eye_manager.update_child(point_list)
-	
+		
+	var main_worm = worm_manager.main_worm
+	var sub_worm = worm_manager.sub_worm
 	if main_worm_pos != worm_manager.main_worm.position \
 	or sub_worm_pos != worm_manager.sub_worm.position:
 		worm_manager.init_pos()
-		
+
 		main_worm_pos = worm_manager.main_worm.position
 		sub_worm_pos = worm_manager.sub_worm.position
+	
+	if main_worm_rotate != worm_manager.main_worm.rotation:
+		sub_worm.rotation = main_worm.rotation + PI
+	elif sub_worm_rotate != worm_manager.sub_worm.rotation:
+		main_worm.rotation = sub_worm.rotation + PI
+	main_worm_rotate = worm_manager.main_worm.rotation
+	sub_worm_rotate = worm_manager.sub_worm.rotation
 #endregion
 
 
-
+## 廣度搜尋, 以每個眼(Eye)為起點開始檢查邊是否已完成
 func check_finish():
 	var eye_game_pos_list:Array[Vector2i] = eye_manager.get_game_pos_list()
 	var space_game_pos_list:Array[Vector2i] = eye_manager.get_used_cells()
-	var h_worm_move_path:Array[Vector2i] = worm_manager.get_move_path_h()
-	var v_worm_move_path:Array[Vector2i] = worm_manager.get_move_path_v()
+	var h_closed_edge:Array[Vector2i] = h_edge_manager.get_closed_edge()
+	var v_closed_edge:Array[Vector2i] = v_edge_manager.get_closed_edge()
 
 	var eye_finish_list:Array[Vector2i] = []
 	for eye_game_pos in eye_game_pos_list:
@@ -124,54 +144,75 @@ func check_finish():
 		var h_checked_edge_list:Array[Vector2i] = []
 		var v_checked_edge_list:Array[Vector2i] = []
 		var need_check_list:Array[Vector2i] = [eye_game_pos]
-		
+
 		var check_count:int = 0
 		while check_count < max_check_finish_distance \
 		or max_check_finish_distance < 0:
+			check_count += 1
+
 			var new_need_check_list:Array[Vector2i] = []
 			for pos in need_check_list:
-				# 這位置是眼(Eye)
+				# 這位置是眼(Eye), 加入完成列表防止重複檢查
 				if pos in eye_game_pos_list:
 					eye_finish_list.append(pos)
 
+				## 上/左的面和線位置稍微有點不同, 再想想有沒有方法壓成一個func
+
 				# 上
-				if not pos in h_worm_move_path:
+				if not pos in h_closed_edge \
+				and not pos in h_checked_edge_list:
 					if not (pos + Vector2i.UP) in space_game_pos_list:
 						return false
-					h_checked_edge_list.append(pos)
-					new_need_check_list.append(pos + Vector2i.UP)
+					if not pos in h_checked_edge_list:
+						h_checked_edge_list.append(pos)
+					if not (pos + Vector2i.UP) in new_need_check_list:
+						new_need_check_list.append(pos + Vector2i.UP)
 
 				# 下
-				if not (pos + Vector2i.DOWN) in h_worm_move_path:
+				if not (pos + Vector2i.DOWN) in h_closed_edge \
+				and not (pos + Vector2i.DOWN) in h_checked_edge_list:
 					if not (pos + Vector2i.DOWN) in space_game_pos_list:
 						return false
-					h_checked_edge_list.append(pos + Vector2i.DOWN)
-					new_need_check_list.append(pos + Vector2i.DOWN)
+					if not (pos + Vector2i.DOWN) in h_checked_edge_list:
+						h_checked_edge_list.append(pos + Vector2i.DOWN)
+					if not (pos + Vector2i.DOWN) in new_need_check_list:
+						new_need_check_list.append(pos + Vector2i.DOWN)
 
 				# 左
-				if not pos in v_worm_move_path:
+				if not pos in v_closed_edge \
+				and not pos in v_checked_edge_list:
 					if not (pos + Vector2i.LEFT) in space_game_pos_list:
 						return false
-					v_checked_edge_list.append(pos)
-					new_need_check_list.append(pos + Vector2i.LEFT)
+					if not pos in v_checked_edge_list:
+						v_checked_edge_list.append(pos)
+					if not (pos + Vector2i.LEFT) in new_need_check_list:
+						new_need_check_list.append(pos + Vector2i.LEFT)
 
 				# 右
-				if not (pos + Vector2i.RIGHT) in v_worm_move_path:
+				if not (pos + Vector2i.RIGHT) in v_closed_edge \
+				and not (pos + Vector2i.RIGHT) in v_checked_edge_list:
 					if not (pos + Vector2i.RIGHT) in space_game_pos_list:
 						return false
-					v_checked_edge_list.append(pos + Vector2i.RIGHT)
-					new_need_check_list.append(pos + Vector2i.RIGHT)
+					if not (pos + Vector2i.RIGHT) in v_checked_edge_list:
+						v_checked_edge_list.append(pos + Vector2i.RIGHT)
+					if not (pos + Vector2i.RIGHT) in new_need_check_list:
+						new_need_check_list.append(pos + Vector2i.RIGHT)
 
-			if not new_need_check_list.is_empty():
-				need_check_list = new_need_check_list
-				
-			check_count += 1
+
+			# 下一輪搜索的目標. 如果無目標則為己完成, 開始檢查下一個眼(Eye)
+			need_check_list = new_need_check_list
+			if need_check_list.is_empty():
+				break
+
+		# 搜索次數用盡但沒完成包圍
 		if not need_check_list.is_empty():
 			return false
+	return true
 
 func _on_worm_move_finish():
 	print("Worm Move Finish")
-	check_finish()
+	if check_finish():
+		print("Game Finish")
 
 
 

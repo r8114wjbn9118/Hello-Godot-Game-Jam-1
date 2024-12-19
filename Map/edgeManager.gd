@@ -2,8 +2,46 @@
 extends TileMapLayer
 class_name EdgeManager
 
+var list = []
+var available_count_dict:Dictionary = {}
+
 func _ready() -> void:
-	clear()
+		init_available_count()
+
+# 初始化路徑的可用次數(目前固定為1)
+func init_available_count():
+	available_count_dict.clear()
+	var cell_list:Array[Vector2i] = get_used_cells()
+	for cell in cell_list:
+		available_count_dict[cell] = 1
+	return available_count_dict
+
+
+func get_closed_edge():
+	var list:Array[Vector2i] = []
+	for key in available_count_dict.keys():
+		if get_available_count(key) == 0:
+			list.append(key)
+	return list
+
+func get_available_count(game_pos):
+	return available_count_dict.get(game_pos, -1)
+
+func change_available_count(game_pos, n):
+	var target = get_available_count(game_pos) + n
+	if target < 0:
+		return false
+	
+	available_count_dict[game_pos] = target
+	return true
+
+func is_passable(game_pos, n = 1):
+	return get_available_count(game_pos) >= n
+
+
+
+func get_game_pos_from_two_point(game_pos_1, game_pos_2):
+	pass
 
 func get_connect_point_list(point_list:Array[Vector2i]) -> Array:
 	var list:Array = []

@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name Worm
 
 signal change_state(target, old_state, new_state)
 signal move_finish_signal()
@@ -9,6 +10,7 @@ signal move_finish_signal()
 enum ACTION {
 	WAIT,
 	MOVE,
+	BACK,
 }
 
 var state:ACTION :
@@ -20,23 +22,26 @@ var game_pos:Vector2i
 var target_game_pos
 var target_pos
 
+var action_distance:int = 1 # 行動距離
 var move_path = [] # TODO
 
 var body:WormTail
-func _ready() -> void:
-	if !Engine.is_editor_hint():
-		body = WormTail.new(position, 70, 10)
-		
-		get_parent().call_deferred("add_child", body)
+
 
 func _physics_process(delta: float):
 	if state == ACTION.MOVE:
 		move(delta)
-	if !Engine.is_editor_hint():
-		body.setHead(position)
-		
+
+
+func create_body(max_distance):
+	body = WormTail.new(self, max_distance, %Point)
+	return body
+	
+
+
 func move(delta):
 	position += position.direction_to(target_pos) * move_speed * delta
+	body.move(position)
 	
 	if reach_destination(position, target_pos):
 		move_finish()

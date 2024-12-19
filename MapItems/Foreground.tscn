@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckbpjay4esc8r"]
+
+[ext_resource type="Texture2D" uid="uid://b0tvtb0pvpjca" path="res://image/觀察箱底圖素材/秋.png" id="1_7wy8j"]
+[ext_resource type="Texture2D" uid="uid://c3aa6okxkw00k" path="res://image/觀察箱底圖素材/黑白.png" id="2_hq1x0"]
+[ext_resource type="Texture2D" uid="uid://c41638h43cpd3" path="res://image/觀察箱底圖素材/春.png" id="3_nb0bf"]
+[ext_resource type="Texture2D" uid="uid://dxxygjds3u54g" path="res://image/觀察箱底圖素材/夏.png" id="4_v7e70"]
+[ext_resource type="Texture2D" uid="uid://bsjss2jnsrkpe" path="res://image/觀察箱底圖素材/冬.png" id="5_cxu7w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0b352"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7wy8j")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hq1x0")
+}],
+"loop": true,
+"name": &"monochrome",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nb0bf")
+}],
+"loop": true,
+"name": &"spring",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_v7e70")
+}],
+"loop": true,
+"name": &"summer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cxu7w")
+}],
+"loop": true,
+"name": &"winter",
+"speed": 5.0
+}]
+
+[node name="Foreground" type="AnimatedSprite2D"]
+position = Vector2(480, 270)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_0b352")
+animation = &"monochrome"

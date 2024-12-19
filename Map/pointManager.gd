@@ -24,6 +24,9 @@ func get_point_game_pos(pos):
 
 func get_point_position(pos):
 	return map_to_local(pos) + position
+	
+func get_point_center_pos(pos):
+	return get_point_position(get_point_game_pos(pos))
 
 
 
