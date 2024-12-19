@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://up6yecfvyrms"]
+
+[ext_resource type="Script" path="res://MapItems/WormTail/legIK/leg_ik.gd" id="1_eerbp"]
+
+[node name="LegIk" type="Node2D"]
+script = ExtResource("1_eerbp")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Node"]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 17, -10.5357, 34, 0)
+default_color = Color(0.827451, 0.560784, 0.698039, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="LegEnd" type="Marker2D" parent="Node"]
+unique_name_in_owner = true
+position = Vector2(34, 0)
+
+[node name="Target" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(34, 0)

@@ -41,7 +41,8 @@ func initialize(move_speed, max_move_distance):
 	init_pos()
 	move_path = [main_worm.game_pos]
 	
-	create_body()
+	#create_body() # NOTE 已放進Worm
+	PathLine.max_distance = max_move_distance
 	
 	state = ACTION.WAIT
 	
@@ -52,12 +53,12 @@ func init_pos():
 	sub_worm.game_pos = point_manager.get_point_game_pos(sub_worm.position)
 	sub_worm.position = point_manager.get_point_position(sub_worm.game_pos)
 
-func create_body():
-	var main_worm_body = main_worm.create_body(max_move_distance)
-	add_child(main_worm_body)
-	
-	var sub_worm_body = sub_worm.create_body(max_move_distance)
-	add_child(sub_worm_body)
+#func create_body():
+	#var main_worm_body = main_worm.create_body(max_move_distance)
+	#add_child(main_worm_body)
+	#
+	#var sub_worm_body = sub_worm.create_body(max_move_distance)
+	#add_child(sub_worm_body)
 	
 
 
@@ -203,9 +204,13 @@ func Do( direction:Vector2i ):
 	
 	_undo_redo.create_action("Move")
 	_undo_redo.add_do_method(move.bind(target, target_sub))
+	_undo_redo.add_do_method(%MainWorm.Do)
+	_undo_redo.add_do_method(%SubWorm.Do)
 	_undo_redo.add_undo_method(unmove.bind(unmove_target, unmove_target_sub))
-	_undo_redo.add_undo_property(main_worm.body, "points", main_worm.body.points)
-	_undo_redo.add_undo_property(sub_worm.body, "points", sub_worm.body.points)
+	_undo_redo.add_undo_method(%MainWorm.Undo)
+	_undo_redo.add_undo_method(%SubWorm.Undo)
+	#_undo_redo.add_undo_property(main_worm.body, "points", main_worm.body.points) # 廢棄
+	#_undo_redo.add_undo_property(sub_worm.body, "points", sub_worm.body.points)
 	_undo_redo.commit_action()
 
 func Reset(): # TODO
@@ -213,9 +218,9 @@ func Reset(): # TODO
 func Undo(): 
 	if _undo_redo.has_undo():
 		_undo_redo.undo()
-func Redo(): # TODO
-	if _undo_redo.has_redo():
-		_undo_redo.redo()
+#func Redo(): # TODO
+	#if _undo_redo.has_redo():
+		#_undo_redo.redo()
 
 
 
