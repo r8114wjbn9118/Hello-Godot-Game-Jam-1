@@ -1,17 +1,20 @@
-[gd_resource type="VisualShader" load_steps=17 format=3 uid="uid://wryyfh37kua4"]
+[gd_resource type="VisualShader" load_steps=20 format=3 uid="uid://wryyfh37kua4"]
 
 [ext_resource type="Script" path="res://addons/ShaderLib_v2_2_4/UV/SpherizeUV.gd" id="1_067um"]
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_1xwja"]
-size = Vector2(540, 260)
+size = Vector2(560, 340)
 expression = "// Puts uv in world space	offset = _shade.position / MAX_LEN
 
 uv = uv * 2.0 - 1.0;
-output0 = (mat * vec4(uv,0,1)).xy;"
+output0 = (mat * vec4(uv,0,1)).xy - world_pos;
+output0/=8.0;"
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_g1qs1"]
-size = Vector2(560, 280)
+size = Vector2(560, 360)
 expression = "// Puts uv back in screen space
+  uv *= 8.0;
+  uv += world_pos;
   uv = (mat * vec4(uv,0,1)).xy;
   output0 = uv * 0.5 + 0.5;"
 
@@ -26,12 +29,26 @@ function = 16
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_jbqjt"]
 input_name = "screen_uv"
 
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_yoo5e"]
+parameter_name = "world_position"
+default_value_enabled = true
+default_value = Vector2(1, 1)
+
+[sub_resource type="VisualShaderNodeIntConstant" id="VisualShaderNodeIntConstant_okh6p"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_3ny8x"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+texture_filter = 1
+texture_repeat = 2
+texture_source = 1
+
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_x0yyr"]
-output_port_for_preview = 0
 expanded_output_ports = [0]
-source = 1
+source = 5
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_yrv5w"]
+output_port_for_preview = 0
 default_input_values = [0, null, 1, Vector2(0.5, 0.5), 2, 0.001, 3, Vector2(0, 0)]
 initialized = true
 script = ExtResource("1_067um")
@@ -63,6 +80,7 @@ varying_type = 7
 [sub_resource type="VisualShaderNodeTransformFunc" id="VisualShaderNodeTransformFunc_s4sbh"]
 
 [resource]
+resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
@@ -71,8 +89,9 @@ render_mode blend_mix;
 varying mat4 var_world_to_screen;
 varying mat4 var_screen_to_world;
 
+uniform vec2 world_position = vec2(1.000000, 1.000000);
 uniform vec2 pup_offset = vec2(1.000000, 1.000000);
-uniform sampler2D screen_tex_frg_3 : hint_screen_texture;
+uniform sampler2D Texture2DParameter : source_color, filter_nearest, repeat_disable, hint_screen_texture;
 
 
 // Spherize
@@ -114,6 +133,10 @@ void fragment() {
 	mat4 n_out8p0 = var_screen_to_world;
 
 
+// Vector2Parameter:20
+	vec2 n_out20p0 = world_position;
+
+
 	vec2 n_out15p0;
 // Expression:15
 	n_out15p0 = vec2(0.0, 0.0);
@@ -121,7 +144,8 @@ void fragment() {
 		// Puts n_out2p0 in world space	offset = _shade.position / MAX_LEN
 		
 		n_out2p0 = n_out2p0 * 2.0 - 1.0;
-		n_out15p0 = (n_out8p0 * vec4(n_out2p0,0,1)).xy;
+		n_out15p0 = (n_out8p0 * vec4(n_out2p0,0,1)).xy - n_out20p0;
+		n_out15p0/=8.0;
 	}
 
 
@@ -147,14 +171,20 @@ void fragment() {
 	n_out16p0 = vec2(0.0, 0.0);
 	{
 		// Puts n_out5p0 back in screen space
+		  n_out5p0 *= 8.0;
+		  n_out5p0 += n_out20p0;
 		  n_out5p0 = (n_out9p0 * vec4(n_out5p0,0,1)).xy;
 		  n_out16p0 = n_out5p0 * 0.5 + 0.5;
 	}
 
 
+// IntConstant:21
+	int n_out21p0 = 0;
+
+
 	vec4 n_out3p0;
 // Texture2D:3
-	n_out3p0 = texture(screen_tex_frg_3, n_out16p0);
+	n_out3p0 = textureLod(Texture2DParameter, n_out16p0, float(n_out21p0));
 	float n_out3p1 = n_out3p0.r;
 
 
@@ -169,6 +199,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-1991.35, 460.248)
 mode = 1
 flags/light_only = false
 varyings/world_to_screen = "0,7"
@@ -187,36 +218,45 @@ nodes/vertex/6/position = Vector2(120, 200)
 nodes/vertex/7/node = SubResource("VisualShaderNodeTransformFunc_s4sbh")
 nodes/vertex/7/position = Vector2(-180, 200)
 nodes/vertex/connections = PackedInt32Array(4, 0, 2, 0, 4, 0, 7, 0, 7, 0, 6, 0, 5, 0, 4, 1, 3, 0, 4, 0)
-nodes/fragment/0/position = Vector2(220, 560)
+nodes/fragment/0/position = Vector2(300, 1000)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_jbqjt")
 nodes/fragment/2/position = Vector2(-1460, 260)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_x0yyr")
-nodes/fragment/3/position = Vector2(-440, 640)
+nodes/fragment/3/position = Vector2(-360, 1080)
 nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_yrv5w")
-nodes/fragment/5/position = Vector2(-500, 400)
+nodes/fragment/5/position = Vector2(-180, 400)
 nodes/fragment/8/node = SubResource("VisualShaderNodeVaryingGetter_tjy30")
 nodes/fragment/8/position = Vector2(-1460, 460)
 nodes/fragment/9/node = SubResource("VisualShaderNodeVaryingGetter_qxrth")
 nodes/fragment/9/position = Vector2(-1380, 780)
 nodes/fragment/15/node = SubResource("VisualShaderNodeExpression_1xwja")
 nodes/fragment/15/position = Vector2(-1120, 400)
-nodes/fragment/15/size = Vector2(540, 260)
-nodes/fragment/15/input_ports = "0,3,uv;1,7,mat;"
+nodes/fragment/15/size = Vector2(560, 340)
+nodes/fragment/15/input_ports = "0,3,uv;1,7,mat;2,3,world_pos;"
 nodes/fragment/15/output_ports = "0,3,output0;"
 nodes/fragment/15/expression = "// Puts uv in world space	offset = _shade.position / MAX_LEN
 
 uv = uv * 2.0 - 1.0;
-output0 = (mat * vec4(uv,0,1)).xy;"
+output0 = (mat * vec4(uv,0,1)).xy - world_pos;
+output0/=8.0;"
 nodes/fragment/16/node = SubResource("VisualShaderNodeExpression_g1qs1")
-nodes/fragment/16/position = Vector2(-1120, 700)
-nodes/fragment/16/size = Vector2(560, 280)
-nodes/fragment/16/input_ports = "0,3,uv;1,7,mat;"
+nodes/fragment/16/position = Vector2(-1140, 820)
+nodes/fragment/16/size = Vector2(560, 360)
+nodes/fragment/16/input_ports = "0,3,uv;1,7,mat;2,3,world_pos;"
 nodes/fragment/16/output_ports = "0,3,output0;"
 nodes/fragment/16/expression = "// Puts uv back in screen space
+  uv *= 8.0;
+  uv += world_pos;
   uv = (mat * vec4(uv,0,1)).xy;
   output0 = uv * 0.5 + 0.5;"
 nodes/fragment/17/node = SubResource("VisualShaderNodeVec2Parameter_76y72")
 nodes/fragment/17/position = Vector2(-840, 140)
 nodes/fragment/19/node = SubResource("VisualShaderNodeFloatFunc_hvasd")
-nodes/fragment/19/position = Vector2(-160, 760)
-nodes/fragment/connections = PackedInt32Array(2, 0, 15, 0, 8, 0, 15, 1, 9, 0, 16, 1, 15, 0, 5, 0, 5, 0, 16, 0, 16, 0, 3, 0, 17, 0, 5, 1, 3, 0, 0, 0, 3, 1, 19, 0, 19, 0, 0, 1)
+nodes/fragment/19/position = Vector2(-80, 1200)
+nodes/fragment/20/node = SubResource("VisualShaderNodeVec2Parameter_yoo5e")
+nodes/fragment/20/position = Vector2(-1760, 480)
+nodes/fragment/21/node = SubResource("VisualShaderNodeIntConstant_okh6p")
+nodes/fragment/21/position = Vector2(-680, 1240)
+nodes/fragment/22/node = SubResource("VisualShaderNodeTexture2DParameter_3ny8x")
+nodes/fragment/22/position = Vector2(-940, 1400)
+nodes/fragment/connections = PackedInt32Array(2, 0, 15, 0, 8, 0, 15, 1, 9, 0, 16, 1, 5, 0, 16, 0, 16, 0, 3, 0, 17, 0, 5, 1, 3, 0, 0, 0, 3, 1, 19, 0, 19, 0, 0, 1, 20, 0, 15, 2, 20, 0, 16, 2, 15, 0, 5, 0, 21, 0, 3, 1, 22, 0, 3, 2)

@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Map/HEdgeManager.gd" id="5_phctv"]
 [ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="9_gth0d"]
 [ext_resource type="PackedScene" uid="uid://3wu8fxil0bju" path="res://MapItems/WormTail/body/WormBody.tscn" id="9_tj3aa"]
-[ext_resource type="PackedScene" uid="uid://bpauwprnu1ruv" path="res://Tile/EyeViewport/EyeViewport.tscn" id="10_yyqo0"]
+[ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Tile/EyeAnime/EyeAnim.tscn" id="10_susjb"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
@@ -60,8 +60,8 @@ position = Vector2(880, 70)
 unique_name_in_owner = true
 visible = false
 
-[node name="EyeViewport" parent="." instance=ExtResource("10_yyqo0")]
-position = Vector2(627, 218)
+[node name="EyeAnim" parent="." instance=ExtResource("10_susjb")]
+position = Vector2(330, 316)
 
-[node name="EyeViewport2" parent="." instance=ExtResource("10_yyqo0")]
-position = Vector2(328, 317)
+[node name="EyeAnim2" parent="." instance=ExtResource("10_susjb")]
+position = Vector2(628, 216)

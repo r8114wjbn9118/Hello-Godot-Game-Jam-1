@@ -21,16 +21,17 @@ func _set_rand_target():
 	_rand_target = Vector2(cos(angle), sin(angle)) * r
 
 func _ready() -> void:
+	pass
 	if !Engine.is_editor_hint():
 		$Camera2D.queue_free()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
-		_target.position = get_global_mouse_position()
+		_target.global_position = get_global_mouse_position()
 	else:
 		_target.position = lerp(_target.position, _rand_target, 8.0* delta)
 	
-	var time := fmod(Time.get_unix_time_from_system(), 1.0)
+	var time := fmod(Time.get_unix_time_from_system()/2.0, 1.0)
 	$"CanvasGroup/直瞳孔".scale.y = blink_curve.sample_baked(time)
 	
 	
@@ -42,6 +43,8 @@ func _process(delta: float) -> void:
 	var offset = _spupil.position / MAX_LEN
 	($CanvasGroup.material as ShaderMaterial).\
 		set_shader_parameter("pup_offset", (offset/2.0 * -1.0) + Vector2(0.5, 0.5))
+	($CanvasGroup.material as ShaderMaterial).\
+		set_shader_parameter("world_position", global_position)
 
 
 
