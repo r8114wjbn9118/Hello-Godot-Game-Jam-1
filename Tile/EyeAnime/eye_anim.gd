@@ -21,7 +21,7 @@ func _set_rand_target():
 	_rand_target = Vector2(cos(angle), sin(angle)) * r
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
+	if !Engine.is_editor_hint():
 		$Camera2D.queue_free()
 
 func _process(delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://5jr077ljxgwi"]
+[gd_scene load_steps=11 format=4 uid="uid://5jr077ljxgwi"]
 
 [ext_resource type="Script" path="res://Map/Map.gd" id="1_anpjl"]
 [ext_resource type="TileSet" uid="uid://dqt36iogsx57j" path="res://Tile/map.tres" id="2_035eu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Map/HEdgeManager.gd" id="5_phctv"]
 [ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="9_gth0d"]
 [ext_resource type="PackedScene" uid="uid://3wu8fxil0bju" path="res://MapItems/WormTail/body/WormBody.tscn" id="9_tj3aa"]
+[ext_resource type="PackedScene" uid="uid://bpauwprnu1ruv" path="res://Tile/EyeViewport/EyeViewport.tscn" id="10_yyqo0"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
@@ -58,3 +59,9 @@ position = Vector2(880, 70)
 [node name="Foreground" parent="." instance=ExtResource("9_gth0d")]
 unique_name_in_owner = true
 visible = false
+
+[node name="EyeViewport" parent="." instance=ExtResource("10_yyqo0")]
+position = Vector2(627, 218)
+
+[node name="EyeViewport2" parent="." instance=ExtResource("10_yyqo0")]
+position = Vector2(328, 317)

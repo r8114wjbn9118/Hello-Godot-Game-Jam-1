@@ -13,7 +13,7 @@ point_count = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3sj4r"]
 shader = ExtResource("2_fjn0d")
-shader_parameter/pup_offset = Vector2(-0.0973802, 0.556008)
+shader_parameter/pup_offset = Vector2(0.5, 0.5)
 
 [node name="EyeAnim" type="Node2D"]
 script = ExtResource("1_8cmtv")
@@ -21,35 +21,33 @@ blink_curve = SubResource("Curve_h0k7j")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_3sj4r")
-fit_margin = 1.0
-clear_margin = 1.0
 
 [node name="眼白" type="Sprite2D" parent="CanvasGroup"]
 texture = ExtResource("2_34yb5")
 
 [node name="圓瞳孔" type="Sprite2D" parent="CanvasGroup"]
-position = Vector2(2.9869, -0.280038)
+position = Vector2(1.18277, -0.901832)
 texture = ExtResource("3_unrhp")
 
 [node name="直瞳孔" type="Sprite2D" parent="CanvasGroup"]
-position = Vector2(3.58428, -0.336045)
-scale = Vector2(1, 0.590862)
+position = Vector2(2.06984, -1.57821)
+scale = Vector2(1, 0.716738)
 texture = ExtResource("4_e7biw")
 
 [node name="反光" type="Sprite2D" parent="CanvasGroup"]
 modulate = Color(1, 1, 1, 0.690196)
-position = Vector2(1.49345, -0.140019)
+position = Vector2(0.591383, -0.450916)
 texture = ExtResource("5_erkaq")
 
 [node name="Target" type="Marker2D" parent="."]
-position = Vector2(37.7638, -3.54056)
+position = Vector2(8.27936, -6.31283)
 gizmo_extents = 5.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(31.1, 31.1)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(32.465, 32.465)
 
 [connection signal="timeout" from="Timer" to="." method="_set_rand_target"]
