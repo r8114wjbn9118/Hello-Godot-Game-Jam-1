@@ -38,11 +38,7 @@ func initialize(move_speed, max_move_distance):
 	self.max_move_distance = max_move_distance
 	main_worm.init()
 	sub_worm.init()
-
-	#main_worm.is_main(true)
-	#sub_worm.is_main(false)
-	#
-	#init_pos()
+	
 	move_path = [main_worm.game_pos]
 	
 	#create_body() # NOTE 已放進Worm
@@ -210,9 +206,7 @@ func change_edge_available_count(p1, p2, n):
 
 func _on_worm_move_finish():
 	if GameManager.is_moving():
-		if main_worm.state == GameManager.ACTION.WAIT \
-		and sub_worm.state == GameManager.ACTION.WAIT:
-			GameManager.move_finish()
-			move_finish_signal.emit()
-			return true
+		GameManager.move_finish()
+		move_finish_signal.emit()
+		return true
 	return false

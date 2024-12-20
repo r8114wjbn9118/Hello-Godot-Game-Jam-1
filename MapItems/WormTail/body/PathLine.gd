@@ -2,10 +2,10 @@
 extends LineManager
 class_name PathLine
 
-func init(head, point_manager, color):
-	max_distance = head.max_move_distance
+func init(worm, point_manager):
+	max_distance = worm.max_move_distance
 	
-	super.init(head, point_manager, color)
+	super.init(worm, point_manager)
 
 func _ready() -> void:
 	line = %PathLine

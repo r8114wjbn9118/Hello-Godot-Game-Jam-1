@@ -1,6 +1,7 @@
-extends Node2D
+extends Node
 class_name LineManager
 
+var worm
 var point_manager:PointManager
 var line:Line2D
 
@@ -18,24 +19,25 @@ var points:
 	get: return line.points
 
 var length:int = 10
-func init(head, point_manager) -> void:
+func init(worm, point_manager) -> void:
+	self.worm = worm
 	if point_manager is PointManager:
 		self.point_manager = point_manager
 		GRID_SIZE = point_manager.tile_set.tile_size
 		GRID_OFFSET = point_manager.position + GRID_SIZE / 2
 
 	var arr = []
-	var pos = head.position
+	var pos = worm.position
 	for i in range(length * max_distance):
 		arr.append(pos)
 	points = arr
 	
-	move(pos)
+	move()
 
 
 ## 頭部移動時連帶執行
-func move(pos) -> void:
-	points[0] = pos
+func move() -> void:
+	points[0] = worm.position
 
 	var arr = points
 	for i in range(1, arr.size()):
