@@ -18,11 +18,11 @@ func init_available_count():
 
 
 func get_closed_edge():
-	var list:Array[Vector2i] = []
+	var _list:Array[Vector2i] = []
 	for key in available_count_dict.keys():
 		if get_available_count(key) == 0:
-			list.append(key)
-	return list
+			_list.append(key)
+	return _list
 
 func get_available_count(game_pos):
 	return available_count_dict.get(game_pos, -1)
@@ -44,7 +44,7 @@ func get_game_pos_from_two_point(game_pos_1, game_pos_2):
 	pass
 
 func get_connect_point_list(point_list:Array[Vector2i]) -> Array:
-	var list:Array = []
+	var _list:Array = []
 	if point_list.size() > 1:
 		for i in range(point_list.size() - 1):
 			var p1:Vector2i = point_list[i]
@@ -52,8 +52,8 @@ func get_connect_point_list(point_list:Array[Vector2i]) -> Array:
 				var p2:Vector2i = point_list[j]
 				var distance:int = abs(p1.x - p2.x) + abs(p1.y - p2.y)
 				if distance == 1:
-					list.append([p1, p2])
-	return list
+					_list.append([p1, p2])
+	return _list
 
 
 

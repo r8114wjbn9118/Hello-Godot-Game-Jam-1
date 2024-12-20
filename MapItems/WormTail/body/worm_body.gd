@@ -5,6 +5,7 @@ signal change_state(target, old_state, new_state)
 signal move_finish_signal()
 
 @export var move_speed:float = 200
+@export var move_time:float = 0.5 # TEST 替代 move_speed
 
 enum ACTION {
 	WAIT,
@@ -27,9 +28,10 @@ var move_path = [] # TODO
 
 
 
-func _physics_process(delta: float):
-	if state == ACTION.MOVE:
-		move(delta)
+#func _physics_process(delta: float):
+	#if state == ACTION.MOVE:
+		#pass
+		##move(delta)
 
 
 #region by DF
@@ -51,19 +53,30 @@ func _ready() -> void:
 	_pathLine.move(position)
 	_bodyLine.move(position)
 
-func set_pos(game_pos, target_pos): # NOTE 由UNDO調用
-	self.game_pos = game_pos
-	position = target_pos
+func set_pos(_game_pos, _target_pos): # NOTE 由父UNDO調用
+	self.game_pos = _game_pos
+	position = _target_pos
 
-func move(delta):
-	position += position.direction_to(target_pos) * move_speed * delta
+func _make_tween():
+	var tween = get_tree().create_tween()
+	tween.tween_method(_tween_move, position, target_pos, move_time)\
+		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(move_finish)
+
+func _tween_move(new_pos): # TEST 替代move
+	position = new_pos
 	_pathLine.move(position)
 	_bodyLine.move(position)
-	
-	if reach_destination(position, target_pos):
-		move_finish()
-		return false
-	return true
+
+#func move(delta):
+	#position += position.direction_to(target_pos) * move_speed * delta
+	#_pathLine.move(position)
+	#_bodyLine.move(position)
+	#
+	#if reach_destination(position, target_pos):
+		#move_finish()
+		#return false
+	#return true
 
 func _move(): # NOTE move  (不應該被直接調用)
 	pass
@@ -86,27 +99,28 @@ func Undo():
 		_undoRedo.undo()
 #endregion
 
-func reach_destination(a, b):
-	if a.distance_squared_to(b) < move_speed / 100:
-		position = b
-		return true
-	return false
+#func reach_destination(a, b):
+	#if a.distance_squared_to(b) < move_speed / 100:
+		#position = b
+		#return true
+	#return false
 
 
 func can_move(direction, map_size):
-	var target_game_pos = game_pos + direction
-	if target_game_pos.x < 0 or target_game_pos.x >= map_size.x:
+	var _target_game_pos = game_pos + direction
+	if _target_game_pos.x < 0 or _target_game_pos.x >= map_size.x:
 		return null
-	if target_game_pos.y < 0 or target_game_pos.y >= map_size.y:
+	if _target_game_pos.y < 0 or _target_game_pos.y >= map_size.y:
 		return null
-	return target_game_pos
-	pass
+	return _target_game_pos
 
-func start_move(target_game_pos, target_pos):
-	printt("Worm Start Move", target_game_pos, target_pos)
-	state = ACTION.MOVE
-	self.target_game_pos = target_game_pos
-	self.target_pos = target_pos
+func start_move(_target_game_pos, _target_pos):
+	printt("Worm Start Move", _target_game_pos, _target_pos)
+	
+	#state = ACTION.MOVE # TEST
+	self.target_game_pos = _target_game_pos
+	self.target_pos = _target_pos
+	_make_tween() # TEST
 
 func move_finish():
 	game_pos = target_game_pos

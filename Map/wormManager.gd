@@ -71,13 +71,13 @@ func init_pos():
 func _unhandled_input(event: InputEvent) -> void:
 	if state == ACTION.WAIT:
 		if Input.is_action_pressed("ui_up"):
-			return move_input(Vector2i.UP)
+			move_input(Vector2i.UP)
 		elif Input.is_action_pressed("ui_left"):
-			return move_input(Vector2i.LEFT)
+			move_input(Vector2i.LEFT)
 		elif Input.is_action_pressed("ui_right"):
-			return move_input(Vector2i.RIGHT)
+			move_input(Vector2i.RIGHT)
 		elif Input.is_action_pressed("ui_down"):
-			return move_input(Vector2i.DOWN)
+			move_input(Vector2i.DOWN)
 		elif Input.is_action_pressed("z"):
 			Undo()
 			
@@ -94,7 +94,7 @@ func move_input(direction:Vector2i):
 
 func check(direction):
 	var map_point_list = point_manager.get_used_cells()
-	var target_edge_map_pos
+	var _target_edge_map_pos
 
 	# 設定目標點
 	var target_map_pos = main_worm.game_pos + direction #* main_worm.action_distance
@@ -140,7 +140,7 @@ func check(direction):
 		#move_path.append(target_map_pos)
 	#else:
 		#return false
-	return true
+	#return true
 	
 func check_edge_is_passable(p1, p2):
 	var edge_game_pos

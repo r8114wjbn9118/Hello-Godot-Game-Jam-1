@@ -18,11 +18,11 @@ func setColor(color:Color):
 @onready var _line = $BodyLine
 
 var length:int = 10
-func init(head, point_manager) -> void:
+func init(head, _point_manager) -> void:
 	
-	self.point_manager = point_manager
-	GRID_SIZE = point_manager.tile_set.tile_size
-	GRID_OFFSET = point_manager.position + GRID_SIZE / 2
+	self.point_manager = _point_manager
+	GRID_SIZE = _point_manager.tile_set.tile_size
+	GRID_OFFSET = _point_manager.position + GRID_SIZE / 2
 	
 	#name = head.name + "Body"
 	var arr = []
