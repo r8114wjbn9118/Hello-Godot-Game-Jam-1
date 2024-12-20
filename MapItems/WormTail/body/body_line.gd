@@ -1,4 +1,4 @@
-class_name BodyLine extends Node
+class_name BodyLine extends Node2D
 
 var point_manager:PointManager
 
@@ -43,7 +43,8 @@ func move(pos) -> void:
 			arr[i] = align_to_grid_line(arr[i])  # 僅在容許範圍內時才更新為對齊的結果
 	# 將節點位置對齊到網格
 	_line.points = arr
-	
+	global_position = Vector2.ZERO
+	global_rotation = 0.0
 	var curve:Curve2D = $Path2D.curve
 	curve.clear_points()
 	for i in arr:
@@ -85,6 +86,8 @@ func align_to_grid_line(pos: Vector2) -> Vector2: # 對齊到網格線上 容許
 var _time = 0.0
 const LEG_SP_MOVE_TIME = 0.05
 func _process(delta: float) -> void:
+	global_position = Vector2.ZERO
+	global_rotation = 0.0
 	_time += delta
 	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
 	var curr_time = fmod(_time, (LEG_SP_MOVE_TIME*4.0))

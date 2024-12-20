@@ -36,22 +36,22 @@ var move_path = [] # TODO
 
 #region by DF
 @onready var _pathLine := $Node/PathLine
-@onready var _bodyLine := $Node/Body
+@onready var _bodyLine := $CanvasGroup/Node/Body
 # Called when the node enters the scene tree for the first time.
 func is_main(main:bool):
 	if main:
 		pass
 	else:
-		$"粉紅洞螈".visible = false
-		$"藍藍洞螈".visible = true
-		$Node/Body/BodyLine.texture = preload("res://MapItems/WormTail/body/身體(1).png")
+		$"CanvasGroup/粉紅洞螈".visible = false
+		$"CanvasGroup/藍藍洞螈".visible = true
+		$CanvasGroup/Node/Body/BodyLine.texture = preload("res://MapItems/WormTail/body/身體(1).png")
 		_bodyLine.setColor(Color("cfdeff"))
 
 func _ready() -> void:
 	_pathLine.init(self, %Point)
 	_bodyLine.init(self, %Point)
-	_pathLine.move(position)
-	_bodyLine.move(position)
+	_pathLine.move(global_position)
+	_bodyLine.move(global_position)
 
 func set_pos(_game_pos, _target_pos): # NOTE 由父UNDO調用
 	self.game_pos = _game_pos
@@ -65,8 +65,8 @@ func _make_tween():
 
 func _tween_move(new_pos): # TEST 替代move
 	position = new_pos
-	_pathLine.move(position)
-	_bodyLine.move(position)
+	_pathLine.move(global_position)
+	_bodyLine.move(global_position)
 
 #func move(delta):
 	#position += position.direction_to(target_pos) * move_speed * delta
@@ -83,8 +83,8 @@ func _move(): # NOTE move  (不應該被直接調用)
 func _unmove(PathPoints, BodyPoints): # NOTE move 的反向操作 (不應該被直接調用)
 	_pathLine.points = PathPoints
 	_bodyLine.setPoints(BodyPoints)
-	_pathLine.move(position)
-	_bodyLine.move(position)
+	_pathLine.move(global_position)
+	_bodyLine.move(global_position)
 
 
 @onready var _undoRedo:UndoRedo = UndoRedo.new()

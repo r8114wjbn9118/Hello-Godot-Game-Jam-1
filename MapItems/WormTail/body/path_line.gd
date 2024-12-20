@@ -3,7 +3,7 @@ class_name PathLine extends Line2D
 var point_manager:PointManager
 
 ## 最大距離(格子), 在Map更改max_move_distance
-static var max_distance:int = 8
+static var max_distance:int = 6
 
 var length:int = 10
 func init(head, point_manager) -> void:
