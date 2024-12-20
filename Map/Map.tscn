@@ -48,6 +48,7 @@ script = ExtResource("4_5oq82")
 [node name="MainWorm" parent="Worm" instance=ExtResource("9_tj3aa")]
 unique_name_in_owner = true
 position = Vector2(80, 470)
+color = 0
 
 [node name="SubWorm" parent="Worm" instance=ExtResource("9_tj3aa")]
 unique_name_in_owner = true

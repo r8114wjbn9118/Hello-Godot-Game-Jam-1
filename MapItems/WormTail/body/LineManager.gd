@@ -4,39 +4,42 @@ class_name LineManager
 var point_manager:PointManager
 var line:Line2D
 
+var color:
+	set(value):
+		color = value
+		if value is Color:
+			if line: line.default_color = value
+
 ## 最大距離(格子), 在Map更改max_move_distance
 var max_distance:int = 8
 
-
-func getPoints():
-	return line.points
-func setPoints(arr):
-	line.points = arr
+var points:
+	set(value): line.points = value
+	get: return line.points
 
 var length:int = 10
-func init(head, point_manager) -> void:
-	printt(head, point_manager)
-	
+func init(head, point_manager, color) -> void:
 	if point_manager is PointManager:
 		self.point_manager = point_manager
 		GRID_SIZE = point_manager.tile_set.tile_size
 		GRID_OFFSET = point_manager.position + GRID_SIZE / 2
 
-	var pos = head.position
+	self.color = color
+
 	var arr = []
+	var pos = head.position
 	for i in range(length * max_distance):
 		arr.append(pos)
-	line.points = arr
+	points = arr
+	
+	move(pos)
 
-func setHead(pos)-> void:
-	print(pos)
-	line.points[0] = pos
 
 ## 頭部移動時連帶執行
 func move(pos) -> void:
-	setHead(pos)
+	points[0] = pos
 
-	var arr = line.points.duplicate()
+	var arr = points
 	for i in range(1, arr.size()):
 		if (arr[i] - arr[i-1]).length() > length:
 			arr[i] = (arr[i] - arr[i-1]).normalized() * length + arr[i-1]
@@ -46,7 +49,7 @@ func move(pos) -> void:
 			## 直接跳出減少循環帶來的計算量
 			break
 	# 將節點位置對齊到網格
-	line.points = arr
+	points = arr
 		
 
 var GRID_SIZE: Vector2 = Vector2.ONE * 100 # 假設網格大小為100x100

@@ -17,7 +17,12 @@ var move_speed:float = 200:
 		main_worm.move_speed = value
 		sub_worm.move_speed = value
 		move_speed = value
-var max_move_distance:int = 8
+var max_move_distance:int = 8:
+	set(value):
+		main_worm.max_move_distance = value
+		sub_worm.max_move_distance = value
+		max_move_distance = value
+		
 
 var body = []
 
@@ -30,8 +35,9 @@ func _ready() -> void:
 func initialize(move_speed, max_move_distance):
 	self.move_speed = move_speed
 	self.max_move_distance = max_move_distance
-	
-	init_pos()
+	main_worm.init()
+	sub_worm.init()
+
 	move_path = [main_worm.game_pos]
 	
 	#create_body() # NOTE 已放進Worm
@@ -40,11 +46,8 @@ func initialize(move_speed, max_move_distance):
 	GameManager.prohibit_action(false)
 	
 func init_pos():
-	main_worm.game_pos = point_manager.get_point_game_pos(main_worm.position)
-	main_worm.position = point_manager.get_point_position(main_worm.game_pos)
-
-	sub_worm.game_pos = point_manager.get_point_game_pos(sub_worm.position)
-	sub_worm.position = point_manager.get_point_position(sub_worm.game_pos)
+	main_worm.init_pos()
+	sub_worm.init_pos()
 
 #func create_body():
 	#var main_worm_body = main_worm.create_body(max_move_distance)

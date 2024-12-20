@@ -23,9 +23,8 @@ script = ExtResource("2_yo5do")
 
 [node name="PathLine" type="Line2D" parent="Path"]
 unique_name_in_owner = true
-points = PackedVector2Array(0, 0, 197, 0)
 width = 30.0
-default_color = Color(0.750604, 0.452951, 0.254425, 1)
+default_color = Color(0.74902, 0.454902, 0.254902, 1)
 
 [node name="Body" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -59,9 +58,8 @@ position = Vector2(130, -34)
 [node name="BodyLine" type="Line2D" parent="Body"]
 unique_name_in_owner = true
 top_level = true
-points = PackedVector2Array(94, 39, 181, 58)
 width = 20.0
-default_color = Color(0.881937, 0.881937, 0.881937, 1)
+default_color = Color(0.882353, 0.882353, 0.882353, 1)
 texture = ExtResource("2_q8g0w")
 texture_mode = 2
 joint_mode = 2
