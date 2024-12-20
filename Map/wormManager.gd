@@ -7,8 +7,8 @@ signal move_finish_signal()
 @onready var point_manager = %Point
 @onready var h_edge_manager = %HEdge
 @onready var v_edge_manager = %VEdge
-@onready var main_worm := %MainWorm
-@onready var sub_worm := %SubWorm
+@export var main_worm:Worm
+@export var sub_worm:Worm
 
 enum ACTION {
 	WAIT,

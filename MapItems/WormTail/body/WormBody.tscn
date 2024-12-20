@@ -20,7 +20,6 @@ point_count = 3
 
 [node name="WormBody" type="Node2D" groups=["Worm"]]
 script = ExtResource("1_aav5k")
-move_time = null
 
 [node name="Node" type="Node" parent="."]
 
