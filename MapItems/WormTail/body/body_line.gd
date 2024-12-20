@@ -83,7 +83,7 @@ func align_to_grid_line(pos: Vector2) -> Vector2: # 對齊到網格線上 容許
 
 
 var _time = 0.0
-const LEG_SP_MOVE_TIME = 0.1
+const LEG_SP_MOVE_TIME = 0.05
 func _process(delta: float) -> void:
 	_time += delta
 	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
