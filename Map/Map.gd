@@ -4,15 +4,26 @@ class_name Map
 
 #region 變量(場景編輯)
 @export_group("場景編輯")
-## 根據點(Point)的最大可放置數量自動調整邊距(功能受到下列的Margin和Spacing影響)
-@export var auto_margin:bool = true
-var old_auto_margin
+## 根據點(Point)的最大可放置數量自動調整邊距(功能受到下列的Offset和Spacing影響)
+@export var auto_margin:bool = true:
+	set(value):
+		print(value)
+		auto_margin = value
+		update_tile()
 ## 調整邊距
-@export var margin:Vector2i = Vector2i(0, 0)
-var old_margin:Vector2i
+@export var offset:Vector2i = Vector2i(0, 0):
+	set(value):
+		offset = value
+		update_tile()
 ## 面(Eye)的大小, 以此同時控制線(VEdge/HEdge)和點(Point)的大小和位置
-@export var spacing:Vector2i = Vector2i.ONE * 100
-var old_spacing:Vector2i
+@export var spacing:Vector2i = Vector2i.ONE * 100:
+	set(value):
+		spacing = value
+		update_tile()
+#@export var grid:Vector2i = Vector2i(9, 5):
+	#set(value):
+		#grid = value
+		#update_tile()
 #endregion
 
 #region 變量(遊戲)
@@ -22,13 +33,13 @@ var old_spacing:Vector2i
 ## 最大檢測範圍(-1=無限).
 ## 從眼(Eye)開始檢查(-1)四個方向的邊, 如果不是關閉的, 則再次檢查(-1)未關閉方向位置的邊.
 ## 直到所有邊完全關閉(完成關卡)或次數用盡
-@export_range(-1, 1000) var max_check_finish_distance:int = -1
+@export_range(-1, 1000) var max_check_finish_distance:int = 1
 
 @export_subgroup("角色")
 ## 移動速度
 @export_range(0, 1000) var move_speed:int = 200
 ## 移動距離(-1=無限)
-@export_range(-1, 1000) var max_move_distance:int = 7
+@export_range(-1, 1000) var max_move_distance:int = 8
 #endregion
 
 #region node
@@ -66,51 +77,47 @@ func _process(delta: float) -> void:
 #region 地圖編輯器
 
 func update():
-	update_tile()
 	update_child()
 
 func update_tile():
-	if auto_margin != old_auto_margin \
-	or margin != old_margin \
-	or spacing != old_spacing:
-		## 編輯器的畫面不等於遊戲畫面大小, 需要用設定的大小調整位置
-		var window_size:Vector2i = Vector2i(
-			ProjectSettings.get_setting("display/window/size/viewport_width"),
-			ProjectSettings.get_setting("display/window/size/viewport_height")
-		)
-		var start_pos:Vector2i = margin
-		# 根據點(Point)的最大可放置數量自動調整邊距, 盡量保持置中
-		if auto_margin:
-			start_pos = (window_size - (spacing * floor((window_size - margin) / spacing))) / 2
+	## 編輯器的畫面不等於遊戲畫面大小, 需要用設定的大小調整位置
+	var window_size:Vector2i = Vector2i(
+		ProjectSettings.get_setting("display/window/size/viewport_width"),
+		ProjectSettings.get_setting("display/window/size/viewport_height")
+	)
+	var start_pos:Vector2i = offset
+	# 根據點(Point)的最大可放置數量自動調整邊距, 盡量保持置中
+	if auto_margin:
+		start_pos = (window_size - (spacing * floor((window_size - offset) / spacing))) / 2
 
+	## 可能需要增加對scale的調整
+
+	if point_manager != null:
 		point_manager.tile_set.tile_size = spacing
-		h_edge_manager.tile_set.tile_size = spacing
-		v_edge_manager.tile_set.tile_size = spacing
-		eye_manager.tile_set.tile_size = spacing
-
-		## 可能需要增加對scale的調整
-		#
-
 		point_manager.position = start_pos
+	if h_edge_manager != null:
+		h_edge_manager.tile_set.tile_size = spacing
 		h_edge_manager.position = start_pos
 		h_edge_manager.position.x += spacing.x / 2
+	if v_edge_manager != null:
+		v_edge_manager.tile_set.tile_size = spacing
 		v_edge_manager.position = start_pos
 		v_edge_manager.position.y += spacing.y / 2
+	if eye_manager != null:
+		eye_manager.tile_set.tile_size = spacing
 		eye_manager.position = start_pos + spacing / 2
 
-		old_auto_margin = auto_margin
-		old_margin = margin
-		old_spacing = spacing
-
 func update_child():
+	# 地圖更新
 	if point_manager.need_update_child():
 		#point_manager.update_childs()
-
 		var point_list:Array[Vector2i] = point_manager.list
+
 		h_edge_manager.update_child(point_list)
 		v_edge_manager.update_child(point_list)
 		eye_manager.update_child(point_list)
 		
+	# 頭(Worm)吸附點(Point)
 	var main_worm = worm_manager.main_worm
 	var sub_worm = worm_manager.sub_worm
 	if main_worm_pos != worm_manager.main_worm.position \
@@ -120,12 +127,14 @@ func update_child():
 		main_worm_pos = worm_manager.main_worm.position
 		sub_worm_pos = worm_manager.sub_worm.position
 	
+	# 同步轉頭
 	if main_worm_rotate != worm_manager.main_worm.rotation:
 		sub_worm.rotation = main_worm.rotation + PI
 	elif sub_worm_rotate != worm_manager.sub_worm.rotation:
 		main_worm.rotation = sub_worm.rotation + PI
 	main_worm_rotate = worm_manager.main_worm.rotation
 	sub_worm_rotate = worm_manager.sub_worm.rotation
+
 #endregion
 
 
@@ -198,7 +207,6 @@ func check_finish():
 					if not (pos + Vector2i.RIGHT) in new_need_check_list:
 						new_need_check_list.append(pos + Vector2i.RIGHT)
 
-
 			# 下一輪搜索的目標. 如果無目標則為己完成, 開始檢查下一個眼(Eye)
 			need_check_list = new_need_check_list
 			if need_check_list.is_empty():
@@ -232,15 +240,15 @@ func _on_worm_move_finish():
 		#max_size = window_size.x
 		#start_pos.y = floori((window_size.y - max_size) / 2)
 		#
-	#var margin:Vector2i = (Vector2i.ONE * max_size) / (size + Vector2i.ONE)
-	#start_pos += margin
+	#var offset:Vector2i = (Vector2i.ONE * max_size) / (size + Vector2i.ONE)
+	#start_pos += offset
 #
-	#var spacing:Vector2i = (Vector2i(max_size, max_size) - margin) / size
+	#var spacing:Vector2i = (Vector2i(max_size, max_size) - offset) / size
 	#
-	#printt(window_size, max_size, start_pos, margin, spacing)
+	#printt(window_size, max_size, start_pos, offset, spacing)
 	#
-	#edge_manager.Build(size, start_pos, margin, spacing)
-	#point_manager.Build(size, start_pos, margin, spacing)
-	#plane_manager.Build(size, start_pos, margin, spacing)
+	#edge_manager.Build(size, start_pos, offset, spacing)
+	#point_manager.Build(size, start_pos, offset, spacing)
+	#plane_manager.Build(size, start_pos, offset, spacing)
 	#eye_manager.Build()
 #endregion

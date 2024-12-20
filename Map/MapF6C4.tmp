@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://5jr077ljxgwi"]
+[gd_scene load_steps=10 format=4 uid="uid://5jr077ljxgwi"]
 
 [ext_resource type="Script" path="res://Map/Map.gd" id="1_anpjl"]
 [ext_resource type="TileSet" uid="uid://dqt36iogsx57j" path="res://Tile/map.tres" id="2_035eu"]
@@ -9,12 +9,9 @@
 [ext_resource type="Script" path="res://Map/HEdgeManager.gd" id="5_phctv"]
 [ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="9_gth0d"]
 [ext_resource type="PackedScene" uid="uid://3wu8fxil0bju" path="res://MapItems/WormTail/body/WormBody.tscn" id="9_tj3aa"]
-[ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Tile/EyeAnime/EyeAnim.tscn" id="10_susjb"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
-max_check_finish_distance = -1
-max_move_distance = 7
 
 [node name="HEdge" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
@@ -44,29 +41,18 @@ tile_map_data = PackedByteArray("AAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAAAAAAAQAAAAA
 tile_set = ExtResource("2_035eu")
 script = ExtResource("2_h8emp")
 
-[node name="Worm" type="Node2D" parent="." node_paths=PackedStringArray("main_worm", "sub_worm")]
+[node name="Worm" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_5oq82")
-main_worm = NodePath("MainWorm")
-sub_worm = NodePath("SubWorm")
 
 [node name="MainWorm" parent="Worm" instance=ExtResource("9_tj3aa")]
 unique_name_in_owner = true
 position = Vector2(80, 470)
-rotation = 3.14159
-color = 0
 
 [node name="SubWorm" parent="Worm" instance=ExtResource("9_tj3aa")]
 unique_name_in_owner = true
 position = Vector2(880, 70)
-rotation = 6.28318
 
 [node name="Foreground" parent="." instance=ExtResource("9_gth0d")]
 unique_name_in_owner = true
 visible = false
-
-[node name="EyeAnim" parent="." instance=ExtResource("10_susjb")]
-position = Vector2(330, 316)
-
-[node name="EyeAnim2" parent="." instance=ExtResource("10_susjb")]
-position = Vector2(628, 216)

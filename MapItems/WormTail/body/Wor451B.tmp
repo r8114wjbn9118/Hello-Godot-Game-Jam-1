@@ -7,16 +7,6 @@
 [ext_resource type="Script" path="res://MapItems/WormTail/body/PathLine.gd" id="2_yo5do"]
 [ext_resource type="Script" path="res://MapItems/WormTail/body/BodyLine.gd" id="3_7hxod"]
 [ext_resource type="PackedScene" uid="uid://up6yecfvyrms" path="res://MapItems/WormTail/legIK/LegIK.tscn" id="5_ca66f"]
-[ext_resource type="Texture2D" uid="uid://ba628tixl2qel" path="res://image/洞螈圖示（粉／藍）/藍藍洞螈.png" id="7_lsyt8"]
-
-[sub_resource type="Gradient" id="Gradient_3k8hu"]
-offsets = PackedFloat32Array(0.5, 1)
-colors = PackedColorArray(0.435294, 0.435294, 0.435294, 1, 0.435294, 0.435294, 0.435294, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qko8t"]
-shader = ExtResource("2_qhpyo")
-shader_parameter/line_colour = Color(0.259294, 0.259294, 0.259294, 1)
-shader_parameter/line_thickness = 2
 
 [sub_resource type="Gradient" id="Gradient_3k8hu"]
 offsets = PackedFloat32Array(0.5, 1)
@@ -41,13 +31,12 @@ point_count = 3
 top_level = true
 script = ExtResource("1_aav5k")
 
-[node name="Path" type="Node" parent="."]
+[node name="Path" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_yo5do")
 
 [node name="PathLine" type="Line2D" parent="Path"]
 unique_name_in_owner = true
-visible = false
 points = PackedVector2Array(0, 0, 36.9362, 0, 80.1929, 0, 115.116, 0, 164, 0, 197, 0)
 width = 50.0
 gradient = SubResource("Gradient_3k8hu")
@@ -56,14 +45,13 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
-z_index = 1
 material = SubResource("ShaderMaterial_ee82a")
 fit_margin = 50.0
 clear_margin = 50.0
 
 [node name="Body" type="Node2D" parent="CanvasGroup"]
 unique_name_in_owner = true
-visible = false
+clip_children = 2
 script = ExtResource("3_7hxod")
 
 [node name="Path2D" type="Path2D" parent="CanvasGroup/Body"]
@@ -75,11 +63,9 @@ rotation = -0.169101
 progress = 54.3416
 
 [node name="RMarker2D" type="Marker2D" parent="CanvasGroup/Body/Path2D/PathFollow2D"]
-unique_name_in_owner = true
 position = Vector2(0, 10)
 
 [node name="LMarker2D" type="Marker2D" parent="CanvasGroup/Body/Path2D/PathFollow2D"]
-unique_name_in_owner = true
 position = Vector2(0, -10)
 
 [node name="LegIk_FR" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]

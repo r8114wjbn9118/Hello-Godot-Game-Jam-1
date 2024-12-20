@@ -10,13 +10,6 @@ signal move_finish_signal()
 @export var main_worm:Worm
 @export var sub_worm:Worm
 
-enum ACTION {
-	WAIT,
-	MOVE,
-	START,
-	END,
-}
-var state:int = ACTION.START
 var move_path = []
 
 var move_speed:float = 200:
@@ -24,7 +17,12 @@ var move_speed:float = 200:
 		main_worm.move_speed = value
 		sub_worm.move_speed = value
 		move_speed = value
-var max_move_distance:int = 8
+var max_move_distance:int = 8:
+	set(value):
+		main_worm.max_move_distance = value
+		sub_worm.max_move_distance = value
+		max_move_distance = value
+		
 
 var body = []
 
@@ -38,23 +36,19 @@ func _ready() -> void:
 func initialize(move_speed, max_move_distance):
 	self.move_speed = move_speed
 	self.max_move_distance = max_move_distance
-	main_worm.is_main(true)
-	sub_worm.is_main(false)
+	main_worm.init()
+	sub_worm.init()
 	
-	init_pos()
 	move_path = [main_worm.game_pos]
 	
 	#create_body() # NOTE 已放進Worm
-	PathLine.max_distance = max_move_distance
+	#PathLine.max_distance = max_move_distance
 	
-	state = ACTION.WAIT
+	GameManager.prohibit_action(false)
 	
 func init_pos():
-	main_worm.game_pos = point_manager.get_point_game_pos(main_worm.position)
-	main_worm.position = point_manager.get_point_position(main_worm.game_pos)
-
-	sub_worm.game_pos = point_manager.get_point_game_pos(sub_worm.position)
-	sub_worm.position = point_manager.get_point_position(sub_worm.game_pos)
+	main_worm.init_pos()
+	sub_worm.init_pos()
 
 #func create_body():
 	#var main_worm_body = main_worm.create_body(max_move_distance)
@@ -69,7 +63,7 @@ func init_pos():
 # NOTE 流程: _unhandled_input -> check -> Do -> move
 
 func _unhandled_input(event: InputEvent) -> void:
-	if state == ACTION.WAIT:
+	if GameManager.is_waiting():
 		if Input.is_action_pressed("ui_up"):
 			move_input(Vector2i.UP)
 		elif Input.is_action_pressed("ui_left"):
@@ -94,7 +88,6 @@ func move_input(direction:Vector2i):
 
 func check(direction):
 	var map_point_list = point_manager.get_used_cells()
-	var _target_edge_map_pos
 
 	# 設定目標點
 	var target_map_pos = main_worm.game_pos + direction #* main_worm.action_distance
@@ -115,7 +108,6 @@ func check(direction):
 	if not check_edge_is_passable(main_worm.game_pos, target_map_pos):
 		return 0
 		
-
 	var sub_target_map_pos = sub_worm.game_pos + direction * -1 #* sub_worm.action_distance
 	if not sub_target_map_pos in map_point_list:
 		return 0
@@ -127,20 +119,8 @@ func check(direction):
 	or target_map_pos == sub_worm.game_pos \
 	and sub_target_map_pos == main_worm.game_pos:
 		return 0
-		
 
 	return 1
-	
-
-	# NOTE 之後移動至Move
-	
-	#if target_map_pos == move_path[-1]: # undo
-		#move_path.pop_back()
-	#elif move_path.size() < max_move_distance: # do
-		#move_path.append(target_map_pos)
-	#else:
-		#return false
-	#return true
 	
 func check_edge_is_passable(p1, p2):
 	var edge_game_pos
@@ -158,43 +138,23 @@ func check_edge_is_passable(p1, p2):
 
 
 func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操作 (不應該被直接調用)
-	var move_rotate = Vector2(main_worm.game_pos - target_map_pos).angle()
 	move_path.append(target_map_pos) # NOTE 紀錄路徑
 	
 	change_edge_available_count(main_worm.game_pos, target_map_pos, -1)
-	main_worm.rotation = move_rotate + PI / 2
-	main_worm.start_move(
-		target_map_pos,
-		point_manager.get_point_position(target_map_pos)
-	)
+	main_worm.start_move(target_map_pos)
 	
 	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, -1)
-	sub_worm.rotation = move_rotate - PI / 2
-	sub_worm.start_move(
-		sub_target_map_pos,
-		point_manager.get_point_position(sub_target_map_pos)
-	)
-	state = ACTION.MOVE
+	sub_worm.start_move(sub_target_map_pos)
+	GameManager.start_move()
 
 func unmove(target_map_pos, sub_target_map_pos): # NOTE move 的反向操作 (不應該被直接調用)
-	var move_rotate = Vector2(main_worm.game_pos - target_map_pos).angle()
 	move_path.pop_back() # NOTE 紀錄路徑
 	
 	change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
-	main_worm.rotation = move_rotate - PI / 2
-	main_worm.set_pos(target_map_pos, point_manager.get_point_position(target_map_pos))
-	#main_worm.start_move(
-		#target_map_pos,
-		#point_manager.get_point_position(target_map_pos)
-	#)
+	main_worm.set_pos(target_map_pos)
 	
 	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
-	sub_worm.rotation = move_rotate + PI / 2
-	sub_worm.set_pos(sub_target_map_pos, point_manager.get_point_position(sub_target_map_pos))
-	#sub_worm.start_move(
-		#sub_target_map_pos,
-		#point_manager.get_point_position(sub_target_map_pos)
-	#)
+	sub_worm.set_pos(sub_target_map_pos)
 	#state = ACTION.MOVE
 
 var _undo_redo = UndoRedo.new() # 命令模式
@@ -245,10 +205,8 @@ func change_edge_available_count(p1, p2, n):
 
 
 func _on_worm_move_finish():
-	if state == ACTION.MOVE:
-		if main_worm.state == ACTION.WAIT \
-		and sub_worm.state == ACTION.WAIT:
-			state = ACTION.WAIT
-			move_finish_signal.emit()
-			return true
+	if GameManager.is_moving():
+		GameManager.move_finish()
+		move_finish_signal.emit()
+		return true
 	return false
