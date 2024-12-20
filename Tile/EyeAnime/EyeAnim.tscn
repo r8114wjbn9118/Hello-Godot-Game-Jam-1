@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://utmygxugx6ap"]
+
+[ext_resource type="Script" path="res://Tile/EyeAnime/eye_anim.gd" id="1_8cmtv"]
+[ext_resource type="Texture2D" uid="uid://csitku5ccawhh" path="res://Tile/EyeAnime/眼白.png" id="2_34yb5"]
+[ext_resource type="Shader" uid="uid://wryyfh37kua4" path="res://Tile/EyeAnime/EyeAnim.tres" id="2_fjn0d"]
+[ext_resource type="Texture2D" uid="uid://cwj6pvm1nm5of" path="res://Tile/EyeAnime/圓瞳孔.png" id="3_unrhp"]
+[ext_resource type="Texture2D" uid="uid://cal71v28exp7o" path="res://Tile/EyeAnime/直瞳孔.png" id="4_e7biw"]
+[ext_resource type="Texture2D" uid="uid://lihx8xx7uxaq" path="res://Tile/EyeAnime/反光.png" id="5_erkaq"]
+
+[sub_resource type="Curve" id="Curve_h0k7j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.231579, 1), 0.0, 0.0, 0, 0, Vector2(0.273684, 0), 0.0, 0.0, 0, 0, Vector2(0.336842, 1), 0.0, 0.0, 0, 0, Vector2(0.403509, 0.193295), 0.0, 0.0, 0, 0, Vector2(0.45614, 1), 0.0, 0.0, 0, 0, Vector2(0.750877, 0.490014), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3sj4r"]
+shader = ExtResource("2_fjn0d")
+shader_parameter/pup_offset = Vector2(-0.0973802, 0.556008)
+
+[node name="EyeAnim" type="Node2D"]
+script = ExtResource("1_8cmtv")
+blink_curve = SubResource("Curve_h0k7j")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_3sj4r")
+fit_margin = 1.0
+clear_margin = 1.0
+
+[node name="眼白" type="Sprite2D" parent="CanvasGroup"]
+texture = ExtResource("2_34yb5")
+
+[node name="圓瞳孔" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(2.9869, -0.280038)
+texture = ExtResource("3_unrhp")
+
+[node name="直瞳孔" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(3.58428, -0.336045)
+scale = Vector2(1, 0.590862)
+texture = ExtResource("4_e7biw")
+
+[node name="反光" type="Sprite2D" parent="CanvasGroup"]
+modulate = Color(1, 1, 1, 0.690196)
+position = Vector2(1.49345, -0.140019)
+texture = ExtResource("5_erkaq")
+
+[node name="Target" type="Marker2D" parent="."]
+position = Vector2(37.7638, -3.54056)
+gizmo_extents = 5.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(31.1, 31.1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_set_rand_target"]
