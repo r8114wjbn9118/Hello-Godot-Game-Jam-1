@@ -1,6 +1,9 @@
 @tool
 extends Node2D
 
+#@onready var 
+@onready var old_points = %Line2D.points
+var need_update = true
 
 const LENGTH = 20.0
 const STEP_LENGTH = 20.0
@@ -15,6 +18,7 @@ func _process(delta: float) -> void:
 		FABRIK_I(StartAt, EndAt)
 		FABRIK_F(StartAt, EndAt)
 	
+	
 func FABRIK_F(start:Vector2, end:Vector2):  # 正向
 	var arr:PackedVector2Array = %Line2D.points
 	arr[0] = start
@@ -26,7 +30,7 @@ func FABRIK_F(start:Vector2, end:Vector2):  # 正向
 func FABRIK_I(start:Vector2, end:Vector2):  # 反向
 	var arr:PackedVector2Array = %Line2D.points
 	arr[-1] = end
-	for i in range(arr.size()-2, -1, -1): # 反向
-			if (arr[i] - arr[i+1]).length() > LENGTH:
-				arr[i] = (arr[i] - arr[i+1]).normalized() * LENGTH + arr[i+1]
+	for i in range(arr.size() - 2, -1, -1): # 反向
+		if (arr[i] - arr[i+1]).length() > LENGTH:
+			arr[i] = (arr[i] - arr[i+1]).normalized() * LENGTH + arr[i+1]
 	%Line2D.points = arr

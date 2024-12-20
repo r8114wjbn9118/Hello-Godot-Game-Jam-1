@@ -14,13 +14,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		anim_tree["parameters/conditions/start"] = true
 
 
-func enter_select_level_scene():
-	get_tree().change_scene_to_packed(select_level_scene)
-
-
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	print(anim_name)
 	if anim_name == "fadein":
-		enter_select_level_scene()
+		GameManager.goto_scene("select")
 	pass # Replace with function body.

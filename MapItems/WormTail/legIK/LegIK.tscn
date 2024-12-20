@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://MapItems/WormTail/legIK/leg_ik.gd" id="1_eerbp"]
 
 [node name="LegIk" type="Node2D"]
+top_level = true
 script = ExtResource("1_eerbp")
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Node2D" parent="."]
+top_level = true
 
 [node name="Line2D" type="Line2D" parent="Node"]
 unique_name_in_owner = true

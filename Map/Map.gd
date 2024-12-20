@@ -103,14 +103,16 @@ func update_tile():
 		old_spacing = spacing
 
 func update_child():
+	# 地圖更新
 	if point_manager.need_update_child():
 		#point_manager.update_childs()
-
 		var point_list:Array[Vector2i] = point_manager.list
+
 		h_edge_manager.update_child(point_list)
 		v_edge_manager.update_child(point_list)
 		eye_manager.update_child(point_list)
 		
+	# 頭(Worm)吸附點(Point)
 	var main_worm = worm_manager.main_worm
 	var sub_worm = worm_manager.sub_worm
 	if main_worm_pos != worm_manager.main_worm.position \
@@ -120,6 +122,7 @@ func update_child():
 		main_worm_pos = worm_manager.main_worm.position
 		sub_worm_pos = worm_manager.sub_worm.position
 	
+	# 同步轉頭
 	if main_worm_rotate != worm_manager.main_worm.rotation:
 		sub_worm.rotation = main_worm.rotation + PI
 	elif sub_worm_rotate != worm_manager.sub_worm.rotation:
@@ -197,7 +200,6 @@ func check_finish():
 						v_checked_edge_list.append(pos + Vector2i.RIGHT)
 					if not (pos + Vector2i.RIGHT) in new_need_check_list:
 						new_need_check_list.append(pos + Vector2i.RIGHT)
-
 
 			# 下一輪搜索的目標. 如果無目標則為己完成, 開始檢查下一個眼(Eye)
 			need_check_list = new_need_check_list
