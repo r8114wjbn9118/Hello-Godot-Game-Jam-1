@@ -36,6 +36,9 @@ func _physics_process(delta: float):
 @onready var _pathLine := $Node/PathLine
 @onready var _bodyLine := $Node/Body
 # Called when the node enters the scene tree for the first time.
+func _is_main(main:bool):
+	pass
+
 func _ready() -> void:
 	_pathLine.init(self, %Point)
 	_bodyLine.init(self, %Point)

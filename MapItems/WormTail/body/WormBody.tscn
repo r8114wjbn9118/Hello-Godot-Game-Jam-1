@@ -21,7 +21,7 @@ script = ExtResource("1_aav5k")
 [node name="PathLine" type="Line2D" parent="Node"]
 points = PackedVector2Array(0, 0, 197, 0)
 width = 30.0
-default_color = Color(0.750604, 0.452951, 0.254425, 1)
+default_color = Color(0.42456, 0.238654, 0.111802, 1)
 script = ExtResource("2_yo5do")
 
 [node name="Body" type="Node" parent="Node"]
@@ -35,26 +35,27 @@ position = Vector2(60.5543, -28.1434)
 rotation = -0.169101
 progress = 54.3416
 
+[node name="RMarker2D" type="Marker2D" parent="Node/Body/Path2D/PathFollow2D"]
+position = Vector2(0, 10)
+
+[node name="LMarker2D" type="Marker2D" parent="Node/Body/Path2D/PathFollow2D"]
+position = Vector2(0, -10)
+
 [node name="LegIk_FR" parent="Node/Body" instance=ExtResource("5_ca66f")]
-z_index = -1
 position = Vector2(76, -31)
 
 [node name="LegIk_FL" parent="Node/Body" instance=ExtResource("5_ca66f")]
-z_index = -1
 position = Vector2(38, 40)
 
 [node name="LegIk_BR" parent="Node/Body" instance=ExtResource("5_ca66f")]
-z_index = -1
 position = Vector2(58, -4)
 
 [node name="LegIk_BL" parent="Node/Body" instance=ExtResource("5_ca66f")]
-z_index = -1
 position = Vector2(130, -34)
 
 [node name="BodyLine" type="Line2D" parent="Node/Body"]
-points = PackedVector2Array(94, 39, 181, 58)
+points = PackedVector2Array(60, -15, 181, 58)
 width = 20.0
-default_color = Color(0.881937, 0.881937, 0.881937, 1)
 texture = ExtResource("2_q8g0w")
 texture_mode = 2
 joint_mode = 2

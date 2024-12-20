@@ -3,7 +3,7 @@ class_name BodyLine extends Node
 var point_manager:PointManager
 
 ## 身體長度
-var max_distance:int = 2
+var max_distance:int = 1
 
 func getPoints():
 	return $BodyLine.points
@@ -45,15 +45,15 @@ func move(pos) -> void:
 	const FRONT_POS = 0.2
 	const BACK_POS = 0.8
 	$Path2D/PathFollow2D.progress_ratio = FRONT_POS
-	$LegIk_FR.position = $Path2D/PathFollow2D.global_position
+	$LegIk_FR.position = $Path2D/PathFollow2D/RMarker2D.global_position
 	$LegIk_FR.rotation = $Path2D/PathFollow2D.global_rotation + PI/2
-	$LegIk_FL.position = $Path2D/PathFollow2D.global_position
+	$LegIk_FL.position = $Path2D/PathFollow2D/LMarker2D.global_position
 	$LegIk_FL.rotation = $Path2D/PathFollow2D.global_rotation - PI/2
 	
 	$Path2D/PathFollow2D.progress_ratio = BACK_POS
-	$LegIk_BR.position = $Path2D/PathFollow2D.global_position
+	$LegIk_BR.position = $Path2D/PathFollow2D/RMarker2D.global_position
 	$LegIk_BR.rotation = $Path2D/PathFollow2D.global_rotation + PI/2
-	$LegIk_BL.position = $Path2D/PathFollow2D.global_position
+	$LegIk_BL.position = $Path2D/PathFollow2D/LMarker2D.global_position
 	$LegIk_BL.rotation = $Path2D/PathFollow2D.global_rotation - PI/2
 	
 	
@@ -73,3 +73,19 @@ func align_to_grid_line(pos: Vector2) -> Vector2: # 對齊到網格線上 容許
 		return grid + (pos - grid).normalized() * MAX_DISTANCE
 	else:
 		return pos
+
+
+
+var _time = 0.0
+const LEG_SP_MOVE_TIME = 0.1
+func _process(delta: float) -> void:
+	_time += delta
+	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
+	var curr_time = fmod(_time, (LEG_SP_MOVE_TIME*4.0))
+	var curr:int = floori(curr_time/LEG_SP_MOVE_TIME)
+	for i in arr:
+		i.canMove = false
+	arr[curr].canMove = true
+	
+	
+	
