@@ -33,10 +33,13 @@ var body = []
 func _ready() -> void:
 	main_worm.move_finish_signal.connect(_on_worm_move_finish)
 	sub_worm.move_finish_signal.connect(_on_worm_move_finish)
+	
 
 func initialize(move_speed, max_move_distance):
 	self.move_speed = move_speed
 	self.max_move_distance = max_move_distance
+	main_worm.is_main(true)
+	sub_worm.is_main(false)
 	
 	init_pos()
 	move_path = [main_worm.game_pos]

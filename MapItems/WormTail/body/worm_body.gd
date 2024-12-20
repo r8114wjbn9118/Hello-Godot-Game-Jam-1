@@ -36,8 +36,14 @@ func _physics_process(delta: float):
 @onready var _pathLine := $Node/PathLine
 @onready var _bodyLine := $Node/Body
 # Called when the node enters the scene tree for the first time.
-func _is_main(main:bool):
-	pass
+func is_main(main:bool):
+	if main:
+		pass
+	else:
+		$"粉紅洞螈".visible = false
+		$"藍藍洞螈".visible = true
+		$Node/Body/BodyLine.texture = preload("res://MapItems/WormTail/body/身體(1).png")
+		_bodyLine.setColor(Color("cfdeff"))
 
 func _ready() -> void:
 	_pathLine.init(self, %Point)

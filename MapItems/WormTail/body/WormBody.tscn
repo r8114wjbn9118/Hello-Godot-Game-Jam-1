@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3wu8fxil0bju"]
+[gd_scene load_steps=9 format=3 uid="uid://3wu8fxil0bju"]
 
 [ext_resource type="Script" path="res://MapItems/WormTail/body/worm_body.gd" id="1_aav5k"]
 [ext_resource type="Texture2D" uid="uid://j2mnes0gkf6d" path="res://MapItems/WormTail/body/身體.png" id="2_q8g0w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://MapItems/WormTail/body/path_line.gd" id="2_yo5do"]
 [ext_resource type="Script" path="res://MapItems/WormTail/body/body_line.gd" id="4_6p0er"]
 [ext_resource type="PackedScene" uid="uid://up6yecfvyrms" path="res://MapItems/WormTail/legIK/LegIK.tscn" id="5_ca66f"]
+[ext_resource type="Texture2D" uid="uid://ba628tixl2qel" path="res://image/洞螈圖示（粉／藍）/藍藍洞螈.png" id="7_lsyt8"]
 
 [sub_resource type="Curve2D" id="Curve2D_58frh"]
 _data = {
@@ -54,6 +55,7 @@ position = Vector2(58, -4)
 position = Vector2(130, -34)
 
 [node name="BodyLine" type="Line2D" parent="Node/Body"]
+z_index = 2
 points = PackedVector2Array(60, -15, 181, 58)
 width = 20.0
 texture = ExtResource("2_q8g0w")
@@ -66,3 +68,10 @@ end_cap_mode = 2
 z_index = 4
 scale = Vector2(5, 5)
 texture = ExtResource("2_vebed")
+
+[node name="藍藍洞螈" type="Sprite2D" parent="."]
+visible = false
+z_index = 4
+position = Vector2(0, -1)
+scale = Vector2(5, 5)
+texture = ExtResource("7_lsyt8")

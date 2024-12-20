@@ -37,3 +37,6 @@ func FABRIK_I(start:Vector2, end:Vector2):  # 反向
 			#if (arr[i] - arr[i+1]).length() > LENGTH:
 			arr[i] = (arr[i] - arr[i+1]).normalized() * LENGTH + arr[i+1]
 	%Line2D.points = arr
+
+func setColor(color:Color):
+	%Line2D.default_color = color

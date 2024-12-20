@@ -9,6 +9,12 @@ func getPoints():
 	return $BodyLine.points
 func setPoints(arr):
 	$BodyLine.points = arr
+
+func setColor(color:Color):
+	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
+	for i in arr:
+		i.setColor(color)
+
 @onready var _line = $BodyLine
 
 var length:int = 10
@@ -18,7 +24,7 @@ func init(head, point_manager) -> void:
 	GRID_SIZE = point_manager.tile_set.tile_size
 	GRID_OFFSET = point_manager.position + GRID_SIZE / 2
 	
-	name = head.name + "Body"
+	#name = head.name + "Body"
 	var arr = []
 	for i in range(length * max_distance):
 		arr.append(head.position)
