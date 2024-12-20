@@ -1,11 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://3wu8fxil0bju"]
+[gd_scene load_steps=13 format=3 uid="uid://3wu8fxil0bju"]
 
 [ext_resource type="Script" path="res://MapItems/WormTail/body/worm_body.gd" id="1_aav5k"]
 [ext_resource type="Texture2D" uid="uid://j2mnes0gkf6d" path="res://MapItems/WormTail/body/身體.png" id="2_q8g0w"]
+[ext_resource type="Shader" path="res://MapItems/WormTail/body/WormBodyShader.gdshader" id="2_qhpyo"]
 [ext_resource type="Texture2D" uid="uid://c223dcf0qhqf0" path="res://image/洞螈圖示（粉／藍）/粉紅洞螈.png" id="2_vebed"]
 [ext_resource type="Script" path="res://MapItems/WormTail/body/PathLine.gd" id="2_yo5do"]
 [ext_resource type="Script" path="res://MapItems/WormTail/body/BodyLine.gd" id="3_7hxod"]
 [ext_resource type="PackedScene" uid="uid://up6yecfvyrms" path="res://MapItems/WormTail/legIK/LegIK.tscn" id="5_ca66f"]
+[ext_resource type="Texture2D" uid="uid://ba628tixl2qel" path="res://image/洞螈圖示（粉／藍）/藍藍洞螈.png" id="7_lsyt8"]
+
+[sub_resource type="Gradient" id="Gradient_3k8hu"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(0.435294, 0.435294, 0.435294, 1, 0.435294, 0.435294, 0.435294, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qko8t"]
+shader = ExtResource("2_qhpyo")
+shader_parameter/line_colour = Color(0.259294, 0.259294, 0.259294, 1)
+shader_parameter/line_thickness = 2
 
 [sub_resource type="Curve2D" id="Curve2D_58frh"]
 _data = {
@@ -23,51 +34,71 @@ script = ExtResource("2_yo5do")
 
 [node name="PathLine" type="Line2D" parent="Path"]
 unique_name_in_owner = true
-width = 30.0
-default_color = Color(0.74902, 0.454902, 0.254902, 1)
+width = 50.0
+default_color = Color(0.435294, 0.435294, 0.435294, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
-[node name="Body" type="Node2D" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_qko8t")
+fit_margin = 50.0
+clear_margin = 50.0
+
+[node name="Body" type="Node2D" parent="CanvasGroup"]
 unique_name_in_owner = true
 top_level = true
 script = ExtResource("3_7hxod")
 
-[node name="Path2D" type="Path2D" parent="Body"]
+[node name="Path2D" type="Path2D" parent="CanvasGroup/Body"]
 curve = SubResource("Curve2D_58frh")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Body/Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="CanvasGroup/Body/Path2D"]
 position = Vector2(60.5543, -28.1434)
 rotation = -0.169101
 progress = 54.3416
 
-[node name="LegIk_FR" parent="Body" instance=ExtResource("5_ca66f")]
+[node name="RMarker2D" type="Marker2D" parent="CanvasGroup/Node/Body/Path2D/PathFollow2D"]
+position = Vector2(0, 10)
+
+[node name="LMarker2D" type="Marker2D" parent="CanvasGroup/Node/Body/Path2D/PathFollow2D"]
+position = Vector2(0, -10)
+
+[node name="LegIk_FR" parent="CanvasGroup/Node/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
 position = Vector2(76, -31)
 
-[node name="LegIk_FL" parent="Body" instance=ExtResource("5_ca66f")]
+[node name="LegIk_FL" parent="CanvasGroup/Node/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
 position = Vector2(38, 40)
 
-[node name="LegIk_BR" parent="Body" instance=ExtResource("5_ca66f")]
+[node name="LegIk_BR" parent="CanvasGroup/Node/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
 position = Vector2(58, -4)
 
-[node name="LegIk_BL" parent="Body" instance=ExtResource("5_ca66f")]
+[node name="LegIk_BL" parent="CanvasGroup/Node/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
 position = Vector2(130, -34)
 
-[node name="BodyLine" type="Line2D" parent="Body"]
+[node name="BodyLine" type="Line2D" parent="CanvasGroup/Node/Body"]
 unique_name_in_owner = true
 top_level = true
 width = 20.0
-default_color = Color(0.882353, 0.882353, 0.882353, 1)
+width_curve = SubResource("Curve_5pkq8")
 texture = ExtResource("2_q8g0w")
 texture_mode = 2
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Head" type="Sprite2D" parent="."]
+[node name="Head" type="Sprite2D" parent="CanvasGroup"]
 unique_name_in_owner = true
 z_index = 4
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("2_vebed")
+
+[node name="藍藍洞螈" type="Sprite2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(3.8147e-06, 3.8147e-06)
+scale = Vector2(4, 4)
+texture = ExtResource("7_lsyt8")

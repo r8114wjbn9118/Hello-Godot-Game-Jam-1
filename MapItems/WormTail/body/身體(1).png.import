@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6qxolrbvlhdm"
-path="res://.godot/imported/影格3.png-1d973154d7342e1a5d8c12575bd14ae8.ctex"
+uid="uid://085oxhrfsole"
+path="res://.godot/imported/身體(1).png-224f0655c229c22b8729df961b8ee6da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/過關畫面/影格3.png"
-dest_files=["res://.godot/imported/影格3.png-1d973154d7342e1a5d8c12575bd14ae8.ctex"]
+source_file="res://MapItems/WormTail/body/身體(1).png"
+dest_files=["res://.godot/imported/身體(1).png-224f0655c229c22b8729df961b8ee6da.ctex"]
 
 [params]
 

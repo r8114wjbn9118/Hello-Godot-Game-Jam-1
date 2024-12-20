@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6qxolrbvlhdm"
-path="res://.godot/imported/影格3.png-1d973154d7342e1a5d8c12575bd14ae8.ctex"
+uid="uid://48s7wn8cbhwr"
+path="res://.godot/imported/2.png-0de0d46437b825487f3ce834a8d41418.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/過關畫面/影格3.png"
-dest_files=["res://.godot/imported/影格3.png-1d973154d7342e1a5d8c12575bd14ae8.ctex"]
+source_file="res://image/故事用插圖/2.png"
+dest_files=["res://.godot/imported/2.png-0de0d46437b825487f3ce834a8d41418.ctex"]
 
 [params]
 

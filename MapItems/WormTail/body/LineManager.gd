@@ -18,13 +18,11 @@ var points:
 	get: return line.points
 
 var length:int = 10
-func init(head, point_manager, color) -> void:
+func init(head, point_manager) -> void:
 	if point_manager is PointManager:
 		self.point_manager = point_manager
 		GRID_SIZE = point_manager.tile_set.tile_size
 		GRID_OFFSET = point_manager.position + GRID_SIZE / 2
-
-	self.color = color
 
 	var arr = []
 	var pos = head.position

@@ -7,8 +7,8 @@ signal move_finish_signal()
 @onready var point_manager = %Point
 @onready var h_edge_manager = %HEdge
 @onready var v_edge_manager = %VEdge
-@onready var main_worm := %MainWorm
-@onready var sub_worm := %SubWorm
+@export var main_worm:Worm
+@export var sub_worm:Worm
 
 var move_path = []
 
@@ -31,6 +31,7 @@ var body = []
 func _ready() -> void:
 	main_worm.move_finish_signal.connect(_on_worm_move_finish)
 	sub_worm.move_finish_signal.connect(_on_worm_move_finish)
+	
 
 func initialize(move_speed, max_move_distance):
 	self.move_speed = move_speed
@@ -38,6 +39,10 @@ func initialize(move_speed, max_move_distance):
 	main_worm.init()
 	sub_worm.init()
 
+	#main_worm.is_main(true)
+	#sub_worm.is_main(false)
+	#
+	#init_pos()
 	move_path = [main_worm.game_pos]
 	
 	#create_body() # NOTE 已放進Worm
@@ -64,13 +69,13 @@ func init_pos():
 func _unhandled_input(event: InputEvent) -> void:
 	if GameManager.is_waiting():
 		if Input.is_action_pressed("ui_up"):
-			return move_input(Vector2i.UP)
+			move_input(Vector2i.UP)
 		elif Input.is_action_pressed("ui_left"):
-			return move_input(Vector2i.LEFT)
+			move_input(Vector2i.LEFT)
 		elif Input.is_action_pressed("ui_right"):
-			return move_input(Vector2i.RIGHT)
+			move_input(Vector2i.RIGHT)
 		elif Input.is_action_pressed("ui_down"):
-			return move_input(Vector2i.DOWN)
+			move_input(Vector2i.DOWN)
 		elif Input.is_action_pressed("z"):
 			Undo()
 			

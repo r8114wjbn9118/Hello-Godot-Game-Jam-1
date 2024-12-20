@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Map/pointManager.gd" id="5_82k7m"]
 [ext_resource type="Script" path="res://Map/eyeManager.gd" id="6_gtbhw"]
 [ext_resource type="Script" path="res://Map/wormManager.gd" id="7_gix1s"]
-[ext_resource type="PackedScene" uid="uid://rjwfydc7rh45" path="res://MapItems/Worm.tscn" id="8_c6ubh"]
+[ext_resource type="PackedScene" uid="uid://3wu8fxil0bju" path="res://MapItems/WormTail/body/WormBody.tscn" id="8_3nj1v"]
 [ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="9_cvpyr"]
 
 [node name="Map" type="Node2D"]
@@ -41,22 +41,19 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAAAAQAAAAA
 tile_set = ExtResource("2_6txq8")
 script = ExtResource("6_gtbhw")
 
-[node name="Worm" type="Node2D" parent="."]
+[node name="Worm" type="Node2D" parent="." node_paths=PackedStringArray("main_worm", "sub_worm")]
 unique_name_in_owner = true
 script = ExtResource("7_gix1s")
+main_worm = NodePath("WormBody")
+sub_worm = NodePath("WormBody2")
 
-[node name="MainWorm" parent="Worm" instance=ExtResource("8_c6ubh")]
-unique_name_in_owner = true
-position = Vector2(80, 470)
+[node name="WormBody" parent="Worm" instance=ExtResource("8_3nj1v")]
+position = Vector2(280, 370)
 rotation = 3.14159
-scale = Vector2(5, 5)
 
-[node name="SubWorm" parent="Worm" instance=ExtResource("8_c6ubh")]
-unique_name_in_owner = true
+[node name="WormBody2" parent="Worm" instance=ExtResource("8_3nj1v")]
 position = Vector2(880, 70)
 rotation = 6.28318
-scale = Vector2(5, 5)
-animation = &"sub"
 
 [node name="Foreground" parent="." instance=ExtResource("9_cvpyr")]
 unique_name_in_owner = true

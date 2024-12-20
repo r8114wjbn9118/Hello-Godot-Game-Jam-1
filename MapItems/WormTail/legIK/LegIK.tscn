@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://up6yecfvyrms"]
+[gd_scene load_steps=4 format=3 uid="uid://up6yecfvyrms"]
 
 [ext_resource type="Script" path="res://MapItems/WormTail/legIK/leg_ik.gd" id="1_eerbp"]
+[ext_resource type="Script" path="res://MapItems/WormTail/legIK/node.gd" id="2_3rdv6"]
+
+[sub_resource type="Curve" id="Curve_1conq"]
+_data = [Vector2(0, 0.384615), 0.0, 0.0, 0, 0, Vector2(0.489474, 0.648352), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="LegIk" type="Node2D"]
 script = ExtResource("1_eerbp")
@@ -10,8 +15,9 @@ top_level = true
 
 [node name="Line2D" type="Line2D" parent="Node"]
 unique_name_in_owner = true
-points = PackedVector2Array(0, 0, 14, 0, 34, 0)
-default_color = Color(0.827451, 0.560784, 0.698039, 1)
+width = 7.0
+default_color = Color(1, 0.733333, 0.835294, 1)
+width_curve = SubResource("Curve_1conq")
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -19,8 +25,8 @@ metadata/_edit_lock_ = true
 
 [node name="LegEnd" type="Marker2D" parent="Node"]
 unique_name_in_owner = true
-position = Vector2(34, 0)
+position = Vector2(20, 0)
 
 [node name="Target" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(34, 0)
+position = Vector2(20, 0)
