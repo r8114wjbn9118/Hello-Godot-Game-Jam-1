@@ -60,7 +60,7 @@ func set_pos(_game_pos, _target_pos): # NOTE 由父UNDO調用
 func _make_tween():
 	var tween = get_tree().create_tween()
 	tween.tween_method(_tween_move, position, target_pos, move_time)\
-		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(move_finish)
 
 func _tween_move(new_pos): # TEST 替代move
