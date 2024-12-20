@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3wu8fxil0bju"]
+[gd_scene load_steps=10 format=3 uid="uid://3wu8fxil0bju"]
 
 [ext_resource type="Script" path="res://MapItems/WormTail/body/worm_body.gd" id="1_aav5k"]
 [ext_resource type="Texture2D" uid="uid://j2mnes0gkf6d" path="res://MapItems/WormTail/body/身體.png" id="2_q8g0w"]
@@ -14,6 +14,10 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_5pkq8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.747368, 0.725275), 0.214145, 0.0, 0, 0, Vector2(1, 0.428571), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="WormBody" type="Node2D" groups=["Worm"]]
 script = ExtResource("1_aav5k")
 
@@ -21,8 +25,11 @@ script = ExtResource("1_aav5k")
 
 [node name="PathLine" type="Line2D" parent="Node"]
 points = PackedVector2Array(0, 0, 197, 0)
-width = 30.0
-default_color = Color(0.42456, 0.238654, 0.111802, 1)
+width = 50.0
+default_color = Color(0.435294, 0.435294, 0.435294, 0.521569)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 script = ExtResource("2_yo5do")
 
 [node name="Body" type="Node" parent="Node"]
@@ -56,8 +63,9 @@ position = Vector2(130, -34)
 
 [node name="BodyLine" type="Line2D" parent="Node/Body"]
 z_index = 2
-points = PackedVector2Array(60, -15, 181, 58)
+points = PackedVector2Array(60, -15, 75.2645, -5.79084, 88.8415, 2.40025, 103.993, 11.5412, 113.899, 17.5174, 125.382, 24.4456, 133.022, 29.0547, 145.814, 36.7719, 154.675, 42.1178, 163, 45, 170.561, 50.4606, 177, 53, 181, 58)
 width = 20.0
+width_curve = SubResource("Curve_5pkq8")
 texture = ExtResource("2_q8g0w")
 texture_mode = 2
 joint_mode = 2

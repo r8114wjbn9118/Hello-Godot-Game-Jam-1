@@ -49,7 +49,7 @@ func move(pos) -> void:
 	for i in arr:
 		curve.add_point(i)
 	const FRONT_POS = 0.2
-	const BACK_POS = 0.8
+	const BACK_POS = 0.6
 	$Path2D/PathFollow2D.progress_ratio = FRONT_POS
 	$LegIk_FR.position = $Path2D/PathFollow2D/RMarker2D.global_position
 	$LegIk_FR.rotation = $Path2D/PathFollow2D.global_rotation + PI/2
