@@ -60,8 +60,8 @@ func align_to_grid_line(pos: Vector2) -> Vector2: # 對齊到網格線上 容許
 	var local_end = pos - GRID_OFFSET
 	var grid = floor(local_end / GRID_SIZE) * GRID_SIZE + GRID_OFFSET + GRID_SIZE / 2
 	
-	#var game_pos = point_manager.get_point_game_pos(pos - GRID_SIZE / 2)
-	#var grid = point_manager.get_point_position(game_pos) + GRID_SIZE / 2
+	#var game_pos = point_manager.get_tile_game_pos(pos - GRID_SIZE / 2)
+	#var grid = point_manager.get_tile_position(game_pos) + GRID_SIZE / 2
 
 	if (pos - grid).length() <= MAX_DISTANCE:
 		return grid + (pos - grid).normalized() * MAX_DISTANCE

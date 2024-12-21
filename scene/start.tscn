@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://cxferyrve8y47"]
+[gd_scene load_steps=2 format=3 uid="uid://cxferyrve8y47"]
 
-[node name="Start" type="Node2D"]
+[ext_resource type="Script" path="res://script/start.gd" id="1_okr7h"]
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_okr7h")

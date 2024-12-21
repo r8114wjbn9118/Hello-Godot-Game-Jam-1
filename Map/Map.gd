@@ -2,6 +2,8 @@
 extends Node2D
 class_name Map
 
+@export var level:int = 0
+
 #region 變量(場景編輯)
 @export_group("場景編輯")
 ## 根據點(Point)的最大可放置數量自動調整邊距(功能受到下列的Offset和Spacing影響)
@@ -39,7 +41,7 @@ class_name Map
 ## 移動速度
 @export_range(0, 1000) var move_speed:int = 200
 ## 移動距離(-1=無限)
-@export_range(-1, 1000) var max_move_distance:int = 8
+@export_range(-1, 1000) var max_move_distance:int = 7
 #endregion
 
 #region node
@@ -109,9 +111,10 @@ func update_tile():
 
 func update_child():
 	# 地圖更新
-	if point_manager.need_update_child():
+	if point_manager.need_update_child() \
+	or eye_manager.need_update_child():
 		#point_manager.update_childs()
-		var point_list:Array[Vector2i] = point_manager.list
+		var point_list:Array[Vector2i] = point_manager.get_used_cells()
 
 		h_edge_manager.update_child(point_list)
 		v_edge_manager.update_child(point_list)
@@ -220,8 +223,14 @@ func check_finish():
 func _on_worm_move_finish():
 	print("Worm Move Finish")
 	if check_finish():
-		print("Game Finish")
+		start_game_finish()
 
+
+
+func start_game_finish():
+	print("Game Finish")
+	
+	GameManager.finish_level(level)
 
 
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dup52acum2gnr"]
+[gd_scene load_steps=20 format=3 uid="uid://dup52acum2gnr"]
 
 [ext_resource type="Texture2D" uid="uid://dtct2131fr665" path="res://image/title/background.png" id="1_ppyqj"]
 [ext_resource type="Script" path="res://script/title.gd" id="1_vvba4"]
 [ext_resource type="Texture2D" uid="uid://wvajv3dbccn" path="res://image/title/start_game.png" id="2_eibid"]
+[ext_resource type="Texture2D" uid="uid://bvxh041hgg2dr" path="res://image/title/game_name.png" id="4_talag"]
+[ext_resource type="AudioStream" uid="uid://c0oowqc4oi4nm" path="res://audio/game_menu.mp3" id="4_tca0t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chf1w"]
 bg_color = Color(0, 0, 0, 0.498039)
@@ -42,7 +44,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/path = NodePath("Panel/Fade:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -71,7 +73,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/path = NodePath("Panel/Fade:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,10 +86,11 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_soke4"]
 resource_name = "fadeout"
 length = 0.5
+step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/path = NodePath("Panel/Fade:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -109,7 +112,7 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/ColorRect:color")
+tracks/0/path = NodePath("Panel/Fade:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -175,23 +178,33 @@ offset_bottom = 130.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chf1w")
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Panel"]
+[node name="StartGame" type="TextureRect" parent="Panel/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -185.4
-offset_top = -27.0
-offset_right = 185.4
-offset_bottom = 27.0
+offset_left = -180.25
+offset_top = -26.25
+offset_right = 180.25
+offset_bottom = 26.25
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(480, 270)
 texture = ExtResource("2_eibid")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="Panel"]
+[node name="TitleText" type="TextureRect" parent="Panel"]
+layout_mode = 1
+offset_left = 34.0
+offset_top = 154.0
+offset_right = 659.0
+offset_bottom = 216.5
+texture = ExtResource("4_talag")
+stretch_mode = 5
+
+[node name="Fade" type="ColorRect" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,5 +223,10 @@ libraries = {
 "": SubResource("AnimationLibrary_83xna")
 }
 autoplay = "fadeout"
+
+[node name="GameMenu" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_tca0t")
+autoplay = true
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

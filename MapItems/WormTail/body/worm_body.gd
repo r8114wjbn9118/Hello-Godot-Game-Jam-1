@@ -61,8 +61,8 @@ func init():
 	color = color
 	
 func init_pos():
-	game_pos = point_manager.get_point_game_pos(position)
-	position = point_manager.get_point_position(game_pos)
+	game_pos = point_manager.get_tile_game_pos(position)
+	position = point_manager.get_tile_position(game_pos)
 	
 # 編輯地圖時隱藏身體
 func _ready() -> void:
@@ -78,7 +78,7 @@ func _ready() -> void:
 func set_pos(game_pos): # NOTE 由UNDO調用
 	rotation = Vector2(self.game_pos - game_pos).angle() - PI / 2
 	self.game_pos = game_pos
-	position = point_manager.get_point_position(game_pos)
+	position = point_manager.get_tile_position(game_pos)
 
 #func move(delta):
 	#var distance = move_speed * delta
@@ -129,7 +129,7 @@ func Undo():
 	#return false
 
 func start_move(target_game_pos):
-	var target_pos = point_manager.get_point_position(target_game_pos)
+	var target_pos = point_manager.get_tile_position(target_game_pos)
 	rotation = Vector2(game_pos - target_game_pos).angle() + PI / 2
 	_make_tween(target_pos) # TEST
 	game_pos = target_game_pos

@@ -1,8 +1,18 @@
 extends Node
 
+func _ready() -> void:
+	print(OS.get_locale())
+
 var LEVEL:Array = [null, ## 0留空
 	"res://scene/level/1.tscn",
 ]
+
+func goto_level(target:int):
+	var path = LEVEL[target]
+	if path:
+		get_tree().change_scene_to_file(path)
+	else:
+		printerr('GameManager.goto_level({0}): 無效目標'.format([target]))
 
 var SCENE:Dictionary = {
 	"title": "res://scene/title.tscn",
@@ -10,6 +20,13 @@ var SCENE:Dictionary = {
 	"start": "res://scene/start.tscn",
 	"end": "res://scene/end.tscn"
 }
+
+func goto_scene(target:String):
+	var path = SCENE.get(target, null)
+	if path:
+		get_tree().change_scene_to_file(path)
+	else:
+		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
 
 #region 玩家行動
 
@@ -72,10 +89,3 @@ func is_finish_game():
 	return finished_level.size() == LEVEL.size()
 
 #endregion
-
-func goto_scene(target:String):
-	var path = SCENE.get(target, null)
-	if path:
-		get_tree().change_scene_to_file(path)
-	else:
-		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))

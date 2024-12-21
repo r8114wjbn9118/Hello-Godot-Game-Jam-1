@@ -49,6 +49,14 @@ z={
 ]
 }
 
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://text/text.en.translation", "res://text/text.zh_TW.translation")
+locale/locale_filter_mode=0
+locale/country_filter=["CN", "HK", "TW"]
+locale/language_filter=["zh"]
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

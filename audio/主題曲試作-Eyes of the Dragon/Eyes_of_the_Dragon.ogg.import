@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://df8iio5fq5hmj"
+path="res://.godot/imported/Eyes_of_the_Dragon.ogg-9b0ed1c350602decf89f82e37d067598.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/主題曲試作-Eyes of the Dragon/Eyes_of_the_Dragon.ogg"
+dest_files=["res://.godot/imported/Eyes_of_the_Dragon.ogg-9b0ed1c350602decf89f82e37d067598.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

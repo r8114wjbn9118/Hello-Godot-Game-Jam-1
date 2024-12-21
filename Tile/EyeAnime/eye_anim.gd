@@ -14,14 +14,22 @@ static func new_instance()-> DragonEye:
 
 const RANDOM_R = 15.0
 
+var eye_manager:EyeManager
+
+var game_pos
+
 var _rand_target:Vector2 = Vector2.ONE
 func _set_rand_target():
 	var r = randf_range(0.0, RANDOM_R)
 	var angle = randf_range(0, 2*PI)
 	_rand_target = Vector2(cos(angle), sin(angle)) * r
+	
+func init(eye_manager, game_pos):
+	self.eye_manager = eye_manager
+	self.game_pos = game_pos
+	position = eye_manager.map_to_local(game_pos)
 
 func _ready() -> void:
-	pass
 	if !Engine.is_editor_hint():
 		$Camera2D.queue_free()
 

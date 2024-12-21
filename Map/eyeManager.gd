@@ -1,6 +1,8 @@
 @tool
-extends TileMapLayer
+extends TileManager
 class_name EyeManager
+
+@export_file() var eye
 
 enum TYPE {
 	NULL,
@@ -12,14 +14,48 @@ var coords_type:Dictionary = {
 	Vector2i(0,3): TYPE.EYE
 }
 
-var list:Array = []
 var eye_game_pos_list:Array = []
 
+func _ready() -> void:
+	for child in get_children():
+		child.queue_free()
+
+
+func need_update_child():
+	if super.need_update_child():
+		return true
+
+	var new_list = get_game_pos_list()
+	if new_list.size() == eye_game_pos_list.size():
+		for i in eye_game_pos_list.size():
+			if new_list[i] != eye_game_pos_list[i]:
+				break
+		return false
+	eye_game_pos_list = new_list
+	return true
+
 func update_child(point_list:Array[Vector2i]):
-	var new_list:Array[Vector2i] = []
-	
 	eye_game_pos_list = get_game_pos_list()
-	
+
+	clear()
+
+	var generated_eye_game_pos = []
+	for child in get_children():
+		if child.game_pos in eye_game_pos_list:
+			generated_eye_game_pos.append(child.game_pos)
+		else:
+			child.queue_free()
+	for game_pos in eye_game_pos_list:
+		create_eye_cell(game_pos)
+
+		if game_pos in generated_eye_game_pos:
+			continue
+
+		var node = eye.instantiate()
+		node.init(self, game_pos)
+		add_child(node)
+
+
 	for point in point_list:
 		if point in eye_game_pos_list:
 			continue
@@ -30,19 +66,15 @@ func update_child(point_list:Array[Vector2i]):
 			continue
 		if not (point + Vector2i.DOWN) in point_list:
 			continue
-		
+
 		create_cell(point)
-		new_list.append(point)
-		
-	for p in list:
-		if not p in new_list:
-			erase_cell(p)
-			
-	list = new_list
-	return
+
 
 func create_cell(vec:Vector2i):
 	set_cell(vec, 1, Vector2i(0, 0))
+
+func create_eye_cell(vec:Vector2i):
+	set_cell(vec, 1, Vector2i(0, 3))
 
 
 func get_game_pos_list():

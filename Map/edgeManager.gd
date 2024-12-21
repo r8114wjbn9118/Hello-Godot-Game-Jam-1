@@ -1,5 +1,5 @@
 @tool
-extends TileMapLayer
+extends TileManager
 class_name EdgeManager
 
 var list = []

@@ -1,32 +1,12 @@
 @tool
-extends TileMapLayer
+extends TileManager
 class_name PointManager
-
-var list = []
-
-func need_update_child() -> bool:
-	var new_list = get_used_cells()
-	if new_list.size() == list.size():
-		for i in list.size():
-			if new_list[i] != list[i]:
-				break
-		return false
-	list = new_list
-	return true
 
 func update_child():
 	return
 	
 
 
-func get_point_game_pos(pos):
-	return local_to_map(pos - position)
-
-func get_point_position(pos):
-	return map_to_local(pos) + position
-	
-func get_point_center_pos(pos):
-	return get_point_position(get_point_game_pos(pos))
 
 
 

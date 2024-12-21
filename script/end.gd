@@ -1,6 +1,6 @@
 extends Control
 
-@onready var img = $img
+@onready var img = %img
 
 var state = "wait"
 var original_img_pos
@@ -33,7 +33,7 @@ func shock(delta):
 
 func start_show():
 	state = "show"
-
+	%text.text = tr("end_1")
 
 
 
