@@ -62,3 +62,16 @@ func move() -> void:
 	BL.global_position = %LMarker2D.global_position
 	BL.global_rotation = Path_rotate - PI/2
 	BL.start_move()
+
+var _time = 0.0
+const LEG_SP_MOVE_TIME = 0.05
+func _process(delta: float) -> void:
+	%Body.global_position = Vector2.ZERO
+	%Body.global_rotation = 0.0
+	_time += delta
+	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
+	var curr_time = fmod(_time, (LEG_SP_MOVE_TIME*4.0))
+	var curr:int = floori(curr_time/LEG_SP_MOVE_TIME)
+	for i in arr:
+		i.canMove = false
+	arr[curr].canMove = true

@@ -1,11 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://up6yecfvyrms"]
 
 [ext_resource type="Script" path="res://MapItems/WormTail/legIK/leg_ik.gd" id="1_eerbp"]
-[ext_resource type="Script" path="res://MapItems/WormTail/legIK/node.gd" id="2_3rdv6"]
-
-[sub_resource type="Curve" id="Curve_1conq"]
-_data = [Vector2(0, 0.384615), 0.0, 0.0, 0, 0, Vector2(0.489474, 0.648352), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="Curve" id="Curve_1conq"]
 _data = [Vector2(0, 0.384615), 0.0, 0.0, 0, 0, Vector2(0.489474, 0.648352), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

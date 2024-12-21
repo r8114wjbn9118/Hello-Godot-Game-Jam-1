@@ -25,7 +25,7 @@ var _moving:bool = false
 var canMove:bool = true
 
 const LENGTH = 15.0
-const STEP_LENGTH = 10.0
+const STEP_LENGTH = 15.0 # 10
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if need_update:
