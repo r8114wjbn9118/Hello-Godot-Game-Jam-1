@@ -6,4 +6,7 @@
 
 [node name="Map" parent="." instance=ExtResource("1_1y58e")]
 
+[node name="ColorRect" parent="Map" index="0"]
+visible = false
+
 [editable path="Map"]

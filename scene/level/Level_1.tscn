@@ -6,8 +6,10 @@
 
 [node name="Map" parent="." instance=ExtResource("1_isk5t")]
 level = 1
-fg_img = null
 max_move_distance = 12
+
+[node name="ColorRect" parent="Map" index="0"]
+visible = false
 
 [node name="HEdge" parent="Map/Tile" index="0"]
 tile_map_data = PackedByteArray("AAABAAAAAQACAAQAAAABAAEAAQACAAQAAAABAAIAAQACAAQAAAABAAQAAQACAAQAAAACAAAAAQACAAQAAAACAAEAAQACAAQAAAACAAIAAQACAAQAAAACAAMAAQACAAQAAAACAAQAAQACAAQAAAADAAAAAQACAAQAAAADAAEAAQACAAQAAAADAAIAAQACAAQAAAADAAMAAQACAAQAAAADAAQAAQACAAQAAAAEAAAAAQACAAQAAAAEAAEAAQACAAQAAAAEAAIAAQACAAQAAAAEAAMAAQACAAQAAAAEAAQAAQACAAQAAAABAAMAAQACAAQAAAA=")
@@ -27,7 +29,7 @@ position = Vector2(180, 470)
 [node name="SubWorm" parent="Map/Worm" index="1"]
 position = Vector2(580, 70)
 
-[node name="Camera2D" parent="Map" index="5"]
+[node name="Camera2D" parent="Map" index="6"]
 position = Vector2(381, 270)
 zoom = Vector2(0.865, 0.865)
 
