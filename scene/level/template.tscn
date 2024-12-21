@@ -48,13 +48,13 @@ sub_worm = NodePath("SubWorm")
 
 [node name="MainWorm" parent="Worm" instance=ExtResource("9_et2ng")]
 unique_name_in_owner = true
-position = Vector2(50, 450)
+position = Vector2(100, 500)
 rotation = 3.14159
 color = 0
 
 [node name="SubWorm" parent="Worm" instance=ExtResource("9_et2ng")]
 unique_name_in_owner = true
-position = Vector2(850, 50)
+position = Vector2(900, 100)
 rotation = 6.28318
 
 [node name="Foreground" parent="." instance=ExtResource("10_0fr57")]

@@ -24,8 +24,6 @@ var max_move_distance:int = 8:
 		max_move_distance = value
 		
 
-var body = []
-
 
 
 func _ready() -> void:

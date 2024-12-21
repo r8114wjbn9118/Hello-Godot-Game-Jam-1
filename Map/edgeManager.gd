@@ -13,7 +13,7 @@ func init_available_count():
 	available_count_dict.clear()
 	var cell_list:Array[Vector2i] = get_used_cells()
 	for cell in cell_list:
-		available_count_dict[cell] = 1
+		available_count_dict[cell] = 2
 	return available_count_dict
 
 
