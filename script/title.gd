@@ -1,11 +1,10 @@
 extends Control
 class_name Title
 
-@onready var anim_tree = $AnimationTree
-#@onready var BGM = %GameMenu
+
 
 @onready var anim_tree = $AnimationTree
-@onready var BGM = %BGM
+#@onready var BGM = %BGM
 
 func _ready() -> void:
 	%background.texture = GameManager.get_title_background()
