@@ -42,14 +42,14 @@ func _enter_anime():
 	
 	
 	
-	
+var _time_offset = randf_range(0.0, 30.0)
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		_target.global_position = get_global_mouse_position()
 	else:
 		_target.position = lerp(_target.position, _rand_target, 8.0* delta)
 	
-	var time := fmod(Time.get_unix_time_from_system()/2.0, 1.0)
+	var time := fmod(Time.get_unix_time_from_system()+_time_offset/2.0, 1.0)
 	$"CanvasGroup/直瞳孔".scale.y = blink_curve.sample_baked(time)
 	
 	
