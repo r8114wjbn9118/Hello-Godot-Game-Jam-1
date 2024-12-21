@@ -29,6 +29,8 @@ const STEP_LENGTH = 10.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if need_update:
+		#global_position = Vector2.ZERO
+		#global_rotation = 0.0
 		$Node.global_position = Vector2.ZERO
 		$Node.global_rotation = 0.0
 		update()

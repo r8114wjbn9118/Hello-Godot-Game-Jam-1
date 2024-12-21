@@ -6,7 +6,7 @@ signal move_finish_signal()
 @export var move_time:float = 0.5 # TEST 替代 move_speed
 
 var color_list = [
-	{ ## NOTE 需要調整
+	{
 		"head_img": "res://image/洞螈圖示（粉／藍）/藍藍洞螈.png",
 		"body_img": "res://MapItems/WormTail/body/身體(1).png",
 		"leg_color": Color("cfdeff"),
@@ -55,14 +55,21 @@ var game_pos:Vector2i
 
 #var action_distance:int = 1 # 行動距離
 
+func setScale(new):
+	scale = new
+func getScale():
+	return get_parent().scale
+	
+
 func init():
 	_pathLine.init(self, point_manager)
 	_bodyLine.init(self, point_manager)
 	color = color
 	
 func init_pos():
-	game_pos = point_manager.get_tile_game_pos(position)
-	position = point_manager.get_tile_position(game_pos)
+	game_pos = point_manager.get_tile_game_pos(global_position)
+	global_position = point_manager.get_tile_position(game_pos)
+	printt(name + " Pos", game_pos, global_position)
 	
 # 編輯地圖時隱藏身體
 func _ready() -> void:
@@ -78,7 +85,7 @@ func _ready() -> void:
 func set_pos(game_pos): # NOTE 由UNDO調用
 	rotation = Vector2(self.game_pos - game_pos).angle() - PI / 2
 	self.game_pos = game_pos
-	position = point_manager.get_tile_position(game_pos)
+	global_position = point_manager.get_tile_position(game_pos)
 
 #func move(delta):
 	#var distance = move_speed * delta
@@ -91,12 +98,12 @@ func set_pos(game_pos): # NOTE 由UNDO調用
 
 func _make_tween(target_pos):
 	var tween = get_tree().create_tween()
-	tween.tween_method(_tween_move, position, target_pos, move_time)\
+	tween.tween_method(_tween_move, global_position, target_pos, move_time) \
 		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(move_finish)
 
 func _tween_move(new_pos): # TEST 替代move
-	position = new_pos
+	global_position = new_pos
 	_pathLine.move()
 	_bodyLine.move()
 

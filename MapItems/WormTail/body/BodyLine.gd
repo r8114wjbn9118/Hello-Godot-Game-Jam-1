@@ -33,8 +33,8 @@ func _ready() -> void:
 func move() -> void:
 	super.move()
 	
-	%Body.global_position = Vector2.ZERO
-	%Body.global_rotation = 0.0
+	#%Body.global_position = Vector2.ZERO
+	#%Body.global_rotation = 0.0
 	
 	var curve:Curve2D = $Path2D.curve
 	curve.clear_points()

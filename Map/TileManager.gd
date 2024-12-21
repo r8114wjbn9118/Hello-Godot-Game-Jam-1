@@ -16,10 +16,10 @@ func need_update_child() -> bool:
 
 
 func get_tile_game_pos(pos):
-	return local_to_map(pos - global_position)
+	return local_to_map(pos / get_parent().scale - position)
 
 func get_tile_position(pos):
-	return map_to_local(pos) + global_position
+	return map_to_local(pos) * get_parent().scale + position
 	
 func get_tile_center_pos(pos):
 	return get_tile_position(get_tile_game_pos(Vector2(pos)))
