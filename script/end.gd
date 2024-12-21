@@ -42,3 +42,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		start_shock()
 	if anim_name == "fadein":
 		start_show()
+
+func End():
+	GameManager.goto_scene("creddit")
