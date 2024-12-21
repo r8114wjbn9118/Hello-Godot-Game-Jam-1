@@ -2,7 +2,7 @@
 extends TileManager
 class_name EyeManager
 
-@export_file() var eye
+@export var eye:PackedScene
 
 enum TYPE {
 	NULL,
