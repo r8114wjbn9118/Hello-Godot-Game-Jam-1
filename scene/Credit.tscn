@@ -1,8 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://ca1dlcv0wq1f4"]
+[gd_scene load_steps=8 format=3 uid="uid://ca1dlcv0wq1f4"]
 
+[ext_resource type="Script" path="res://scene/credit.gd" id="1_5snkl"]
+[ext_resource type="Shader" path="res://scene/Credit.gdshader" id="1_g8yeg"]
 [ext_resource type="Script" path="res://scene/rich_text_label.gd" id="1_hhalx"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6lvr1"]
+shader = ExtResource("1_g8yeg")
+shader_parameter/screen_size = Vector2(500, 250)
+
+[sub_resource type="Animation" id="Animation_46aq2"]
+resource_name = "credit"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CanvasGroup/RichTextLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 785), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o0003"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CanvasGroup/RichTextLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 785)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kxf08"]
+_data = {
+"RESET": SubResource("Animation_o0003"),
+"credit": SubResource("Animation_46aq2")
+}
+
 [node name="Credit" type="Node2D"]
+script = ExtResource("1_5snkl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -27,29 +71,38 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.118581, 0.118581, 0.118581, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = 76.0
-offset_right = -56.0
-offset_bottom = -55.0
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_6lvr1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/CanvasGroup"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 785.0
+offset_right = 961.0
+offset_bottom = 1321.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "
-[font_size=40][center]Credit[/center][/font_size]
+text = "[center]
+[font_size=40]Credit[/font_size]
 [font_size=25]
-[b]Game, Level Designer[/b]: zunyu_verse
-[b]Art[/b]: rs37153889
-[b]Program[/b]: DennisFan ([url]https://github.com/DennisFan11[/url])
-[b]Program[/b]: XX ([url]https://github.com/r8114wjbn9118[/url])
+[b] Game, Level Designer[/b]: zunyu_verse
+[b] Art[/b]: rs37153889
+[b] Program[/b]: DennisFan ([url]https://github.com/DennisFan11[/url])
+[b] Program[/b]: XX ([url]https://github.com/r8114wjbn9118[/url])
 [/font_size]
 
-
+[/center]
 "
 script = ExtResource("1_hhalx")
 
-[connection signal="meta_clicked" from="CanvasLayer/Control/RichTextLabel" to="CanvasLayer/Control/RichTextLabel" method="_on_meta_clicked"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kxf08")
+}
+
+[connection signal="meta_clicked" from="CanvasLayer/CanvasGroup/RichTextLabel" to="CanvasLayer/CanvasGroup/RichTextLabel" method="_on_meta_clicked"]
