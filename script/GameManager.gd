@@ -1,8 +1,10 @@
 extends Node
 
+
+
 func _ready() -> void:
 	_load_save_data()
-	print(OS.get_locale())
+
 
 var LEVEL:Array = [null, ## 0留空
 	"res://scene/level/Level_1.tscn",
@@ -17,7 +19,7 @@ var LEVEL:Array = [null, ## 0留空
 	"res://scene/level/Level_10.tscn"
 ]
 func get_available_level()-> int:
-	return LEVEL.size()-1
+	return LEVEL.size() - 1
 
 func goto_level(target:int):
 	if target >= LEVEL.size():
@@ -42,6 +44,7 @@ var SCENE:Dictionary = {
 func goto_scene(target:String):
 	var path = SCENE.get(target, null)
 	if path:
+		printt("GOTO", target, path)
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
@@ -55,12 +58,14 @@ enum ACTION {
 	BACK
 }
 
-signal check_level_finish()
+signal change_player_action
+signal check_level_finish
 
 var player_action:ACTION = ACTION.PROHIBIT:
 	set(value):
 		if is_moving():
 			check_level_finish.emit()
+		change_player_action.emit(player_action, value)
 		player_action = value
 			
 func is_waiting():
@@ -94,14 +99,17 @@ func prohibit_action(b:bool):
 #endregion
 
 #region 關卡完成檢測
+
+var _save_data:SaveData # 必須在開始時分配實例
 func reset_save_data():
 	_save_data = SaveData.new()
 	_save_data.SaveSelf()
 	print_rich("[color=green]SaveData reset ![/color]")
 
-var _save_data:SaveData # 必須在開始時分配實例
 func _load_save_data(): # call by _ready
 	_save_data = SaveData.LoadSelf()
+		
+	
 
 func GetFinishedLevel()-> Array[int]:
 	return _save_data.GetFinishedLevels()
@@ -114,7 +122,7 @@ func finish_level(n):
 		if is_finish_game():
 			goto_scene("end")
 		else:
-			goto_level(n+1)
+			goto_level(n + 1)
 	else:
 		goto_scene("select")
 
@@ -124,6 +132,33 @@ func is_finish_game():
 #endregion
 
 #region 新建程式碼區域
+
+func is_finished_anim(anim_name:String):
+	return _save_data.AnimIsFinished(anim_name)
+
+func finish_anim(anim_name:String):
+	print(is_finished_anim(anim_name))
+	if not is_finished_anim(anim_name):
+		_save_data.AddFinishedAnim(anim_name)
+	print(is_finished_anim(anim_name))
+
+#endregion
+
+#region 背景
+
+var title_background = [
+	"res://image/過關畫面/影格1.png",
+	"res://image/過關畫面/影格3.png",
+]
+
+func get_title_background():
+	var target = 1 if is_finish_game() else 0
+	var path = title_background[target]
+	return load(path)
+
+#endregion
+
+#region 前景
 
 enum FG_TYPE {
 	MONOCHRMOE,

@@ -1,13 +1,13 @@
 extends Control
 class_name Title
 
-@onready var anim_tree = $AnimationTree
-@onready var BGM = %GameMenu
+var bg_img_list
 
-#var select_level_scene = preload("res://scene/selectLevel.tscn")
-var select_level_scene = preload("res://Map/Map.tscn")
+@onready var anim_tree = $AnimationTree
+@onready var BGM = %BGM
 
 func _ready() -> void:
+	%background.texture = GameManager.get_title_background()
 	anim_tree["parameters/conditions/start"] = false
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -15,15 +15,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		anim_tree["parameters/conditions/start"] = true
 		BGM.stop()
 	
-
+func goto():
+	var scene = "select"
+	if not GameManager.is_finished_anim("start"):
+		scene = "start"
+		
+	GameManager.goto_scene(scene)
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	print(anim_name)
 	if anim_name == "fadeout":
 		BGM.play()
 	if anim_name == "fadein":
-		GameManager.goto_scene("select")
+		goto()
 	pass # Replace with function body.
 
 

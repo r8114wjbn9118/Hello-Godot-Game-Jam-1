@@ -161,6 +161,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="background" type="TextureRect" parent="Panel"]
+unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -234,7 +235,7 @@ libraries = {
 }
 autoplay = "fadeout"
 
-[node name="GameMenu" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_tca0t")
 autoplay = true
