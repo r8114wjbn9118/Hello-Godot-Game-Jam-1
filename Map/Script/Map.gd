@@ -81,7 +81,7 @@ func _ready():
 	# 太大擋住畫面, 編輯時先關閉
 	ui.visible = not Engine.is_editor_hint()
 	#%Light.visible = not Engine.is_editor_hint()
-	%fade.visible = not Engine.is_editor_hint()
+	#%fade.visible = not Engine.is_editor_hint()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
