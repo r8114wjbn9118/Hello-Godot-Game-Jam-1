@@ -1,8 +1,9 @@
 shader_type canvas_item;
-uniform float len:hint_range(0.0, 0.5) = 0.5;
+uniform float min_len:hint_range(0.5, 0.5) = 0.6;
+uniform float max_len:hint_range(0.5, 0.5) = 0.7;
 
 void fragment() {
-	if (length(UV-vec2(0.5, 0.5)) > len){
+	if (!(length(UV-vec2(0.5, 0.5)) > min_len && length(UV-vec2(0.5, 0.5)) < max_len)){
 		discard;
 	}
 }

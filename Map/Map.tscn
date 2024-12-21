@@ -13,6 +13,7 @@
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
+level = 1
 max_move_distance = 1000
 
 [node name="Tile" type="Node2D" parent="."]
@@ -66,4 +67,3 @@ rotation = 6.28318
 
 [node name="GameUI" parent="." instance=ExtResource("12_xxg6l")]
 unique_name_in_owner = true
-visible = false

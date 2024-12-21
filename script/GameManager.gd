@@ -1,6 +1,6 @@
 extends Node
 
-
+var current_map
 
 func _ready() -> void:
 	_load_save_data()
@@ -23,13 +23,26 @@ func get_available_level()-> int:
 
 func goto_level(target:int):
 	if target >= LEVEL.size():
-		prints("GOTO LEVEL:", target)
 		printerr('GameManager.goto_level({0}): 無效目標'.format([target]))
 		return
 		
 	var path = LEVEL[target]
 	if path:
-		get_tree().change_scene_to_file(path)
+		
+		if current_map:
+			var cutscene = await load("res://Map/cutscene.tscn").instantiate()
+			var map = load(path).instantiate()
+			cutscene.init(current_map, map)
+			map.visible = false
+			
+
+			get_tree().root.add_child(map)
+			get_tree().root.add_child(cutscene)
+			printt("GOTO LEVEL:", target, map.name, map, current_map.name, current_map)
+			
+		else:
+			get_tree().change_scene_to_file(path)
+			
 	else:
 		printerr('GameManager.goto_level({0}): 無效目標'.format([target]))
 

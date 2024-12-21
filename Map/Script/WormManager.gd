@@ -103,7 +103,6 @@ func check(direction):
 		SoundManager.play_ohno()
 		return 0
 
-	printt(name, main_worm.game_pos, target_map_pos, check_edge_is_passable(main_worm.game_pos, target_map_pos))
 	if not target_map_pos in map_point_list:
 		return 0
 	if not check_edge_is_passable(main_worm.game_pos, target_map_pos):

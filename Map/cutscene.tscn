@@ -1,148 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://blch05uim8pht"]
+[gd_scene load_steps=4 format=3 uid="uid://blch05uim8pht"]
 
 [ext_resource type="Shader" path="res://Map/Shader/cutscene.gdshader" id="1_2gr1a"]
+[ext_resource type="Script" path="res://Map/Script/cutscene.gd" id="1_qnt66"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_85g88"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckxhq"]
 shader = ExtResource("1_2gr1a")
-
-[sub_resource type="Animation" id="Animation_71frn"]
-resource_name = "fade"
-step = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("1:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.666667, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(960, 540), Vector2(960, 540)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("1:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.666667, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(480, 270), Vector2(0, 0), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("2:size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.333333, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(960, 540)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("2:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.333333, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(480, 270), Vector2(480, 270), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4exjm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("1:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("1:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(480, 270)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("2:size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("2:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(480, 270)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqlog"]
-_data = {
-"RESET": SubResource("Animation_4exjm"),
-"fade": SubResource("Animation_71frn")
-}
+shader_parameter/min_len = 0.0
+shader_parameter/max_len = 1.0
 
 [node name="fade" type="CanvasLayer"]
+script = ExtResource("1_qnt66")
 
-[node name="1" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_85g88")
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ckxhq")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 480.0
-offset_top = 270.0
-offset_right = -480.0
-offset_bottom = -270.0
+offset_top = -210.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(480, 270)
 color = Color(0, 0, 0, 1)
-
-[node name="2" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 480.0
-offset_top = 270.0
-offset_right = -480.0
-offset_bottom = -270.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_yqlog")
-}
-autoplay = "fade"

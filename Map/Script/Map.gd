@@ -63,7 +63,7 @@ var main_worm_rotate:float
 var sub_worm_rotate:float
 
 func _ready():
-	
+	GameManager.current_map = self if get_parent() == get_tree().root else get_parent()
 	update() ## WARNING 必須更新一次, 否則可能會出現問題
 
 	if Engine.is_editor_hint():
@@ -81,7 +81,6 @@ func _ready():
 	# 太大擋住畫面, 編輯時先關閉
 	ui.visible = not Engine.is_editor_hint()
 	#%Light.visible = not Engine.is_editor_hint()
-	#%fade.visible = not Engine.is_editor_hint()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -244,46 +243,15 @@ func check_finish():
 	return true
 
 func _on_worm_move_finish():
-	print("Worm Move Finish")
 	if check_finish():
 		start_game_finish()
 
 ## NOTE 結束流程
  # _on_worm_move_finish() -> start_game_finish() -> game_finish() -> Cutscene -> GameManager.finish_level
 func start_game_finish():
-	print("Game Finish")
 	game_finish()
 	
 func game_finish():
 	SoundManager.play_effect(SoundManager.EFFECT.SUCCES)
 	ui.EndAnimeEnd.connect(GameManager.finish_level.bind(level))
 	ui.EndAnimeStart()
-#
-
-
-#region 廢棄
-#func Build(): #size:Vector2i, points:Array[Vector2i]): #初始化
-	#var max_size:int
-	#var start_pos:Vector2i = Vector2i.ZERO
-	#
-	#var window_size:Vector2i = get_tree().root.size
-	#if window_size.x > window_size.y:
-		#max_size = window_size.y
-		#start_pos.x = floori((window_size.x - max_size) / 2)
-		#
-	#else:
-		#max_size = window_size.x
-		#start_pos.y = floori((window_size.y - max_size) / 2)
-		#
-	#var offset:Vector2i = (Vector2i.ONE * max_size) / (size + Vector2i.ONE)
-	#start_pos += offset
-#
-	#var spacing:Vector2i = (Vector2i(max_size, max_size) - offset) / size
-	#
-	#printt(window_size, max_size, start_pos, offset, spacing)
-	#
-	#edge_manager.Build(size, start_pos, offset, spacing)
-	#point_manager.Build(size, start_pos, offset, spacing)
-	#plane_manager.Build(size, start_pos, offset, spacing)
-	#eye_manager.Build()
-#endregion

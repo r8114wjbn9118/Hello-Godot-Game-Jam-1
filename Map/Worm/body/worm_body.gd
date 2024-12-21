@@ -69,7 +69,6 @@ func init():
 func init_pos():
 	game_pos = point_manager.get_tile_game_pos(global_position)
 	global_position = point_manager.get_tile_position(game_pos)
-	printt(name + " Pos", game_pos, global_position)
 	
 # 編輯地圖時隱藏身體
 func _ready() -> void:
@@ -124,7 +123,6 @@ func Do(): # NOTE 由WormManager調用
 	_undoRedo.add_do_method(_move)
 	_undoRedo.add_do_method(_bodyLine.Do)
 	
-	#print_tree_pretty()
 	_undoRedo.add_undo_method(_unmove.bind(_pathLine.points, _bodyLine.points))
 	_undoRedo.add_undo_method(_bodyLine.Undo)
 	_undoRedo.commit_action()
