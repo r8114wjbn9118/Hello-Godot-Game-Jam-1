@@ -36,7 +36,7 @@ var SCENE:Dictionary = {
 	"select": "res://scene/selectLevel.tscn",
 	"start": "res://scene/start.tscn",
 	"end": "res://scene/end.tscn",
-	"creddit": "res://scene/Creddit.tscn"
+	"creddit": "res://scene/Credit.tscn"
 }
 
 func goto_scene(target:String):

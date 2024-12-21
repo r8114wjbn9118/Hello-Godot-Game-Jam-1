@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://ca1dlcv0wq1f4"]
 
-[ext_resource type="Script" path="res://scene/rich_text_label.gd" id="1_rtgp8"]
+[ext_resource type="Script" path="res://scene/rich_text_label.gd" id="1_hhalx"]
 
-[node name="Creddit" type="Node2D"]
+[node name="Credit" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -40,7 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "
-[font_size=40][center]Creddit[/center][/font_size]
+[font_size=40][center]Credit[/center][/font_size]
 [font_size=25]
 [b]Game, Level Designer[/b]: zunyu_verse
 [b]Art[/b]: rs37153889
@@ -50,6 +50,6 @@ text = "
 
 
 "
-script = ExtResource("1_rtgp8")
+script = ExtResource("1_hhalx")
 
 [connection signal="meta_clicked" from="CanvasLayer/Control/RichTextLabel" to="CanvasLayer/Control/RichTextLabel" method="_on_meta_clicked"]
