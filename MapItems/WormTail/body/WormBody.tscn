@@ -73,15 +73,19 @@ position = Vector2(0, -10)
 
 [node name="LegIk_FR" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
+visible = false
 
 [node name="LegIk_FL" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
+visible = false
 
 [node name="LegIk_BR" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
+visible = false
 
 [node name="LegIk_BL" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
+visible = false
 
 [node name="BodyLine" type="Line2D" parent="CanvasGroup/Body"]
 unique_name_in_owner = true

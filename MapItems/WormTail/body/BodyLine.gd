@@ -26,6 +26,9 @@ func _ready() -> void:
 	## 身體長度
 	max_distance = 1
 	line = %BodyLine
+	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
+	for i in arr:
+		i.Visible = false
 
 
 
@@ -74,6 +77,8 @@ func Do():
 		_undoRedo.add_undo_property(i, "points", i.points)
 		_undoRedo.add_undo_property(i, "end_point", i.end_point)
 		
+		_undoRedo.add_undo_property(i, "visible", i.Visible) # NOTE 腳部顯示補丁
+		i.Visible = true
 		
 	_undoRedo.commit_action()
 func Undo():
