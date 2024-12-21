@@ -24,7 +24,7 @@ func move(t):
 	screen.material.set_shader_parameter("max_len", max)
 
 	if t >= 0.5:
-		if old_map:
+		if is_instance_valid(old_map):
 			printt(old_map)
 			old_map.visible = false
 			old_map.queue_free()

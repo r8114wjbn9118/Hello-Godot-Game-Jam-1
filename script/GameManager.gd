@@ -137,6 +137,8 @@ func finish_level(n):
 		_save_data.AddFinishedLevel(n)
 		_save_data.SaveSelf()
 		if is_finish_game():
+			_save_data.game_finish = true
+			_save_data.SaveSelf()
 			goto_scene("end")
 		else:
 			goto_level(n + 1)

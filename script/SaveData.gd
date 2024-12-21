@@ -2,8 +2,8 @@ class_name SaveData extends Resource
 
 #region Level
 
-var finished_level:Array[int] = [0] #NOTE 0有特殊意義 關聯LevelSelect
-
+@export var finished_level:Array[int] = [0] #NOTE 0有特殊意義 關聯LevelSelect
+@export var game_finish:bool = false # NOTE 通關
 func AddFinishedLevel(level:int) -> void:
 	finished_level.append(level)
 	SaveSelf()
@@ -17,7 +17,7 @@ func LevelIsFinished(level:int):
 
 #region Anim
 
-var finished_anim:Array[String] = []
+@export var finished_anim:Array[String] = []
 
 func AddFinishedAnim(anim_name:String):
 	finished_anim.append(anim_name)
