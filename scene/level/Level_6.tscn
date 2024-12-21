@@ -7,9 +7,6 @@
 [node name="Map" parent="." instance=ExtResource("1_bgs3e")]
 level = 6
 
-[node name="ColorRect" parent="Map" index="0"]
-visible = false
-
 [node name="HEdge" parent="Map/Tile" index="0"]
 tile_map_data = PackedByteArray("AAAAAAAAAQACAAQAAAAAAAEAAQACAAQAAAAAAAIAAQACAAQAAAABAAEAAQACAAQAAAABAAIAAQACAAQAAAABAAQAAQACAAQAAAACAAEAAQACAAQAAAACAAIAAQACAAQAAAACAAMAAQACAAQAAAACAAQAAQACAAQAAAADAAEAAQACAAQAAAADAAIAAQACAAQAAAADAAMAAQACAAQAAAADAAQAAQACAAQAAAADAAUAAQACAAQAAAAEAAQAAQACAAQAAAAEAAUAAQACAAQAAAAAAAMAAQACAAQAAAABAAMAAQACAAQAAAA=")
 
@@ -27,5 +24,9 @@ position = Vector2(80, 70)
 
 [node name="SubWorm" parent="Map/Worm" index="1"]
 position = Vector2(580, 570)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(333, 321)
+zoom = Vector2(0.805, 0.805)
 
 [editable path="Map"]

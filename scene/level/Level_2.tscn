@@ -7,9 +7,6 @@
 [node name="Map" parent="." instance=ExtResource("1_c10sl")]
 level = 2
 
-[node name="ColorRect" parent="Map" index="0"]
-visible = false
-
 [node name="HEdge" parent="Map/Tile" index="0"]
 tile_map_data = PackedByteArray("AAAAAAAAAQACAAQAAAAAAAEAAQACAAQAAAAAAAIAAQACAAQAAAAAAAQAAQACAAQAAAABAAAAAQACAAQAAAABAAEAAQACAAQAAAABAAIAAQACAAQAAAABAAQAAQACAAQAAAACAAAAAQACAAQAAAACAAEAAQACAAQAAAACAAIAAQACAAQAAAACAAMAAQACAAQAAAACAAQAAQACAAQAAAADAAAAAQACAAQAAAADAAEAAQACAAQAAAADAAIAAQACAAQAAAADAAMAAQACAAQAAAADAAQAAQACAAQAAAABAAMAAQACAAQAAAAAAAMAAQACAAQAAAA=")
 
@@ -27,8 +24,5 @@ position = Vector2(80, 370)
 
 [node name="SubWorm" parent="Map/Worm" index="1"]
 position = Vector2(480, 70)
-
-[node name="Camera2D" parent="Map" index="6"]
-position = Vector2(282, 270)
 
 [editable path="Map"]

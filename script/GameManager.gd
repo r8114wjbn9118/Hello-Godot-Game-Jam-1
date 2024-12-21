@@ -12,7 +12,9 @@ var LEVEL:Array = [null, ## 0留空
 	"res://scene/level/Level_5.tscn",
 	"res://scene/level/Level_6.tscn",
 	"res://scene/level/Level_7.tscn",
-	"res://scene/level/Level_8.tscn"
+	"res://scene/level/Level_8.tscn",
+	"res://scene/level/Level_9.tscn",
+	"res://scene/level/Level_10.tscn"
 ]
 func get_available_level()-> int:
 	return LEVEL.size()-1
