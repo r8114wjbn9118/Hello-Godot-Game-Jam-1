@@ -63,9 +63,34 @@ func move() -> void:
 	BL.global_rotation = Path_rotate - PI/2
 	BL.start_move()
 
+@onready var _undoRedo:UndoRedo = UndoRedo.new()
+
+
+func Do():
+	var arr := [$LegIk_FR, $LegIk_BL, $LegIk_FL, $LegIk_BR]
+	_undoRedo.create_action("leg point save")
+	for i in arr:
+		_undoRedo.add_undo_method(i.update.bind(true))
+		_undoRedo.add_undo_property(i, "points", i.points)
+		_undoRedo.add_undo_property(i, "end_point", i.end_point)
+		
+		
+	_undoRedo.commit_action()
+func Undo():
+	if _undoRedo.has_undo():
+		_undoRedo.undo()
+		
+
+
+
+
+
+
+
+
 var _time = 0.0
 const LEG_SP_MOVE_TIME = 0.05
-func _process(delta: float) -> void:
+func _process(delta: float) -> void: # NOTE 分次移動
 	%Body.global_position = Vector2.ZERO
 	%Body.global_rotation = 0.0
 	_time += delta

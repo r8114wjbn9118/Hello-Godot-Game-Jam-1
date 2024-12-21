@@ -13,7 +13,7 @@ script = ExtResource("1_eerbp")
 
 [node name="Line2D" type="Line2D" parent="Node"]
 unique_name_in_owner = true
-points = PackedVector2Array(0, 0, 15, 0, 30, 0)
+points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 width = 7.0
 width_curve = SubResource("Curve_1conq")
 default_color = Color(1, 0.733333, 0.835294, 1)

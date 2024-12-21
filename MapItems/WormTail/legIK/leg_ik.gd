@@ -10,6 +10,10 @@ var points:
 	set(value): line.points = value
 	get: return line.points
 
+var end_point: ## NOTE for undoRedo from Body
+	set(value): %LegEnd.global_position = value
+	get: return %LegEnd.global_position
+
 func start_move():
 	need_update = true
 
@@ -30,21 +34,19 @@ const STEP_LENGTH = 15.0 # 10
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if need_update:
-		#global_position = Vector2.ZERO
-		#global_rotation = 0.0
 		
-		
-		$Node.global_position = Vector2.ZERO
-		$Node.global_rotation = 0.0
 		update()
 		if points == old_points:
 			need_update = false
 		old_points = points
-		
-func update():
+
+
+func update(forced:bool = false):
+	$Node.global_position = Vector2.ZERO
+	$Node.global_rotation = 0.0
 	var StartAt:Vector2 = global_position
 	var EndAt:Vector2 = %LegEnd.global_position
-	if not _moving and canMove:
+	if (not _moving and canMove) or forced:
 		if (%LegEnd.global_position - %Target.global_position).length() > STEP_LENGTH: # 重置落腳點
 			_moving = true
 			var tween = create_tween()
