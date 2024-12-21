@@ -20,6 +20,11 @@ class_name Map
 	set(value):
 		tile_scale = value
 		update_tile()
+		
+@export var fg_img:GameManager.FG_TYPE:
+	set(value):
+		fg_img = value
+		if ui: ui.set_fg_img(fg_img)
 #endregion
 
 #region 變量(遊戲)
@@ -48,6 +53,7 @@ class_name Map
 @onready var v_edge_manager = %VEdge
 @onready var eye_manager = %Eye
 @onready var worm_manager = %Worm
+@onready var ui:GameUI = %GameUI
 #endregion
 
 var timer:float = 0.0 # update timer
@@ -67,9 +73,11 @@ func _ready():
 		
 		h_edge_manager.max_available_count = max_available_count
 		v_edge_manager.max_available_count = max_available_count
+		
+		ui.init(level, fg_img)
 
 	# 太大擋住畫面, 編輯時先關閉
-	#%Foreground.visible = not Engine.is_editor_hint()
+	ui.visible = not Engine.is_editor_hint()
 	%Light.visible = not Engine.is_editor_hint()
 	%fade.visible = not Engine.is_editor_hint()
 
@@ -245,7 +253,6 @@ func start_game_finish():
 	game_finish()
 	
 func game_finish():
-	var ui:GameUI = %GameUI
 	ui.EndAnimeEnd.connect(GameManager.finish_level.bind(level))
 	ui.EndAnimeStart()
 #

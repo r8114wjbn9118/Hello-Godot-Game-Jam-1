@@ -88,6 +88,10 @@ material = SubResource("ShaderMaterial_xwalh")
 offset_right = 960.0
 offset_bottom = 541.0
 
+[node name="GameUI" parent="." instance=ExtResource("12_xxg6l")]
+unique_name_in_owner = true
+visible = false
+
 [node name="fade" type="ColorRect" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -96,9 +100,7 @@ offset_right = 960.0
 offset_bottom = 540.0
 color = Color(0, 0, 0, 0)
 
-[node name="GameUI" parent="." instance=ExtResource("12_xxg6l")]
-unique_name_in_owner = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(480, 270)
 enabled = false

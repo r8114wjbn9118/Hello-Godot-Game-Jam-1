@@ -13,6 +13,10 @@ func get_available_level()-> int:
 	return LEVEL.size()-1
 
 func goto_level(target:int):
+	if target >= LEVEL.size():
+		printerr('GameManager.goto_level({0}): 無效目標'.format([target]))
+		return
+		
 	var path = LEVEL[target]
 	if path:
 		get_tree().change_scene_to_file(path)
@@ -108,5 +112,33 @@ func finish_level(n):
 
 func is_finish_game():
 	return _save_data.GetFinishedLevels().size() == LEVEL.size()
+
+#endregion
+
+#region 新建程式碼區域
+
+enum FG_TYPE {
+	MONOCHRMOE,
+	SPRING,
+	SUMMER,
+	FALL,
+	WINTER
+}
+var forefround_list = [
+	"res://image/觀察箱底圖素材/黑白.png",
+	"res://image/觀察箱底圖素材/春.png",
+	"res://image/觀察箱底圖素材/夏.png",
+	"res://image/觀察箱底圖素材/秋.png",
+	"res://image/觀察箱底圖素材/冬.png",
+]
+
+func get_fg_img(target:FG_TYPE):
+	if target == null:
+		return null
+	if target >= forefround_list.size():
+		return null
+	
+	var path = forefround_list[target]
+	return load(path)
 
 #endregion
