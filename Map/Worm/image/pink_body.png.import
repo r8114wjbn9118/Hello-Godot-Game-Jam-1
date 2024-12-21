@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lihx8xx7uxaq"
-path="res://.godot/imported/反光.png-8b00a3c3cb5dc9751da5e7fad405020b.ctex"
+uid="uid://j2mnes0gkf6d"
+path="res://.godot/imported/pink_body.png-02ce5e10a5ef17a8e6749a6c76b9d2e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile/EyeAnime/反光.png"
-dest_files=["res://.godot/imported/反光.png-8b00a3c3cb5dc9751da5e7fad405020b.ctex"]
+source_file="res://Map/Worm/image/pink_body.png"
+dest_files=["res://.godot/imported/pink_body.png-02ce5e10a5ef17a8e6749a6c76b9d2e4.ctex"]
 
 [params]
 

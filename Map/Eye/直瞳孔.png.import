@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csitku5ccawhh"
-path="res://.godot/imported/眼白.png-b9d4a05007060ae3dc13c8179c126ecc.ctex"
+uid="uid://cal71v28exp7o"
+path="res://.godot/imported/直瞳孔.png-63d73b306834cf6da034745a304cad8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile/EyeAnime/眼白.png"
-dest_files=["res://.godot/imported/眼白.png-b9d4a05007060ae3dc13c8179c126ecc.ctex"]
+source_file="res://Map/Eye/直瞳孔.png"
+dest_files=["res://.godot/imported/直瞳孔.png-63d73b306834cf6da034745a304cad8a.ctex"]
 
 [params]
 

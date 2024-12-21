@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwj6pvm1nm5of"
-path="res://.godot/imported/圓瞳孔.png-789d33ea2a839e848c77f8438271add0.ctex"
+uid="uid://wy4v7vcblxdd"
+path="res://.godot/imported/pink_head.png-d367b6e27e0b09de391f7988ff8942fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile/EyeAnime/圓瞳孔.png"
-dest_files=["res://.godot/imported/圓瞳孔.png-789d33ea2a839e848c77f8438271add0.ctex"]
+source_file="res://Map/Worm/image/pink_head.png"
+dest_files=["res://.godot/imported/pink_head.png-d367b6e27e0b09de391f7988ff8942fb.ctex"]
 
 [params]
 

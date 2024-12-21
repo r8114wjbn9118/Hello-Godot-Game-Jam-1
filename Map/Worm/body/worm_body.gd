@@ -7,13 +7,13 @@ signal move_finish_signal()
 
 var color_list = [
 	{
-		"head_img": "res://image/洞螈圖示（粉／藍）/藍藍洞螈.png",
-		"body_img": "res://MapItems/WormTail/body/身體(1).png",
+		"head_img": "res://image/image/blue_head.png",
+		"body_img": "res://image/image/blue_body.png",
 		"leg_color": Color("cfdeff"),
 	},
 	{
-		"head_img": "res://image/洞螈圖示（粉／藍）/粉紅洞螈.png",
-		"body_img": "res://MapItems/WormTail/body/身體.png",
+		"head_img": "res://image/image/pink_head.png",
+		"body_img": "res://image/image/pink_body.png",
 		"leg_color": Color("d38fb2")
 	},
 ]

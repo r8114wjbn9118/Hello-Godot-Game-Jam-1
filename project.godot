@@ -29,8 +29,8 @@ window/stretch/mode="canvas_items"
 
 folder_colors={
 "res://Map/": "red",
-"res://MapItems/": "red",
-"res://Tile/EyeAnime/": "green"
+"res://Map/Eye/": "green",
+"res://Map/Worm/": "pink"
 }
 
 [global_group]

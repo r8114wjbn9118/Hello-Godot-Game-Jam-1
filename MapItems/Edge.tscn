@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp2ovh4y77imp"]
-
-[ext_resource type="Script" path="res://MapItems/edge.gd" id="2_sbs35"]
-
-[node name="Edge" type="Line2D" groups=["Edge"]]
-script = ExtResource("2_sbs35")

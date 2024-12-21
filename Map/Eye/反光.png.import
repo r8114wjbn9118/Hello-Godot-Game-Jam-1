@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j2mnes0gkf6d"
-path="res://.godot/imported/身體.png-6f1fab82355744fe2707e7fe940edac6.ctex"
+uid="uid://lihx8xx7uxaq"
+path="res://.godot/imported/反光.png-8ef27d716835a2c59c274d7c3c27a12d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MapItems/WormTail/body/身體.png"
-dest_files=["res://.godot/imported/身體.png-6f1fab82355744fe2707e7fe940edac6.ctex"]
+source_file="res://Map/Eye/反光.png"
+dest_files=["res://.godot/imported/反光.png-8ef27d716835a2c59c274d7c3c27a12d.ctex"]
 
 [params]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://utmygxugx6ap"]
 
-[ext_resource type="Script" path="res://Tile/EyeAnime/eye_anim.gd" id="1_8cmtv"]
-[ext_resource type="Texture2D" uid="uid://csitku5ccawhh" path="res://Tile/EyeAnime/眼白.png" id="2_34yb5"]
-[ext_resource type="Shader" uid="uid://wryyfh37kua4" path="res://Tile/EyeAnime/EyeAnim.tres" id="2_fjn0d"]
-[ext_resource type="Texture2D" uid="uid://cwj6pvm1nm5of" path="res://Tile/EyeAnime/圓瞳孔.png" id="3_unrhp"]
-[ext_resource type="Texture2D" uid="uid://cal71v28exp7o" path="res://Tile/EyeAnime/直瞳孔.png" id="4_e7biw"]
-[ext_resource type="Texture2D" uid="uid://lihx8xx7uxaq" path="res://Tile/EyeAnime/反光.png" id="5_erkaq"]
+[ext_resource type="Script" path="res://Map/Eye/eye_anim.gd" id="1_8cmtv"]
+[ext_resource type="Texture2D" uid="uid://csitku5ccawhh" path="res://Map/Eye/眼白.png" id="2_34yb5"]
+[ext_resource type="Shader" uid="uid://wryyfh37kua4" path="res://Map/Eye/EyeAnim.tres" id="2_fjn0d"]
+[ext_resource type="Texture2D" uid="uid://cwj6pvm1nm5of" path="res://Map/Eye/圓瞳孔.png" id="3_unrhp"]
+[ext_resource type="Texture2D" uid="uid://cal71v28exp7o" path="res://Map/Eye/直瞳孔.png" id="4_e7biw"]
+[ext_resource type="Texture2D" uid="uid://lihx8xx7uxaq" path="res://Map/Eye/反光.png" id="5_erkaq"]
 
 [sub_resource type="Curve" id="Curve_h0k7j"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.231579, 1), 0.0, 0.0, 0, 0, Vector2(0.273684, 0), 0.0, 0.0, 0, 0, Vector2(0.336842, 1), 0.0, 0.0, 0, 0, Vector2(0.403509, 0.193295), 0.0, 0.0, 0, 0, Vector2(0.45614, 1), 0.0, 0.0, 0, 0, Vector2(0.547368, 1), 0.0, 0.0, 0, 0, Vector2(0.677193, 0.0912982), 0.0, 0.0, 0, 0, Vector2(0.873684, 0.100571), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

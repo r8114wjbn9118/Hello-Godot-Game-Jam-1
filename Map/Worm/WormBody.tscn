@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://3wu8fxil0bju"]
 
-[ext_resource type="Script" path="res://MapItems/WormTail/body/worm_body.gd" id="1_aav5k"]
-[ext_resource type="Texture2D" uid="uid://j2mnes0gkf6d" path="res://MapItems/WormTail/body/身體.png" id="2_q8g0w"]
-[ext_resource type="Shader" path="res://MapItems/WormTail/body/WormBodyShader.gdshader" id="2_qhpyo"]
+[ext_resource type="Script" path="res://Map/Worm/body/worm_body.gd" id="1_aav5k"]
+[ext_resource type="Texture2D" uid="uid://j2mnes0gkf6d" path="res://Map/Worm/image/pink_body.png" id="2_q8g0w"]
+[ext_resource type="Shader" path="res://Map/Worm/body/WormBodyShader.gdshader" id="2_qhpyo"]
 [ext_resource type="Texture2D" uid="uid://c223dcf0qhqf0" path="res://image/洞螈圖示（粉／藍）/粉紅洞螈.png" id="2_vebed"]
-[ext_resource type="Script" path="res://MapItems/WormTail/body/PathLine.gd" id="2_yo5do"]
-[ext_resource type="Script" path="res://MapItems/WormTail/body/BodyLine.gd" id="3_7hxod"]
-[ext_resource type="PackedScene" uid="uid://up6yecfvyrms" path="res://MapItems/WormTail/legIK/LegIK.tscn" id="5_ca66f"]
+[ext_resource type="Script" path="res://Map/Worm/body/PathLine.gd" id="2_yo5do"]
+[ext_resource type="Script" path="res://Map/Worm/body/BodyLine.gd" id="3_7hxod"]
+[ext_resource type="PackedScene" uid="uid://up6yecfvyrms" path="res://Map/Worm/legIK/LegIK.tscn" id="5_ca66f"]
 
 [sub_resource type="Gradient" id="Gradient_3k8hu"]
 offsets = PackedFloat32Array(0.5, 1)
@@ -27,7 +27,7 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.747368, 0.725275), 0.214145, 0.0, 0, 0, Vector2(1, 0.428571), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="WormBody" type="Node2D" groups=["Worm"]]
+[node name="Worm" type="Node2D" groups=["Worm"]]
 script = ExtResource("1_aav5k")
 
 [node name="Path" type="Node2D" parent="."]
