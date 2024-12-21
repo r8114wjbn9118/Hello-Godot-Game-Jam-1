@@ -28,10 +28,9 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.747368, 0.725275), 0.214145, 0
 point_count = 3
 
 [node name="WormBody" type="Node2D" groups=["Worm"]]
-top_level = true
 script = ExtResource("1_aav5k")
 
-[node name="Path" type="Node" parent="."]
+[node name="Path" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_yo5do")
 
@@ -74,19 +73,15 @@ position = Vector2(0, -10)
 
 [node name="LegIk_FR" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
-position = Vector2(76, -31)
 
 [node name="LegIk_FL" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
-position = Vector2(38, 40)
 
 [node name="LegIk_BR" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
-position = Vector2(58, -4)
 
 [node name="LegIk_BL" parent="CanvasGroup/Body" instance=ExtResource("5_ca66f")]
 unique_name_in_owner = true
-position = Vector2(130, -34)
 
 [node name="BodyLine" type="Line2D" parent="CanvasGroup/Body"]
 unique_name_in_owner = true

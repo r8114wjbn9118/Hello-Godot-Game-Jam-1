@@ -9,7 +9,6 @@ class_name Map
 ## 根據點(Point)的最大可放置數量自動調整邊距(功能受到下列的Offset和Spacing影響)
 @export var auto_margin:bool = true:
 	set(value):
-		print(value)
 		auto_margin = value
 		update_tile()
 ## 調整邊距
@@ -17,15 +16,10 @@ class_name Map
 	set(value):
 		offset = value
 		update_tile()
-## 面(Eye)的大小, 以此同時控制線(VEdge/HEdge)和點(Point)的大小和位置
-@export var spacing:Vector2i = Vector2i.ONE * 100:
+@export_range(1, 100, 1) var tile_scale:float = 10:
 	set(value):
-		spacing = value
+		tile_scale = value
 		update_tile()
-#@export var grid:Vector2i = Vector2i(9, 5):
-	#set(value):
-		#grid = value
-		#update_tile()
 #endregion
 
 #region 變量(遊戲)
@@ -83,16 +77,26 @@ func update():
 
 func update_tile():
 	## 編輯器的畫面不等於遊戲畫面大小, 需要用設定的大小調整位置
-	var window_size:Vector2i = Vector2i(
+	var window_size:Vector2 = Vector2(
 		ProjectSettings.get_setting("display/window/size/viewport_width"),
 		ProjectSettings.get_setting("display/window/size/viewport_height")
 	)
-	var start_pos:Vector2i = offset
+	var spacing = Vector2.ONE * 100
+	var new_scale = Vector2.ONE * tile_scale / 10
+	
+	var start_pos:Vector2 = offset
 	# 根據點(Point)的最大可放置數量自動調整邊距, 盡量保持置中
 	if auto_margin:
-		start_pos = (window_size - (spacing * floor((window_size - offset) / spacing))) / 2
-
+		var new_spacing = floor(spacing * new_scale)
+		var grid = floor((window_size - Vector2(offset)) / new_spacing)
+		printt("Grid", grid, tile_scale)
+		start_pos = Vector2(window_size - (new_spacing * Vector2(grid))) / 2
+	
 	## 可能需要增加對scale的調整
+	if %Tile != null:
+		%Tile.scale = new_scale
+	if worm_manager != null:
+		worm_manager.scale = new_scale
 
 	if point_manager != null:
 		point_manager.tile_set.tile_size = spacing

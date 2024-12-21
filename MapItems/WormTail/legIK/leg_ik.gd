@@ -19,7 +19,8 @@ func _ready() -> void:
 		list.append(Vector2.ZERO)
 	points = list
 	old_points = points
-
+	%Line2D.width *= $Node.global_scale.x
+	$Node.global_scale = Vector2(1.0, 1.0)
 
 var _moving:bool = false
 var canMove:bool = true
@@ -29,6 +30,10 @@ const STEP_LENGTH = 15.0 # 10
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if need_update:
+		#global_position = Vector2.ZERO
+		#global_rotation = 0.0
+		
+		
 		$Node.global_position = Vector2.ZERO
 		$Node.global_rotation = 0.0
 		update()

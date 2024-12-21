@@ -51,5 +51,6 @@ wait_time = 0.5
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_set_rand_target"]

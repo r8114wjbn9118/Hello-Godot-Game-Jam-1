@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name LineManager
 
 var worm
@@ -27,17 +27,25 @@ func init(worm, point_manager) -> void:
 		GRID_OFFSET = point_manager.position + GRID_SIZE / 2
 
 	var arr = []
-	var pos = worm.position
+	var pos = head_pos
 	for i in range(length * max_distance):
 		arr.append(pos)
 	points = arr
 	
 	move()
+	
+var head_pos:
+	get:
+		printt(worm.name + "P", worm.global_position, worm.scale, worm.global_position / worm.scale)
+		return worm.global_position / worm.getScale()
 
 
 ## 頭部移動時連帶執行
 func move() -> void:
-	points[0] = worm.position
+	global_position = Vector2.ZERO
+	global_rotation = 0
+	
+	points[0] = head_pos
 
 	var arr = points
 	for i in range(1, arr.size()):
