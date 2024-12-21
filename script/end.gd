@@ -10,6 +10,9 @@ var frequency = PI * 10
 var window_size
 var max_x
 
+func _ready() -> void:
+	SoundManager.play_BGM(SoundManager.BGM.ED)
+
 func _physics_process(delta: float) -> void:
 	if state == "shock":
 		shock(delta)
