@@ -21,6 +21,7 @@ var fg_img:
 func init(level, fg_img):
 	input.value = level
 	self.fg_img = fg_img
+	%Level.text = "[center][font_size=20][color=green]Level "+str(level)+"[/color][/font_size][/center]"
 #
 
 
@@ -30,3 +31,7 @@ func _on_button_button_down() -> void: ## goto level
 
 func _on_reset_data_button_button_down() -> void:
 	GameManager.reset_save_data()
+
+
+func _on_level_select_button_button_down() -> void:
+	GameManager.goto_scene("select")

@@ -7,3 +7,7 @@ Button/font_sizes/font_size = 30
 Button/fonts/font = ExtResource("1_ead4m")
 Label/font_sizes/font_size = 30
 Label/fonts/font = ExtResource("1_ead4m")
+RichTextLabel/fonts/bold_font = ExtResource("1_ead4m")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_ead4m")
+RichTextLabel/fonts/italics_font = ExtResource("1_ead4m")
+RichTextLabel/fonts/normal_font = ExtResource("1_ead4m")
