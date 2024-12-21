@@ -100,9 +100,22 @@ text = "[center]
 "
 script = ExtResource("1_hhalx")
 
+[node name="TitleButton" type="Button" parent="CanvasLayer/CanvasGroup/RichTextLabel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.95
+anchor_bottom = 0.724
+offset_left = 328.0
+offset_top = 311.0
+offset_right = -291.0
+offset_bottom = -14.064
+theme_override_font_sizes/font_size = 40
+text = "   BackToTitle   "
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kxf08")
 }
 
 [connection signal="meta_clicked" from="CanvasLayer/CanvasGroup/RichTextLabel" to="CanvasLayer/CanvasGroup/RichTextLabel" method="_on_meta_clicked"]
+[connection signal="button_down" from="CanvasLayer/CanvasGroup/RichTextLabel/TitleButton" to="." method="_on_title_button_button_down"]
