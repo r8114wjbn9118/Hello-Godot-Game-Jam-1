@@ -15,7 +15,7 @@ point_count = 10
 resource_local_to_scene = true
 shader = ExtResource("2_fjn0d")
 shader_parameter/world_position = Vector2(0, 0)
-shader_parameter/pup_offset = Vector2(-0.0886895, 0.615951)
+shader_parameter/pup_offset = Vector2(-0.0847914, 0.634235)
 
 [node name="EyeAnim" type="Node2D"]
 z_index = 999
@@ -30,28 +30,25 @@ scale = Vector2(8, 8)
 texture = ExtResource("2_34yb5")
 
 [node name="圓瞳孔" type="Sprite2D" parent="CanvasGroup"]
-position = Vector2(2.94345, -0.579754)
+position = Vector2(2.92396, -0.671175)
 texture = ExtResource("3_unrhp")
 
 [node name="直瞳孔" type="Sprite2D" parent="CanvasGroup"]
-position = Vector2(3.53214, -0.695705)
-scale = Vector2(1, 0.493977)
+position = Vector2(3.50875, -0.80541)
+scale = Vector2(1, 0.905698)
 texture = ExtResource("4_e7biw")
 
 [node name="反光" type="Sprite2D" parent="CanvasGroup"]
 modulate = Color(1, 1, 1, 0.690196)
-position = Vector2(1.47172, -0.289877)
+position = Vector2(1.46198, -0.335587)
 texture = ExtResource("5_erkaq")
 
 [node name="Target" type="Marker2D" parent="."]
-position = Vector2(85.5489, -16.8501)
+position = Vector2(95.6271, -21.9506)
 gizmo_extents = 5.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_set_rand_target"]

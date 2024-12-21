@@ -27,9 +27,22 @@ func init(eye_manager, game_pos):
 	position = eye_manager.map_to_local(game_pos)
 
 func _ready() -> void:
-	if !Engine.is_editor_hint():
-		$Camera2D.queue_free()
-
+	_enter_anime()
+	
+func _enter_anime():
+	const time = 2.5
+	scale = Vector2.ZERO
+	rotation = PI
+	var tween := get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), time)\
+		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "rotation", 0.0, time)\
+		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	
+	
+	
+	
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		_target.global_position = get_global_mouse_position()
