@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2tyifmg01tlv"]
 
 [ext_resource type="Script" path="res://MapItems/UI/GameUI.gd" id="1_bmuld"]
-[ext_resource type="Theme" uid="uid://gsakknmlk7u6" path="res://fonts/Theme.tres" id="3_cqal2"]
+[ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="3_cqal2"]
 
 [sub_resource type="Theme" id="Theme_bhsl5"]
 default_font_size = 20

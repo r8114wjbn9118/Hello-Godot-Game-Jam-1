@@ -32,6 +32,11 @@ shader_parameter/seed = 5.0
 script = ExtResource("1_anpjl")
 max_move_distance = 1000
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1350.0
+offset_bottom = 909.0
+color = Color(0, 0, 0, 1)
+
 [node name="Tile" type="Node2D" parent="."]
 unique_name_in_owner = true
 
