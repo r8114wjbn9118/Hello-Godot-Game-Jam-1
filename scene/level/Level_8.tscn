@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7k33f83fa2m6"]
+
+[ext_resource type="PackedScene" uid="uid://5jr077ljxgwi" path="res://Map/Map.tscn" id="1_1y58e"]
+
+[node name="Level8" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_1y58e")]
+
+[editable path="Map"]

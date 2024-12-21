@@ -7,7 +7,12 @@ func _ready() -> void:
 var LEVEL:Array = [null, ## 0留空
 	"res://scene/level/Level_1.tscn",
 	"res://scene/level/Level_2.tscn",
-	"res://scene/level/Level_3.tscn"
+	"res://scene/level/Level_3.tscn",
+	"res://scene/level/Level_4.tscn",
+	"res://scene/level/Level_5.tscn",
+	"res://scene/level/Level_6.tscn",
+	"res://scene/level/Level_7.tscn",
+	"res://scene/level/Level_8.tscn"
 ]
 func get_available_level()-> int:
 	return LEVEL.size()-1
