@@ -6,6 +6,7 @@
 
 [node name="Map" parent="." instance=ExtResource("1_isk5t")]
 level = 1
+max_available_count = null
 max_move_distance = 12
 
 [node name="HEdge" parent="Map/Tile" index="0"]
@@ -21,16 +22,12 @@ tile_map_data = PackedByteArray("AAABAAAAAQAAAAEAAAABAAEAAQAAAAEAAAABAAIAAQAAAAE
 tile_map_data = PackedByteArray("AAABAAAAAQAAAAAAAAABAAEAAQAAAAAAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQAAAAAAAAACAAMAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAAEAAAAAQAAAAMAAAAEAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAEAAQAAAAAAAAABAAIAAQAAAAMAAAABAAMAAQAAAAAAAAA=")
 
 [node name="MainWorm" parent="Map/Worm" index="0"]
-position = Vector2(186.364, 495.455)
+position = Vector2(180, 470)
 
 [node name="SubWorm" parent="Map/Worm" index="1"]
-position = Vector2(586.364, 95.4545)
-
-[node name="Foreground" parent="Map" index="2"]
-scale = Vector2(3.2, 3.2)
+position = Vector2(580, 70)
 
 [node name="Camera2D" parent="Map" index="5"]
-position = Vector2(453, 332)
 zoom = Vector2(0.865, 0.865)
 
 [editable path="Map"]

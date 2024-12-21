@@ -2,6 +2,8 @@
 extends TileManager
 class_name EdgeManager
 
+var max_available_count = 2
+
 var list = []
 var available_count_dict:Dictionary = {}
 
@@ -13,14 +15,14 @@ func init_available_count():
 	available_count_dict.clear()
 	var cell_list:Array[Vector2i] = get_used_cells()
 	for cell in cell_list:
-		available_count_dict[cell] = 2
+		available_count_dict[cell] = 0
 	return available_count_dict
 
 
 func get_closed_edge():
 	var _list:Array[Vector2i] = []
 	for key in available_count_dict.keys():
-		if get_available_count(key) == 0:
+		if get_available_count(key) > 0:
 			_list.append(key)
 	return _list
 
@@ -28,15 +30,18 @@ func get_available_count(game_pos):
 	return available_count_dict.get(game_pos, -1)
 
 func change_available_count(game_pos, n):
-	var target = get_available_count(game_pos) + n
-	if target < 0:
-		return false
-	
-	available_count_dict[game_pos] = target
+	if not is_passable(game_pos, n):
+		return false	
+	available_count_dict[game_pos] = get_available_count(game_pos) + n
 	return true
 
 func is_passable(game_pos, n = 1):
-	return get_available_count(game_pos) >= n
+	var available_count = get_available_count(game_pos) + n
+	if max_available_count < 0:
+		return true
+	if clamp(available_count, 0, max_available_count) == available_count:
+		return true
+	return false
 
 
 

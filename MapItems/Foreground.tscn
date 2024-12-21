@@ -50,6 +50,7 @@ animations = [{
 }]
 
 [node name="Foreground" type="AnimatedSprite2D"]
+top_level = true
 z_index = 100
 position = Vector2(480, 270)
 scale = Vector2(3, 3)

@@ -25,6 +25,10 @@ class_name Map
 #region 變量(遊戲)
 @export_group("遊戲")
 
+@export_subgroup("路徑")
+## 可通過次數
+@export_range(-1, 1000) var max_available_count:int = -1
+
 @export_subgroup("目標")
 ## 最大檢測範圍(-1=無限).
 ## 從眼(Eye)開始檢查(-1)四個方向的邊, 如果不是關閉的, 則再次檢查(-1)未關閉方向位置的邊.
@@ -34,8 +38,8 @@ class_name Map
 @export_subgroup("角色")
 ## 移動速度
 @export_range(0, 1000) var move_speed:int = 200
-## 移動距離(-1=無限)
-@export_range(-1, 1000) var max_move_distance:int = 7
+## 可移動次數
+@export_range(1, 1000) var max_move_distance:int = 7
 #endregion
 
 #region node
@@ -60,9 +64,14 @@ func _ready():
 	else:
 		worm_manager.initialize(move_speed, max_move_distance)
 		worm_manager.move_finish_signal.connect(_on_worm_move_finish)
+		
+		h_edge_manager.max_available_count = max_available_count
+		v_edge_manager.max_available_count = max_available_count
 
 	# 太大擋住畫面, 編輯時先關閉
 	%Foreground.visible = not Engine.is_editor_hint()
+	%Light.visible = not Engine.is_editor_hint()
+	%fade.visible = not Engine.is_editor_hint()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -234,6 +243,7 @@ func _on_worm_move_finish():
 func start_game_finish():
 	print("Game Finish")
 	
+func game_finish():
 	GameManager.finish_level(level)
 
 

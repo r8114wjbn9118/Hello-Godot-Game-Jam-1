@@ -101,6 +101,7 @@ func check(direction):
 	if move_path.size() > max_move_distance:
 		return 0
 
+	printt(name, main_worm.game_pos, target_map_pos, check_edge_is_passable(main_worm.game_pos, target_map_pos))
 	if not target_map_pos in map_point_list:
 		return 0
 	if not check_edge_is_passable(main_worm.game_pos, target_map_pos):
@@ -138,20 +139,20 @@ func check_edge_is_passable(p1, p2):
 func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操作 (不應該被直接調用)
 	move_path.append(target_map_pos) # NOTE 紀錄路徑
 	
-	change_edge_available_count(main_worm.game_pos, target_map_pos, -1)
+	change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
 	main_worm.start_move(target_map_pos)
 	
-	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, -1)
+	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
 	sub_worm.start_move(sub_target_map_pos)
 	GameManager.start_move()
 
 func unmove(target_map_pos, sub_target_map_pos): # NOTE move 的反向操作 (不應該被直接調用)
 	move_path.pop_back() # NOTE 紀錄路徑
 	
-	change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
+	change_edge_available_count(main_worm.game_pos, target_map_pos, -1)
 	main_worm.set_pos(target_map_pos)
 	
-	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
+	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, -1)
 	sub_worm.set_pos(sub_target_map_pos)
 	#state = ACTION.MOVE
 

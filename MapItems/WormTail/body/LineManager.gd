@@ -35,9 +35,7 @@ func init(worm, point_manager) -> void:
 	move()
 	
 var head_pos:
-	get:
-		printt(worm.name + "P", worm.global_position, worm.scale, worm.global_position / worm.scale)
-		return worm.global_position / worm.getScale()
+	get: return worm.global_position / worm.getScale()
 
 
 ## 頭部移動時連帶執行
