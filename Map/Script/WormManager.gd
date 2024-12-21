@@ -100,6 +100,7 @@ func check(direction):
 	# 最大距離限制
 	print(move_path.size(), "/", max_move_distance)
 	if move_path.size() > max_move_distance:
+		SoundManager.play_ohno()
 		return 0
 
 	printt(name, main_worm.game_pos, target_map_pos, check_edge_is_passable(main_worm.game_pos, target_map_pos))

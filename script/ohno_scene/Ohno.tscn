@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cigaq13vi1wux"]
+
+[ext_resource type="Script" path="res://script/ohno_scene/color_rect.gd" id="1_csksn"]
+
+[sub_resource type="Curve" id="Curve_ofyk3"]
+_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.058319, 0.505967), 0.0, 0.0, 0, 0, Vector2(0.113208, 0.114008), 0.0, 0.0, 0, 0, Vector2(0.207547, 0.644786), 0.0, 0.0, 0, 0, Vector2(0.295, 0.10989), -0.137362, -0.137362, 0, 0, Vector2(0.38422, 0.734611), 0.0, 0.0, 0, 0, Vector2(0.485, 0.142857), 0.0, 0.0, 0, 0, Vector2(0.557461, 0.861181), 0.0, 0.0, 0, 0, Vector2(0.63, 0.252747), 0.0, 0.0, 0, 0, Vector2(0.73928, 0.918342), 0.0, 0.0, 0, 0, Vector2(0.8, 0.373626), 0.0, 0.0, 0, 0, Vector2(0.854202, 1), 0.0, 0.0, 0, 0, Vector2(0.926244, 0.387563), 0.0, 0.0, 0, 0, Vector2(0.975986, 1), 0.0, 0.0, 0, 0]
+point_count = 14
+
+[node name="Ohno" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.705882, 0, 0, 1)
+script = ExtResource("1_csksn")
+curve = SubResource("Curve_ofyk3")

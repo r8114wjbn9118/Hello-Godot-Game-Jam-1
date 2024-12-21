@@ -49,7 +49,19 @@ func play_effect(str:EFFECT):
 		_:
 			_effect_player.stream = _effect_list[str]
 	_effect_player.play()
-			
+
+
+func play_ohno():
+	var ohno := AudioStreamPlayer.new()
+	var node = preload("res://script/ohno_scene/Ohno.tscn").instantiate()
+	add_child(node)
+	add_child(ohno)
+	ohno.bus = "OhnoBus"
+	ohno.stream = _BMG_list[BGM.GMAE_MENU]
+	ohno.play()
+	get_tree().create_timer(5.0).timeout.connect(ohno.queue_free)
+	get_tree().create_timer(5.0).timeout.connect(node.queue_free)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		play_effect(EFFECT.CLICK)
