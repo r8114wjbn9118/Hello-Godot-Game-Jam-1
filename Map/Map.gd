@@ -69,7 +69,7 @@ func _ready():
 		v_edge_manager.max_available_count = max_available_count
 
 	# 太大擋住畫面, 編輯時先關閉
-	%Foreground.visible = not Engine.is_editor_hint()
+	#%Foreground.visible = not Engine.is_editor_hint()
 	%Light.visible = not Engine.is_editor_hint()
 	%fade.visible = not Engine.is_editor_hint()
 
@@ -238,15 +238,17 @@ func _on_worm_move_finish():
 	if check_finish():
 		start_game_finish()
 
-
-
+## NOTE 結束流程
+ # _on_worm_move_finish() -> start_game_finish() -> game_finish() -> Cutscene -> GameManager.finish_level
 func start_game_finish():
 	print("Game Finish")
+	game_finish()
 	
 func game_finish():
-	GameManager.finish_level(level)
-
-
+	var ui:GameUI = %GameUI
+	ui.EndAnimeEnd.connect(GameManager.finish_level.bind(level))
+	ui.EndAnimeStart()
+#
 
 
 #region 廢棄

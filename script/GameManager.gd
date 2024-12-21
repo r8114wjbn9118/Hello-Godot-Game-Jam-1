@@ -1,10 +1,13 @@
 extends Node
 
 func _ready() -> void:
+	_load_save_data()
 	print(OS.get_locale())
 
 var LEVEL:Array = [null, ## 0留空
-	"res://scene/level/1.tscn",
+	"res://scene/level/Level_1.tscn",
+	"res://scene/level/Level_2.tscn",
+	"res://scene/level/Level_3.tscn"
 ]
 
 func goto_level(target:int):
@@ -77,15 +80,26 @@ func prohibit_action(b:bool):
 
 #region 關卡完成檢測
 
-var finished_level:Array[int] = [0]
+
+var _save_data:SaveData # 必須在開始時分配實例
+func _load_save_data(): # call by _ready
+	_save_data = SaveData.LoadSelf()
+
+func GetFinishedLevel()-> Array[int]:
+	return _save_data.GetFinishedLevels()
 
 func finish_level(n):
-	if not n in finished_level:
-		finished_level.append(n)
+	print("from GameManager: finish {0}".format([n]))
+	print("change level: {0}".format([not n in _save_data.GetFinishedLevels()]))
+	if not n in _save_data.GetFinishedLevels():
+		_save_data.AddFinishedLevel(n)
+		_save_data.SaveSelf()
 		if is_finish_game():
 			goto_scene("end")
+		else:
+			goto_level(n+1)
 
 func is_finish_game():
-	return finished_level.size() == LEVEL.size()
+	return _save_data.GetFinishedLevels().size() == LEVEL.size()
 
 #endregion

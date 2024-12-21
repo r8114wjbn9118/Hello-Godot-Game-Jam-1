@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2tyifmg01tlv"]
+
+[ext_resource type="Script" path="res://MapItems/UI/GameUI.gd" id="1_bmuld"]
+[ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="2_j8pnb"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_bmuld")
+
+[node name="Foreground" parent="." instance=ExtResource("2_j8pnb")]
+z_index = 0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DEBUGPanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 749.0
+offset_top = 42.0
+offset_right = -44.0
+offset_bottom = -382.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextEdit" type="TextEdit" parent="Control/DEBUGPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 53.0
+offset_top = 21.0
+offset_right = -5.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "go to level"
+
+[node name="Button" type="Button" parent="Control/DEBUGPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 26.0
+offset_right = -124.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GO"
+
+[node name="Label" type="Label" parent="Control/DEBUGPanel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -1.0
+offset_right = 134.0
+offset_bottom = 22.0
+text = "DEBUGPanel"
+
+[connection signal="button_down" from="Control/DEBUGPanel/Button" to="." method="_on_button_button_down"]

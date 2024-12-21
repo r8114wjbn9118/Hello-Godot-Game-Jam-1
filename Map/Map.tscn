@@ -7,10 +7,10 @@
 [ext_resource type="Script" path="res://Map/wormManager.gd" id="4_5oq82"]
 [ext_resource type="Script" path="res://Map/VEdgeManager.gd" id="4_m55aa"]
 [ext_resource type="Script" path="res://Map/HEdgeManager.gd" id="5_phctv"]
-[ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="9_gth0d"]
 [ext_resource type="PackedScene" uid="uid://3wu8fxil0bju" path="res://MapItems/WormTail/body/WormBody.tscn" id="9_tj3aa"]
 [ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Tile/EyeAnime/EyeAnim.tscn" id="10_susjb"]
 [ext_resource type="Shader" path="res://Map/Maplight.gdshader" id="11_pscms"]
+[ext_resource type="PackedScene" uid="uid://b2tyifmg01tlv" path="res://MapItems/UI/GameUI.tscn" id="12_xxg6l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xwalh"]
 shader = ExtResource("11_pscms")
@@ -81,10 +81,6 @@ unique_name_in_owner = true
 position = Vector2(880, 70)
 rotation = 6.28318
 
-[node name="Foreground" parent="." instance=ExtResource("9_gth0d")]
-unique_name_in_owner = true
-visible = false
-
 [node name="Light" type="ColorRect" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -100,7 +96,9 @@ offset_right = 960.0
 offset_bottom = 540.0
 color = Color(0, 0, 0, 0)
 
+[node name="GameUI" parent="." instance=ExtResource("12_xxg6l")]
+unique_name_in_owner = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 position = Vector2(480, 270)
 enabled = false
