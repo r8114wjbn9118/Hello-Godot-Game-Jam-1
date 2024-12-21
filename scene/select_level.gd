@@ -1,12 +1,17 @@
-extends Node2D
+extends Control
 
-
+@export var button:PackedScene
 
 func _ready() -> void:
-	var target = $CanvasLayer/Control/Panel/HFlowContainer
-	for i in range(1, GameManager.get_available_level()+1):
-		var node = preload("res://scene/selectLevelButton/LevelSelectButton.tscn")\
-			.instantiate()
-		node.Init(i, (i-1) in GameManager.GetFinishedLevel())
-		target.add_child(node)
+	SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
 	
+	var target = $Panel/VBoxContainer
+	var child
+	
+	for i in range(1, GameManager.get_available_level() + 1):
+		if i % 10 == 1:
+			child = HBoxContainer.new()
+			target.add_child(child)
+		var node = button.instantiate()
+		node.Init(i)
+		child.add_child(node)

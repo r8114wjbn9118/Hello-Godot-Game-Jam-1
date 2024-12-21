@@ -23,6 +23,7 @@ func get_available_level()-> int:
 
 func goto_level(target:int):
 	if target >= LEVEL.size():
+		prints("GOTO LEVEL:", target)
 		printerr('GameManager.goto_level({0}): 無效目標'.format([target]))
 		return
 		
@@ -44,7 +45,7 @@ var SCENE:Dictionary = {
 func goto_scene(target:String):
 	var path = SCENE.get(target, null)
 	if path:
-		printt("GOTO", target, path)
+		printt("GOTO SCENE ", target, path)
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
@@ -110,6 +111,9 @@ func _load_save_data(): # call by _ready
 	_save_data = SaveData.LoadSelf()
 		
 	
+
+func is_finish_level(level)-> bool:
+	return _save_data.LevelIsFinished(level)
 
 func GetFinishedLevel()-> Array[int]:
 	return _save_data.GetFinishedLevels()
