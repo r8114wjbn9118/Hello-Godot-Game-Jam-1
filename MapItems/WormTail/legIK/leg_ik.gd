@@ -14,6 +14,11 @@ var end_point: ## NOTE for undoRedo from Body
 	set(value): %LegEnd.global_position = value
 	get: return %LegEnd.global_position
 
+var Visible:
+	set(new): visible = new
+	get: return visible
+	
+
 func start_move():
 	need_update = true
 

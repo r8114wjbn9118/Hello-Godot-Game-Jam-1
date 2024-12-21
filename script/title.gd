@@ -27,5 +27,8 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	pass # Replace with function body.
 
 
-func _on_start_game_button_down() -> void:
-	pass
+
+
+func _on_button_button_down() -> void:
+	anim_tree["parameters/conditions/start"] = true
+	BGM.stop()
