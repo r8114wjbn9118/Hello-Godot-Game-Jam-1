@@ -1,0 +1,21 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://bgiashlvgypie"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_bifob"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4lefe"]
+resource_name = "Reverb"
+damping = 0.2
+
+[resource]
+bus/0/volume_db = -7.27252
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_bifob")
+bus/0/effect/0/enabled = false
+bus/1/name = &"EffectBus"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.862736
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_4lefe")
+bus/1/effect/0/enabled = false

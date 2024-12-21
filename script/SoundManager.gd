@@ -27,17 +27,16 @@ var button_click := [ # click
 ]
 func _ready():
 	_BGM_player = AudioStreamPlayer.new()
+	_BGM_player.finished.connect(_BGM_player.play)
 	add_child(_BGM_player)
 	_effect_player = AudioStreamPlayer.new()
+	_effect_player.bus = "EffectBus"
 	add_child(_effect_player)
 
 var _BGM_player:AudioStreamPlayer
 func play_BGM(str:BGM):
-	for i in _BGM_player.finished.get_connections():
-		_BGM_player.finished.disconnect(i["callable"])
 	_BGM_player.stream = _BMG_list[str]
 	_BGM_player.play()
-	_BGM_player.finished.connect(play_BGM.bind(str))
 
 
 var _effect_player:AudioStreamPlayer
