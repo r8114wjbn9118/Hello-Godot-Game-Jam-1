@@ -9,6 +9,8 @@ var LEVEL:Array = [null, ## 0留空
 	"res://scene/level/Level_2.tscn",
 	"res://scene/level/Level_3.tscn"
 ]
+func get_available_level()-> int:
+	return LEVEL.size()-1
 
 func goto_level(target:int):
 	var path = LEVEL[target]
@@ -16,6 +18,7 @@ func goto_level(target:int):
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_level({0}): 無效目標'.format([target]))
+
 
 var SCENE:Dictionary = {
 	"title": "res://scene/title.tscn",
@@ -79,7 +82,10 @@ func prohibit_action(b:bool):
 #endregion
 
 #region 關卡完成檢測
-
+func reset_save_data():
+	_save_data = SaveData.new()
+	_save_data.SaveSelf()
+	print_rich("[color=green]SaveData reset ![/color]")
 
 var _save_data:SaveData # 必須在開始時分配實例
 func _load_save_data(): # call by _ready
@@ -89,8 +95,7 @@ func GetFinishedLevel()-> Array[int]:
 	return _save_data.GetFinishedLevels()
 
 func finish_level(n):
-	print("from GameManager: finish {0}".format([n]))
-	print("change level: {0}".format([not n in _save_data.GetFinishedLevels()]))
+	print_rich("[color=green]Level {0} Clear ![/color]".format([n]))
 	if not n in _save_data.GetFinishedLevels():
 		_save_data.AddFinishedLevel(n)
 		_save_data.SaveSelf()
@@ -98,6 +103,8 @@ func finish_level(n):
 			goto_scene("end")
 		else:
 			goto_level(n+1)
+	else:
+		goto_scene("select")
 
 func is_finish_game():
 	return _save_data.GetFinishedLevels().size() == LEVEL.size()

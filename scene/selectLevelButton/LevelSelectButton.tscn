@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm5iwd88kjub8"]
+
+[ext_resource type="Script" path="res://scene/selectLevelButton/level_select_button.gd" id="1_0n0js"]
+[ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="1_mvoub"]
+
+[node name="LevelSelectButton" type="Button"]
+custom_minimum_size = Vector2(50, 50)
+theme = ExtResource("1_mvoub")
+text = "1
+"
+script = ExtResource("1_0n0js")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.247059, 0.207843, 0.541176)

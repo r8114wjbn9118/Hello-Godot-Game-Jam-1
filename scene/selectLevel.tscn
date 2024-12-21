@@ -1,3 +1,40 @@
-[gd_scene format=3 uid="uid://bwdntfnhloqpw"]
+[gd_scene load_steps=3 format=3 uid="uid://bwdntfnhloqpw"]
+
+[ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="1_a0vku"]
+[ext_resource type="Script" path="res://scene/select_level.gd" id="1_hfjtf"]
 
 [node name="LevelChange" type="Node2D"]
+script = ExtResource("1_hfjtf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 19.0
+offset_right = 935.0
+offset_bottom = 515.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 34.0
+offset_right = 712.0
+offset_bottom = 134.0
+theme = ExtResource("1_a0vku")
+text = "Level Select"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/Control/Panel"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 107.0
+offset_right = 822.0
+offset_bottom = 431.0
