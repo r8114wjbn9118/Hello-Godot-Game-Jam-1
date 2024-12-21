@@ -82,6 +82,7 @@ func move_input(direction:Vector2i):
 		Do(direction)
 		return true
 	#if action == 0: # 無法移動
+	SoundManager.play_effect(SoundManager.EFFECT.BLOCK)
 	return false
 
 func check(direction):
@@ -180,6 +181,9 @@ func Reset(): # TODO
 func Undo(): 
 	if _undo_redo.has_undo():
 		_undo_redo.undo()
+		SoundManager.play_effect(SoundManager.EFFECT.ROAR)
+	else:
+		SoundManager.play_effect(SoundManager.EFFECT.BLOCK)
 #func Redo(): # TODO
 	#if _undo_redo.has_redo():
 		#_undo_redo.redo()

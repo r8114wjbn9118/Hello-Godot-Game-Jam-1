@@ -253,6 +253,7 @@ func start_game_finish():
 	game_finish()
 	
 func game_finish():
+	SoundManager.play_effect(SoundManager.EFFECT.SUCCES)
 	ui.EndAnimeEnd.connect(GameManager.finish_level.bind(level))
 	ui.EndAnimeStart()
 #
