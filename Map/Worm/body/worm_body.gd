@@ -7,13 +7,13 @@ signal move_finish_signal()
 
 var color_list = [
 	{
-		"head_img": "res://image/image/blue_head.png",
-		"body_img": "res://image/image/blue_body.png",
+		"head_img": "res://Map/Worm/image/blue_head.png",
+		"body_img": "res://Map/Worm/image/blue_body.png",
 		"leg_color": Color("cfdeff"),
 	},
 	{
-		"head_img": "res://image/image/pink_head.png",
-		"body_img": "res://image/image/pink_body.png",
+		"head_img": "res://Map/Worm/image/pink_head.png",
+		"body_img": "res://Map/Worm/image/pink_body.png",
 		"leg_color": Color("d38fb2")
 	},
 ]
