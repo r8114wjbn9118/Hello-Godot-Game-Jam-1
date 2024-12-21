@@ -5,5 +5,5 @@
 [resource]
 Button/font_sizes/font_size = 30
 Button/fonts/font = ExtResource("1_ead4m")
-Label/font_sizes/font_size = 60
+Label/font_sizes/font_size = 30
 Label/fonts/font = ExtResource("1_ead4m")

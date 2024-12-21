@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2tyifmg01tlv"]
+[gd_scene load_steps=5 format=3 uid="uid://b2tyifmg01tlv"]
 
 [ext_resource type="Script" path="res://MapItems/UI/GameUI.gd" id="1_bmuld"]
 [ext_resource type="PackedScene" uid="uid://ckbpjay4esc8r" path="res://MapItems/Foreground.tscn" id="2_j8pnb"]
+[ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="3_cqal2"]
+
+[sub_resource type="Theme" id="Theme_bhsl5"]
+default_font_size = 20
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_bmuld")
@@ -16,18 +20,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cqal2")
 
 [node name="DEBUGPanel" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 749.0
-offset_top = 42.0
-offset_right = -44.0
-offset_bottom = -382.0
+offset_left = 756.0
+offset_top = 387.0
+offset_right = -37.0
+offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_bhsl5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/DEBUGPanel"]
 layout_mode = 0
@@ -60,6 +66,36 @@ offset_top = -1.0
 offset_right = 134.0
 offset_bottom = 22.0
 text = "DEBUGPanel"
+
+[node name="GamePanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 760.0
+offset_top = 34.0
+offset_right = -37.0
+offset_bottom = -401.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelectButton" type="Button" parent="Control/GamePanel/VBoxContainer"]
+layout_mode = 2
+text = "LevelSelect"
+
+[node name="Hint" type="Label" parent="Control/GamePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = " Move: WASD
+ Undo: Z"
 
 [connection signal="button_down" from="Control/DEBUGPanel/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="Control/DEBUGPanel/VBoxContainer/ResetDataButton" to="." method="_on_reset_data_button_button_down"]

@@ -178,7 +178,7 @@ offset_bottom = 130.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chf1w")
 
-[node name="StartGame" type="TextureRect" parent="Panel/Panel"]
+[node name="StartGame" type="TextureButton" parent="Panel/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -192,7 +192,12 @@ offset_bottom = 26.25
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(480, 270)
-texture = ExtResource("2_eibid")
+focus_mode = 0
+texture_normal = ExtResource("2_eibid")
+texture_pressed = ExtResource("2_eibid")
+texture_hover = ExtResource("2_eibid")
+texture_disabled = ExtResource("2_eibid")
+texture_focused = ExtResource("2_eibid")
 stretch_mode = 5
 
 [node name="TitleText" type="TextureRect" parent="Panel"]
@@ -229,4 +234,5 @@ unique_name_in_owner = true
 stream = ExtResource("4_tca0t")
 autoplay = true
 
+[connection signal="button_down" from="Panel/Panel/StartGame" to="." method="_on_start_game_button_down"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

@@ -25,3 +25,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fadein":
 		GameManager.goto_scene("select")
 	pass # Replace with function body.
+
+
+func _on_start_game_button_down() -> void:
+	pass
