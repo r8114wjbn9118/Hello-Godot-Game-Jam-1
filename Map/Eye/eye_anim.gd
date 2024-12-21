@@ -1,9 +1,6 @@
 @tool
 class_name DragonEye extends Node2D
 
-static func new_instance()-> DragonEye:
-	return preload("res://Tile/EyeAnime/EyeAnim.tscn").instantiate()
-
 @onready var _white_eye_ball = $"CanvasGroup/眼白"
 @onready var _pupil = $"CanvasGroup/圓瞳孔"
 @onready var _spupil = $"CanvasGroup/直瞳孔"
