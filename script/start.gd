@@ -16,7 +16,7 @@ var state = "wait" :
 
 func start_story():
 	state = "story"
-	story_index = 0
+	story_index = 2
 	img.position = Vector2.ZERO
 	await get_tree().create_timer(1).timeout
 	story()
@@ -32,7 +32,7 @@ func story():
 		
 func start_eye():
 	var node := preload("res://Map/Eye/EyeAnim.tscn").instantiate()
-	node.position = Vector2(get_tree().root.size) / 2
+	node.position = Vector2(size) / 2
 	add_child(node)
 	node._enter_anime(0.5)
 	await get_tree().create_timer(1.5).timeout
