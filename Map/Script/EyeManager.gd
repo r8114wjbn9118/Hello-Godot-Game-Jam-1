@@ -46,7 +46,7 @@ func update_child(point_list:Array[Vector2i]):
 		else:
 			child.queue_free()
 	for game_pos in eye_game_pos_list:
-		create_eye_cell(game_pos)
+		create_cell(game_pos, true)
 
 		if game_pos in generated_eye_game_pos:
 			continue
@@ -67,14 +67,15 @@ func update_child(point_list:Array[Vector2i]):
 		if not (point + Vector2i.DOWN) in point_list:
 			continue
 
-		create_cell(point)
+		create_cell(point, false)
 
 
-func create_cell(vec:Vector2i):
-	set_cell(vec, 1, Vector2i(0, 0))
-
-func create_eye_cell(vec:Vector2i):
-	set_cell(vec, 1, Vector2i(0, 3))
+func create_cell(vec:Vector2i, eye:bool):
+	if Engine.is_editor_hint():
+		if eye:
+			set_cell(vec, 1, Vector2i(0, 3))
+		else:
+			set_cell(vec, 1, Vector2i(0, 0))
 
 
 func get_game_pos_list():
