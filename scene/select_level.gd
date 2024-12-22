@@ -3,7 +3,7 @@ extends Control
 @export var button:PackedScene
 
 func _ready() -> void:
-	SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
+	#SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
 	
 	var target = $Panel/VBoxContainer
 	var child
