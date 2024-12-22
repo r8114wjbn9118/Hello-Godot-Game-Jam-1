@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cciudriytvkwi"]
+[gd_scene load_steps=16 format=3 uid="uid://cxferyrve8y47"]
 
 [ext_resource type="Script" path="res://script/start.gd" id="1_okr7h"]
 [ext_resource type="Texture2D" uid="uid://cxqothrvfx6ja" path="res://image/過關畫面/影格2.png" id="2_f4jl4"]
@@ -79,84 +79,6 @@ tracks/4/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_xqvo4"]
-resource_name = "fade to credit"
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("bg:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.117647, 0.117647, 0.117647, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_et7ad"]
-resource_name = "fadein"
-length = 2.0
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("img:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xk0b7"]
-resource_name = "story"
-length = 10.0
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("img:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 8.5, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("text:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2, 3.5, 6.5, 8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_u5ix1"]
-resource_name = "fade to select"
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("bg:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.176471, 0.176471, 0.176471, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_dsv3m"]
 resource_name = "end"
 length = 5.0
@@ -186,10 +108,88 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_xqvo4"]
+resource_name = "fade to credit"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bg:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.117647, 0.117647, 0.117647, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u5ix1"]
+resource_name = "fade to select"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bg:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.176471, 0.176471, 0.176471, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_et7ad"]
+resource_name = "fadein"
+length = 2.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("img:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_ubu8o"]
 resource_name = "start"
 length = 0.001
 step = 0.5
+
+[sub_resource type="Animation" id="Animation_xk0b7"]
+resource_name = "story"
+length = 10.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("img:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 8.5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 3.5, 6.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ow1vc"]
 _data = {

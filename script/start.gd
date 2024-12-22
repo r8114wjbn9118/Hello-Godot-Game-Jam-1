@@ -31,9 +31,11 @@ func story():
 		start_eye()
 		
 func start_eye():
-	pass
-
-
+	var node := preload("res://Map/Eye/EyeAnim.tscn").instantiate()
+	add_child(node)
+	node._enter_anime(0.5)
+	await get_tree().create_timer(1.0).timeout
+	node._exit_anime(0.5)
 
 func _on_anim_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "start":
