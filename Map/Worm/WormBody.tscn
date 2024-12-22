@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://up6yecfvyrms" path="res://Map/Worm/legIK/LegIK.tscn" id="5_ca66f"]
 
 [sub_resource type="Gradient" id="Gradient_3k8hu"]
+resource_local_to_scene = true
 offsets = PackedFloat32Array(0.5, 1)
 colors = PackedColorArray(0.435294, 0.435294, 0.435294, 1, 0.435294, 0.435294, 0.435294, 0)
 
@@ -36,7 +37,6 @@ script = ExtResource("2_yo5do")
 
 [node name="PathLine" type="Line2D" parent="Path"]
 unique_name_in_owner = true
-visible = false
 points = PackedVector2Array(0, 0, 36.9362, 0, 80.1929, 0, 115.116, 0, 164, 0, 197, 0)
 width = 50.0
 gradient = SubResource("Gradient_3k8hu")
