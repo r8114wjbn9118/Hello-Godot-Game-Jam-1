@@ -20,7 +20,7 @@ func goto():
 	var scene = "select"
 	if not GameManager.is_finished_anim("start"):
 		scene = "start"
-		
+	SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
 	GameManager.goto_scene(scene)
 
 

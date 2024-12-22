@@ -63,7 +63,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		main_worm_rotate = worm_manager.main_worm.rotation
 	else:
-		SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
+		#SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
 		worm_manager.initialize(max_move_distance)
 		worm_manager.move_finish_signal.connect(_on_worm_move_finish)
 		
