@@ -37,7 +37,8 @@ var _BGM_player:AudioStreamPlayer
 func play_BGM(str:BGM):
 	_BGM_player.stream = _BMG_list[str]
 	_BGM_player.play()
-
+func stop():
+	_BGM_player.stop()
 
 var _effect_player:AudioStreamPlayer
 func play_effect(str:EFFECT):

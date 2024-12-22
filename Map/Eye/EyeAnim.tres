@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=20 format=3 uid="uid://wryyfh37kua4"]
+[gd_resource type="VisualShader" load_steps=21 format=3 uid="uid://wryyfh37kua4"]
 
 [ext_resource type="Script" path="res://addons/ShaderLib_v2_2_4/UV/SpherizeUV.gd" id="1_067um"]
 
@@ -13,7 +13,7 @@ output0/=8.0;"
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_g1qs1"]
 size = Vector2(560, 360)
 expression = "// Puts uv back in screen space
-  uv *= 8.0;
+  uv *= s_scale;
   uv += world_pos;
   uv = (mat * vec4(uv,0,1)).xy;
   output0 = uv * 0.5 + 0.5;"
@@ -42,6 +42,11 @@ texture_type = 1
 texture_filter = 1
 texture_repeat = 2
 texture_source = 1
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_ur14d"]
+parameter_name = "s_scale"
+default_value_enabled = true
+default_value = 8.0
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_x0yyr"]
 expanded_output_ports = [0]
@@ -90,6 +95,7 @@ varying mat4 var_world_to_screen;
 varying mat4 var_screen_to_world;
 
 uniform vec2 world_position = vec2(1.000000, 1.000000);
+uniform float s_scale = 8;
 uniform vec2 pup_offset = vec2(1.000000, 1.000000);
 uniform sampler2D Texture2DParameter : source_color, filter_nearest, repeat_disable, hint_screen_texture;
 
@@ -137,6 +143,10 @@ void fragment() {
 	vec2 n_out20p0 = world_position;
 
 
+// FloatParameter:23
+	float n_out23p0 = s_scale;
+
+
 	vec2 n_out15p0;
 // Expression:15
 	n_out15p0 = vec2(0.0, 0.0);
@@ -171,7 +181,7 @@ void fragment() {
 	n_out16p0 = vec2(0.0, 0.0);
 	{
 		// Puts n_out5p0 back in screen space
-		  n_out5p0 *= 8.0;
+		  n_out5p0 *= n_out23p0;
 		  n_out5p0 += n_out20p0;
 		  n_out5p0 = (n_out9p0 * vec4(n_out5p0,0,1)).xy;
 		  n_out16p0 = n_out5p0 * 0.5 + 0.5;
@@ -199,6 +209,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-1693.1, 470.476)
 mode = 1
 flags/light_only = false
 varyings/world_to_screen = "0,7"
@@ -231,7 +242,7 @@ nodes/fragment/9/position = Vector2(-1380, 780)
 nodes/fragment/15/node = SubResource("VisualShaderNodeExpression_1xwja")
 nodes/fragment/15/position = Vector2(-1120, 400)
 nodes/fragment/15/size = Vector2(560, 340)
-nodes/fragment/15/input_ports = "0,3,uv;1,7,mat;2,3,world_pos;"
+nodes/fragment/15/input_ports = "0,3,uv;1,7,mat;2,3,world_pos;3,0,s_scale;"
 nodes/fragment/15/output_ports = "0,3,output0;"
 nodes/fragment/15/expression = "// Puts uv in world space	offset = _shade.position / MAX_LEN
 
@@ -241,10 +252,10 @@ output0/=8.0;"
 nodes/fragment/16/node = SubResource("VisualShaderNodeExpression_g1qs1")
 nodes/fragment/16/position = Vector2(-1140, 820)
 nodes/fragment/16/size = Vector2(560, 360)
-nodes/fragment/16/input_ports = "0,3,uv;1,7,mat;2,3,world_pos;"
+nodes/fragment/16/input_ports = "0,3,uv;1,7,mat;2,3,world_pos;3,0,s_scale;"
 nodes/fragment/16/output_ports = "0,3,output0;"
 nodes/fragment/16/expression = "// Puts uv back in screen space
-  uv *= 8.0;
+  uv *= s_scale;
   uv += world_pos;
   uv = (mat * vec4(uv,0,1)).xy;
   output0 = uv * 0.5 + 0.5;"
@@ -258,4 +269,6 @@ nodes/fragment/21/node = SubResource("VisualShaderNodeIntConstant_okh6p")
 nodes/fragment/21/position = Vector2(-680, 1240)
 nodes/fragment/22/node = SubResource("VisualShaderNodeTexture2DParameter_3ny8x")
 nodes/fragment/22/position = Vector2(-940, 1400)
-nodes/fragment/connections = PackedInt32Array(2, 0, 15, 0, 8, 0, 15, 1, 9, 0, 16, 1, 5, 0, 16, 0, 16, 0, 3, 0, 17, 0, 5, 1, 3, 0, 0, 0, 3, 1, 19, 0, 19, 0, 0, 1, 20, 0, 15, 2, 20, 0, 16, 2, 15, 0, 5, 0, 21, 0, 3, 1, 22, 0, 3, 2)
+nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_ur14d")
+nodes/fragment/23/position = Vector2(-1787.91, 847.807)
+nodes/fragment/connections = PackedInt32Array(2, 0, 15, 0, 8, 0, 15, 1, 9, 0, 16, 1, 5, 0, 16, 0, 16, 0, 3, 0, 17, 0, 5, 1, 3, 0, 0, 0, 3, 1, 19, 0, 19, 0, 0, 1, 20, 0, 15, 2, 20, 0, 16, 2, 15, 0, 5, 0, 21, 0, 3, 1, 22, 0, 3, 2, 23, 0, 16, 3, 23, 0, 15, 3)
