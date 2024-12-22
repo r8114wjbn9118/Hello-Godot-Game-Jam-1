@@ -3,12 +3,13 @@ class_name SaveData extends Resource
 #region Level
 
 @export var finished_level:Array[int] = [0,
-#1,2,3,4,5,6,7,8
+#1,2,3,4,5,6,7,8 # TEST
 ] #NOTE 0有特殊意義 關聯LevelSelect
-@export var game_finish:bool = false: # NOTE 通關
-	set(value):
-		game_finish = value
-		SaveSelf()
+@export var game_finish:bool = false # NOTE 通關
+	
+func SetGameFinish(b:bool):
+	game_finish = b
+	SaveSelf()
 
 func AddFinishedLevel(level:int) -> void:
 	finished_level.append(level)
@@ -39,11 +40,6 @@ func AnimIsFinished(anim_name:String):
 #region SaveLoad
 
 const SAVE_PATH = "user://save.tres"
-
-func _init() -> void:
-	if not ResourceLoader.exists(SAVE_PATH):
-		SaveSelf()
-	
 
 func SaveSelf()-> void:
 	printt("Save", error_string(ResourceSaver.save(self, SAVE_PATH)))

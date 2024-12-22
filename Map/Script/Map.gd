@@ -2,8 +2,6 @@
 extends Node2D
 class_name Map
 
-@export var level:int = 0
-
 #region 變量(場景編輯)
 @export_group("場景編輯")
 ## 根據點(Point)的最大可放置數量自動調整邊距(功能受到下列的Offset和Spacing影響)
@@ -71,7 +69,7 @@ func _ready():
 		h_edge_manager.max_available_count = max_available_count
 		v_edge_manager.max_available_count = max_available_count
 		
-		ui.init(level, fg_img)
+		ui.init(fg_img)
 		
 		## 一秒通關
 		#await get_tree().create_timer(1).timeout
@@ -246,5 +244,5 @@ func start_game_finish():
 	
 func game_finish():
 	SoundManager.play_effect(SoundManager.EFFECT.SUCCES)
-	ui.EndAnimeEnd.connect(GameManager.finish_level.bind(level))
+	ui.EndAnimeEnd.connect(GameManager.finish_level)
 	ui.EndAnimeStart()

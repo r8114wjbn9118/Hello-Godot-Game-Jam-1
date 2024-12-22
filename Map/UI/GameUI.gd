@@ -18,10 +18,10 @@ var fg_img:
 			fg.texture = load(target)
 	get: return fg.texture if fg else null
 
-func init(level, fg_img):
-	input.value = level
+func init(fg_img):
+	input.value = GameManager.current_level
 	self.fg_img = fg_img
-	%Level.text = "[center][font_size=20][color=green]Level "+str(level)+"[/color][/font_size][/center]"
+	%Level.text = "[center][font_size=20][color=green]Level "+str(input.value)+"[/color][/font_size][/center]"
 #
 
 

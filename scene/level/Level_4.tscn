@@ -5,7 +5,6 @@
 [node name="Level4" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("1_atjj2")]
-level = 4
 fg_img = 1
 max_move_distance = 15
 

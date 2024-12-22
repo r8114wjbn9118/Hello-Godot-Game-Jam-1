@@ -2,7 +2,18 @@ extends Node
 
 @onready var cutscene = preload("res://Map/cutscene.tscn").instantiate()
 
-var current_map
+var current_map:
+	set(value):
+		if value == null:
+			current_level = 0
+		current_map = value
+var current_level:
+	get:
+		if not current_level \
+		or not current_level is int \
+		or current_level >= LEVEL.size():
+			return 0
+		return current_level
 
 func _ready() -> void:
 	_load_save_data()
@@ -32,6 +43,7 @@ func goto_level(target:int):
 	var path = LEVEL[target]
 	printt("GOTO LEVEL", target, path)
 	if path:
+		current_level = target
 		if current_map:
 			cutscene.old_map = current_map
 			cutscene.new_map = load(path).instantiate()
@@ -61,8 +73,8 @@ func goto_scene(target:String):
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
 		
-func goto_end():
-	_save_data.game_finish = true
+func start_end():
+	_save_data.SetGameFinish(true)
 	cutscene.start_goto_end()
 
 #region 玩家行動
@@ -124,8 +136,8 @@ func reset_save_data():
 
 func _load_save_data(): # call by _ready
 	_save_data = SaveData.LoadSelf()
-		
-	
+
+
 
 func is_finish_level(level)-> bool:
 	return _save_data.LevelIsFinished(level)
@@ -133,19 +145,30 @@ func is_finish_level(level)-> bool:
 func GetFinishedLevel()-> Array[int]:
 	return _save_data.GetFinishedLevels()
 
-func finish_level(n):
-	print_rich("[color=green]Level {0} Clear ![/color]".format([n]))
-	if not n in _save_data.GetFinishedLevels():
-		_save_data.AddFinishedLevel(n)
+func finish_level():
+	print_rich("[color=green]Level {0} Clear ![/color]".format([current_level]))
+	if not current_level in _save_data.GetFinishedLevels():
+		_save_data.AddFinishedLevel(current_level)
 		if is_finish_game():
-			goto_end()
+			start_end()
 		else:
-			goto_level(n + 1)
+			goto_level(current_level + 1)
 	else:
 		goto_scene("select")
 
 func is_finish_game():
-	return _save_data.GetFinishedLevels().size() == LEVEL.size() or _save_data.game_finish
+	return _save_data.GetFinishedLevels().size() == LEVEL.size() \
+			or _save_data.game_finish
+
+func get_last_level():
+	if is_finish_game():
+		return 1
+
+	var finish = GetFinishedLevel()
+	for i in range(1, LEVEL.size()):
+		if not i in finish:
+			return i
+	return 1
 
 #endregion
 

@@ -37,9 +37,6 @@ offset_top = 88.0
 offset_right = 803.0
 offset_bottom = 412.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
-layout_mode = 2
-
 [node name="TitleButton" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
