@@ -46,7 +46,6 @@ func shock(delta):
 
 
 func start_story():
-	print(OS.get_locale())
 	state = "story"
 	story_index = 0
 	img.position = Vector2.ZERO
@@ -65,8 +64,8 @@ func story():
 
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "anim":
+func _on_anim_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "end":
 		start_shock()
 	if anim_name == "fadein":
 		start_story()
@@ -74,8 +73,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		story_index += 1
 		story()
 	if anim_name == "fade to credit":
-		GameManager.goto_scene("credit")
-		
+		finish()
 
 func End():
 	anim.play("fade to credit")
+
+func finish():
+	GameManager.finish_anim("end")
+	GameManager.goto_scene("credit")

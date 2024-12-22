@@ -1,0 +1,169 @@
+[gd_scene load_steps=18 format=3 uid="uid://cciudriytvkwi"]
+
+[ext_resource type="Script" path="res://script/start.gd" id="1_okr7h"]
+[ext_resource type="Texture2D" uid="uid://cxqothrvfx6ja" path="res://image/過關畫面/影格2.png" id="2_f4jl4"]
+[ext_resource type="FontFile" uid="uid://cs0w3u1dnd1dh" path="res://fonts/Cubic_11.ttf" id="3_ukh6m"]
+[ext_resource type="Texture2D" uid="uid://bho4k7u6fqrmi" path="res://image/過關畫面/影格3.png" id="4_v0y78"]
+[ext_resource type="Texture2D" uid="uid://mlxt2fi5iqhm" path="res://image/故事用插圖/1.png" id="5_gdj5p"]
+[ext_resource type="Texture2D" uid="uid://48s7wn8cbhwr" path="res://image/故事用插圖/2.png" id="6_0axpj"]
+[ext_resource type="Texture2D" uid="uid://btjcod0yvcs33" path="res://image/故事用插圖/3.png" id="7_1pk4v"]
+[ext_resource type="Texture2D" uid="uid://cw3dtlesn2822" path="res://image/故事用插圖/4.png" id="8_i5nkp"]
+[ext_resource type="Texture2D" uid="uid://uqvs7kjl0d3u" path="res://image/故事用插圖/5.png" id="9_dpcuq"]
+[ext_resource type="Texture2D" uid="uid://dukm8bsbsrkp0" path="res://image/故事用插圖/6.png" id="10_vumbx"]
+[ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Map/Eye/EyeAnim.tscn" id="11_iusq7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5mqpo"]
+line_spacing = 8.0
+font = ExtResource("3_ukh6m")
+font_size = 24
+
+[sub_resource type="Animation" id="Animation_6jeoe"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_dsv3m"]
+resource_name = "anim"
+length = 5.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("img:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_f4jl4"), ExtResource("4_v0y78")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("img:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 3.5, 4, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_et7ad"]
+resource_name = "fadein"
+length = 2.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("img:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aoqkb"]
+resource_name = "story01"
+length = 70.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("img:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(5, 15, 25, 35, 45, 55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_gdj5p"), ExtResource("6_0axpj"), ExtResource("7_1pk4v"), ExtResource("8_i5nkp"), ExtResource("9_dpcuq"), ExtResource("10_vumbx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("img:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 5.5, 14.5, 15, 15.5, 24.5, 25, 25.5, 34.5, 35, 35.5, 44.5, 45, 45.5, 54.5, 55, 55.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("img:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ow1vc"]
+_data = {
+"RESET": SubResource("Animation_6jeoe"),
+"anim": SubResource("Animation_dsv3m"),
+"fadein": SubResource("Animation_et7ad"),
+"story01": SubResource("Animation_aoqkb")
+}
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_okr7h")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="img" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(480, 270)
+
+[node name="text" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_5mqpo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ow1vc")
+}
+autoplay = "RESET"
+
+[node name="EyeAnim" parent="." instance=ExtResource("11_iusq7")]
+position = Vector2(480, 270)
+
+[connection signal="animation_finished" from="anim" to="." method="_on_animation_player_animation_finished"]
