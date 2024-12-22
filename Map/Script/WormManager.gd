@@ -97,16 +97,29 @@ func check(direction):
 		SoundManager.play_ohno()
 		return 0
 
-	if not target_map_pos in map_point_list:
-		return 0
-	if not check_edge_is_passable(main_worm.game_pos, target_map_pos):
-		return 0
+	#if not target_map_pos in map_point_list:
+		#return 0
+	#if not check_edge_is_passable(main_worm.game_pos, target_map_pos):
+		#return 0
 		
 	var sub_target_map_pos = sub_worm.game_pos + direction * -1 #* sub_worm.action_distance
-	if not sub_target_map_pos in map_point_list:
+	#if not sub_target_map_pos in map_point_list:
+		#return 0
+	#if not check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos):
+		#return 0
+	
+#region Test
+	# TEST 其中一隻蠑螈能走 就能走
+	var _have_point = target_map_pos in map_point_list
+	var _have_edge = check_edge_is_passable(main_worm.game_pos, target_map_pos)
+	
+	var _s_have_point = sub_target_map_pos in map_point_list
+	var _s_have_edge = check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos)
+	if (!_have_point or !_have_edge) and (!_s_have_point or !_s_have_edge):
 		return 0
-	if not check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos):
-		return 0
+#endregion
+	
+	
 	
 	# 相撞
 	if target_map_pos == sub_target_map_pos \
@@ -134,11 +147,20 @@ func check_edge_is_passable(p1, p2):
 func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操作 (不應該被直接調用)
 	move_path.append(target_map_pos) # NOTE 紀錄路徑
 	
-	change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
-	main_worm.start_move(target_map_pos)
+#region Test
+	var _have_point = target_map_pos in point_manager.get_used_cells()
+	var _have_edge = check_edge_is_passable(main_worm.game_pos, target_map_pos)
+	var _s_have_point = sub_target_map_pos in point_manager.get_used_cells()
+	var _s_have_edge = check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos)
+
+	if (_have_point and _have_edge):
+		change_edge_available_count(main_worm.game_pos, target_map_pos, 1)
+		main_worm.start_move(target_map_pos)
 	
-	change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
-	sub_worm.start_move(sub_target_map_pos)
+	if (_s_have_point and _s_have_edge):
+		change_edge_available_count(sub_worm.game_pos, sub_target_map_pos, 1)
+		sub_worm.start_move(sub_target_map_pos)
+#endregion
 	GameManager.start_move()
 
 func unmove(target_map_pos, sub_target_map_pos): # NOTE move 的反向操作 (不應該被直接調用)
@@ -170,18 +192,13 @@ func Do( direction:Vector2i ):
 	#_undo_redo.add_undo_property(sub_worm.body, "points", sub_worm.body.points)
 	_undo_redo.commit_action()
 
-func Reset(): # TODO
-	pass
+
 func Undo(): 
 	if _undo_redo.has_undo():
 		_undo_redo.undo()
 		SoundManager.play_effect(SoundManager.EFFECT.ROAR)
 	else:
 		SoundManager.play_effect(SoundManager.EFFECT.BLOCK)
-#func Redo(): # TODO
-	#if _undo_redo.has_redo():
-		#_undo_redo.redo()
-
 
 
 
@@ -197,9 +214,6 @@ func change_edge_available_count(p1, p2, n):
 		return v_edge_manager.change_available_count(edge_game_pos, n)
 
 	return false
-
-
-
 
 func _on_worm_move_finish():
 	if GameManager.is_moving():
