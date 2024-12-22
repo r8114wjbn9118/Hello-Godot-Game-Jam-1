@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 	else:
 		_target.position = lerp(_target.position, _rand_target, 8.0* delta)
 	
-	var time := fmod(Time.get_unix_time_from_system()+_time_offset/2.0, 1.0)
+	var time := fmod((Time.get_unix_time_from_system()+_time_offset)/2.0, 1.0)
 	$"CanvasGroup/直瞳孔".scale.y = blink_curve.sample_baked(time)
 	
 	
