@@ -90,7 +90,7 @@ click={
 [internationalization]
 
 locale/translation_remaps={}
-locale/translations=PackedStringArray("res://text/text.en.translation")
+locale/translations=PackedStringArray("res://text/text.en.translation", "res://text/text.zh_TW.translation")
 locale/locale_filter_mode=0
 locale/country_filter=["CN", "HK", "TW"]
 locale/language_filter=["zh"]

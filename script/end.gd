@@ -1,8 +1,17 @@
 extends Control
 
-@onready var img = %img
+@export var story_img:Array[Texture2D]
+@export var story_count:int = 5
+var story_index = 0
 
-var state = "wait"
+@onready var img = %img
+@onready var text = %text
+@onready var anim = %anim
+
+var state = "wait" :
+	set(value):
+		state = value
+		printt("Start", state)
 var original_img_pos
 var shock_offset
 var timer
@@ -32,15 +41,27 @@ func shock(delta):
 	var offset_y = window_size.y * (3 - sqrt(9 - (timer - 3) ** 2)) if timer >= 3 else 0
 	img.position = original_img_pos + Vector2(offset_x, offset_y)
 	if timer >= 3:
-		$anim.play("fadein")
+		anim.play("fadein")
 		
 
 
-func start_show():
-	state = "show"
-	%text.text = tr("end_1")
-	$anim.play("story01")
-	$anim.animation_finished.connect(End)
+func start_story():
+	print(OS.get_locale())
+	state = "story"
+	story_index = 0
+	img.position = Vector2.ZERO
+	await get_tree().create_timer(5).timeout
+	story()
+
+func story():
+	if story_index < story_count:
+		text.text = tr("end_{0}".format([story_index + 1]))
+		img.texture = story_img[story_index]
+		await get_tree().create_timer(1).timeout
+		anim.play("story")
+	else:
+		await get_tree().create_timer(15).timeout
+		End()
 
 
 
@@ -48,7 +69,13 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "anim":
 		start_shock()
 	if anim_name == "fadein":
-		start_show()
+		start_story()
+	if anim_name == "story":
+		story_index += 1
+		story()
+	if anim_name == "fade to credit":
+		GameManager.goto_scene("credit")
+		
 
-func End(anim_name: StringName):
-	GameManager.goto_scene("credit")
+func End():
+	anim.play("fade to credit")
