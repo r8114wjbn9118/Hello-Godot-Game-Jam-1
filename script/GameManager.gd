@@ -30,12 +30,12 @@ func goto_level(target:int):
 		return
 		
 	var path = LEVEL[target]
-	printt("GOTO LEVEL", target, path, get_tree().current_scene)
+	printt("GOTO LEVEL", target, path)
 	if path:
 		if current_map:
 			cutscene.old_map = current_map
 			cutscene.new_map = load(path).instantiate()
-			cutscene.start()
+			cutscene.start_change_level()
 		else:
 			get_tree().change_scene_to_file(path)
 			
@@ -55,11 +55,15 @@ var SCENE:Dictionary = {
 func goto_scene(target:String):
 	var path = SCENE.get(target, null)
 	if path:
-		printt("GOTO SCENE ", target, path, get_tree().current_scene)
+		printt("GOTO SCENE ", target, path)
 		current_map = null
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
+		
+func goto_end():
+	_save_data.game_finish = true
+	cutscene.start_goto_end()
 
 #region 玩家行動
 
@@ -134,8 +138,7 @@ func finish_level(n):
 	if not n in _save_data.GetFinishedLevels():
 		_save_data.AddFinishedLevel(n)
 		if is_finish_game():
-			_save_data.game_finish = true
-			goto_scene("end")
+			goto_end()
 		else:
 			goto_level(n + 1)
 	else:

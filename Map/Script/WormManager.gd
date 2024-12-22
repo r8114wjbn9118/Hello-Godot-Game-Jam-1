@@ -64,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			move_input(Vector2i.RIGHT)
 		elif Input.is_action_pressed("ui_down"):
 			move_input(Vector2i.DOWN)
-		elif Input.is_action_pressed("z"):
+		elif Input.is_action_pressed("ui_accept"):
 			Undo()
 			
 func move_input(direction:Vector2i):

@@ -13,6 +13,10 @@ var state = "wait" :
 	set(value):
 		state = value
 		printt("Start", state)
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_pressed("ui_accept"):
+		finish()
 
 func start_story():
 	state = "story"

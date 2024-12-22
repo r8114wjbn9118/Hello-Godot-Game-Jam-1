@@ -1,4 +1,5 @@
 extends Control
+class_name End
 
 @export var story_img:Array[Texture2D]
 @export var story_count:int = 5
@@ -25,6 +26,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if state == "shock":
 		shock(delta)
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_pressed("ui_accept"):
+		finish()
 
 func start_shock():
 	original_img_pos = img.position

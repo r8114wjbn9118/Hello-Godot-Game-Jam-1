@@ -71,6 +71,10 @@ func _ready():
 		v_edge_manager.max_available_count = max_available_count
 		
 		ui.init(level, fg_img)
+		
+		## 一秒通關
+		#await get_tree().create_timer(1).timeout
+		#game_finish()
 
 	# 太大擋住畫面, 編輯時先關閉
 	ui.visible = not Engine.is_editor_hint()
