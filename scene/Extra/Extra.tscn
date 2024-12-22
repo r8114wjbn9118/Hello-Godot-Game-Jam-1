@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbswrcr0qf2si"]
+[gd_scene load_steps=12 format=3 uid="uid://dbswrcr0qf2si"]
 
 [ext_resource type="Script" path="res://scene/Extra/extra.gd" id="1_g3wyy"]
 [ext_resource type="Texture2D" uid="uid://1x7r1s6xa5kl" path="res://image/過關畫面/新_影格1.png" id="1_qcccd"]
 [ext_resource type="Texture2D" uid="uid://lnm55buesn82" path="res://image/過關畫面/新_影格2.png" id="2_itnrs"]
 [ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Map/Eye/EyeAnim.tscn" id="3_t8lg1"]
 [ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="3_uysih"]
+[ext_resource type="Shader" uid="uid://dt5wbgbab1b35" path="res://scene/Extra/Extra.tres" id="5_wa7a6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_au72h"]
+shader = ExtResource("5_wa7a6")
 
 [sub_resource type="Animation" id="Animation_uwi1k"]
 length = 0.001
@@ -321,6 +325,12 @@ show_behind_parent = true
 position = Vector2(41.9948, 448.192)
 color = Color(0, 0.792408, 0.847986, 1)
 polygon = PackedVector2Array(-97.5957, -429.712, 85.0077, -482.636, 90.2812, -388.635)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_au72h")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 unique_name_in_owner = true
