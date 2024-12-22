@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cciudriytvkwi"]
+[gd_scene load_steps=16 format=3 uid="uid://cxferyrve8y47"]
 
 [ext_resource type="Script" path="res://script/start.gd" id="1_okr7h"]
 [ext_resource type="Texture2D" uid="uid://cxqothrvfx6ja" path="res://image/過關畫面/影格2.png" id="2_f4jl4"]

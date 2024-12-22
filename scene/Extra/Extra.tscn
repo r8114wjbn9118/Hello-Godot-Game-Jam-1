@@ -1,14 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbswrcr0qf2si"]
+[gd_scene load_steps=10 format=3 uid="uid://dbswrcr0qf2si"]
 
 [ext_resource type="Script" path="res://scene/Extra/extra.gd" id="1_g3wyy"]
 [ext_resource type="Texture2D" uid="uid://1x7r1s6xa5kl" path="res://image/過關畫面/新_影格1.png" id="1_qcccd"]
 [ext_resource type="Texture2D" uid="uid://lnm55buesn82" path="res://image/過關畫面/新_影格2.png" id="2_itnrs"]
-[ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Map/Eye/EyeAnim.tscn" id="3_t8lg1"]
 [ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="3_uysih"]
-[ext_resource type="Shader" uid="uid://dt5wbgbab1b35" path="res://scene/Extra/Extra.tres" id="5_wa7a6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_au72h"]
-shader = ExtResource("5_wa7a6")
+[ext_resource type="PackedScene" uid="uid://dbraa8twboarj" path="res://scene/Extra/clickableEye/ClickableEye.tscn" id="4_o8k20"]
 
 [sub_resource type="Animation" id="Animation_uwi1k"]
 length = 0.001
@@ -209,6 +205,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("3_uysih")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
@@ -298,18 +295,6 @@ position = Vector2(7.66588, 2.49664)
 color = Color(1, 0.54902, 0.54902, 1)
 polygon = PackedVector2Array(-51.6597, 16.8307, 208.165, -45.1716, 207.324, 88.7847)
 
-[node name="EyeAnim" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
-position = Vector2(472, 50)
-trackMode = true
-
-[node name="EyeAnim2" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
-position = Vector2(278, 441)
-trackMode = true
-
-[node name="EyeAnim3" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
-position = Vector2(652, 434)
-trackMode = true
-
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 66.0
@@ -326,11 +311,14 @@ position = Vector2(41.9948, 448.192)
 color = Color(0, 0.792408, 0.847986, 1)
 polygon = PackedVector2Array(-97.5957, -429.712, 85.0077, -482.636, 90.2812, -388.635)
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
-material = SubResource("ShaderMaterial_au72h")
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ClickableEye" parent="CanvasLayer/Control" instance=ExtResource("4_o8k20")]
+position = Vector2(466, 49)
+
+[node name="ClickableEye2" parent="CanvasLayer/Control" instance=ExtResource("4_o8k20")]
+position = Vector2(714, 457)
+
+[node name="ClickableEye3" parent="CanvasLayer/Control" instance=ExtResource("4_o8k20")]
+position = Vector2(278, 457)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 unique_name_in_owner = true
