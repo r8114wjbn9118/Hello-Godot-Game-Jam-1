@@ -52,7 +52,7 @@ func update_child(point_list:Array[Vector2i]):
 			continue
 
 		var node = eye.instantiate()
-		node.init(self, game_pos)
+		node.get_eye().init(self, game_pos)
 		add_child(node)
 
 
