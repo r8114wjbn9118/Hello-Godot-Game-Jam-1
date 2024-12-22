@@ -15,3 +15,7 @@ func _ready() -> void:
 		var node = button.instantiate()
 		node.Init(i)
 		child.add_child(node)
+
+
+func _on_title_button_button_down() -> void:
+	GameManager.goto_scene("title")
