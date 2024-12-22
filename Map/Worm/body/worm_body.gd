@@ -10,11 +10,13 @@ var color_list = [
 		"head_img": "res://Map/Worm/image/blue_head.png",
 		"body_img": "res://Map/Worm/image/blue_body.png",
 		"leg_color": Color("cfdeff"),
+		"path_color": Color("6e6dec")
 	},
 	{
 		"head_img": "res://Map/Worm/image/pink_head.png",
 		"body_img": "res://Map/Worm/image/pink_body.png",
-		"leg_color": Color("d38fb2")
+		"leg_color": Color("d38fb2"),
+		"path_color": Color("e23d6e")
 	},
 ]
 enum COLOR_TYPE {BLUE = 0, PINK = 1}
@@ -25,6 +27,7 @@ enum COLOR_TYPE {BLUE = 0, PINK = 1}
 		head_img = args.head_img
 		body_img = args.body_img
 		leg_color = args.leg_color
+		path_color = args.path_color
 
 
 var head_img:
@@ -44,6 +47,12 @@ var leg_color:
 		leg_color = value
 		if value is Color:
 			if _bodyLine: _bodyLine.leg_color = value
+
+var path_color:
+	set(value):
+		path_color = value
+		if value is Color:
+			if _pathLine: _pathLine.path_color = value
 
 @onready var point_manager = %Point
 
