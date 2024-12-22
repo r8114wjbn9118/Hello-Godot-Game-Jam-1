@@ -41,10 +41,10 @@ func _enter_anime():
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	
 	
-	
+@export var trackMode:bool = false
 var _time_offset = randf_range(0.0, 30.0)
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or trackMode:
 		_target.global_position = get_global_mouse_position()
 	else:
 		_target.position = lerp(_target.position, _rand_target, 8.0* delta)

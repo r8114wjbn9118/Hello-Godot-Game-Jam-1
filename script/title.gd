@@ -7,6 +7,7 @@ class_name Title
 #@onready var BGM = %BGM
 
 func _ready() -> void:
+	%ExtraButton.visible = GameManager.is_finish_game()
 	%background.texture = GameManager.get_title_background()
 	anim_tree["parameters/conditions/start"] = false
 
@@ -37,3 +38,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 func _on_button_button_down() -> void:
 	anim_tree["parameters/conditions/start"] = true
 	#BGM.stop()
+
+
+func _on_extra_button_button_down() -> void:
+	GameManager.goto_scene("extra")

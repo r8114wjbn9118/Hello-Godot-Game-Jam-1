@@ -52,7 +52,8 @@ var SCENE:Dictionary = {
 	"select": "res://scene/selectLevel.tscn",
 	"start": "res://scene/start.tscn",
 	"end": "res://scene/end.tscn",
-	"credit": "res://scene/Credit.tscn"
+	"credit": "res://scene/Credit.tscn",
+	"extra": "res://scene/Extra/Extra.tscn"
 }
 
 func goto_scene(target:String):
@@ -146,7 +147,7 @@ func finish_level(n):
 		goto_scene("select")
 
 func is_finish_game():
-	return _save_data.GetFinishedLevels().size() == LEVEL.size()
+	return _save_data.GetFinishedLevels().size() == LEVEL.size() or _save_data.game_finish
 
 #endregion
 
