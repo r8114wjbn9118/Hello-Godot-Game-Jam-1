@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cigaq13vi1wux"]
+[gd_scene load_steps=4 format=3 uid="uid://cigaq13vi1wux"]
 
 [ext_resource type="Script" path="res://script/ohno_scene/color_rect.gd" id="1_csksn"]
+[ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="2_vvynr"]
 
 [sub_resource type="Curve" id="Curve_ofyk3"]
-_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.058319, 0.505967), 0.0, 0.0, 0, 0, Vector2(0.113208, 0.114008), 0.0, 0.0, 0, 0, Vector2(0.207547, 0.644786), 0.0, 0.0, 0, 0, Vector2(0.295, 0.10989), -0.137362, -0.137362, 0, 0, Vector2(0.38422, 0.734611), 0.0, 0.0, 0, 0, Vector2(0.485, 0.142857), 0.0, 0.0, 0, 0, Vector2(0.557461, 0.861181), 0.0, 0.0, 0, 0, Vector2(0.63, 0.252747), 0.0, 0.0, 0, 0, Vector2(0.73928, 0.918342), 0.0, 0.0, 0, 0, Vector2(0.8, 0.373626), 0.0, 0.0, 0, 0, Vector2(0.854202, 1), 0.0, 0.0, 0, 0, Vector2(0.926244, 0.387563), 0.0, 0.0, 0, 0, Vector2(0.975986, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.058319, 0.505967), 0.0, 0.0, 0, 0, Vector2(0.118143, 0.353288), 0.0, 0.0, 0, 0, Vector2(0.207547, 0.644786), 0.0, 0.0, 0, 0, Vector2(0.308017, 0.419056), -0.137362, -0.137362, 0, 0, Vector2(0.38422, 0.734611), 0.0, 0.0, 0, 0, Vector2(0.489451, 0.320405), 0.259781, 0.259781, 0, 0, Vector2(0.557461, 0.861181), 0.0, 0.0, 0, 0, Vector2(0.64135, 0.419056), 0.494821, 0.494821, 0, 0, Vector2(0.73928, 0.918342), 0.0, 0.0, 0, 0, Vector2(0.814346, 0.539629), 0.0, 0.0, 0, 0, Vector2(0.854202, 1), 0.0, 0.0, 0, 0, Vector2(0.919831, 0.63828), 0.0, 0.0, 0, 0, Vector2(0.975986, 1), 0.0, 0.0, 0, 0]
 point_count = 14
 
 [node name="Ohno" type="Node2D"]
@@ -29,3 +30,18 @@ grow_vertical = 2
 color = Color(0.705882, 0, 0, 1)
 script = ExtResource("1_csksn")
 curve = SubResource("Curve_ofyk3")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 166.0
+offset_top = 225.0
+offset_right = -181.0
+offset_bottom = -221.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_vvynr")
+theme_override_font_sizes/font_size = 80
+text = "We're exhausted "
