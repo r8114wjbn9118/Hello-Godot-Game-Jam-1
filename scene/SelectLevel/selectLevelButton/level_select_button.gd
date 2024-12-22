@@ -1,11 +1,7 @@
 extends Button
 
 var target_level = 0
-var selected = false:
-	set(value):
-		selected = value
-		$ColorRect2.visible = value
-		
+var selected = false
 var can_select = false
 
 func Init(tolevel:int):

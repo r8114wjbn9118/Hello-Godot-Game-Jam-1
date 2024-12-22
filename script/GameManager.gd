@@ -72,8 +72,16 @@ func goto_scene(target:String):
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
-		
-func start_end():
+
+func start_goto_select():
+	var s = prohibit_action(true)
+	# -1 = worm正在行動
+	if s == -1:
+		return
+	print(s)
+	cutscene.start_goto_select()
+
+func start_goto_end():
 	_save_data.SetGameFinish(true)
 	cutscene.start_goto_end()
 
@@ -150,7 +158,7 @@ func finish_level():
 	if not current_level in _save_data.GetFinishedLevels():
 		_save_data.AddFinishedLevel(current_level)
 		if is_finish_game():
-			start_end()
+			start_goto_end()
 		else:
 			goto_level(current_level + 1)
 	else:

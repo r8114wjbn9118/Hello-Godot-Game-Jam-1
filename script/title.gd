@@ -26,7 +26,8 @@ func goto():
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fadeout":
-		SoundManager.play_BGM(SoundManager.BGM.GMAE_MENU)
+		if SoundManager.current_BGM != SoundManager.BGM.ED:
+			SoundManager.play_BGM(SoundManager.BGM.GMAE_MENU)
 		#BGM.play()
 	if anim_name == "fadein":
 		goto()

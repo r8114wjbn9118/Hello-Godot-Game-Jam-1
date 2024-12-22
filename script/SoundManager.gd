@@ -33,11 +33,14 @@ func _ready():
 	_effect_player.bus = "EffectBus"
 	add_child(_effect_player)
 
+var current_BGM
 var _BGM_player:AudioStreamPlayer
 func play_BGM(str:BGM):
+	current_BGM = str
 	_BGM_player.stream = _BMG_list[str]
 	_BGM_player.play()
 func stop():
+	current_BGM = null
 	_BGM_player.stop()
 
 var _effect_player:AudioStreamPlayer

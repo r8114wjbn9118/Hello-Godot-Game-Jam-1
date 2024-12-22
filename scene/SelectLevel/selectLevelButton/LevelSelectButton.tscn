@@ -19,13 +19,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.247059, 0.207843, 0.541176)
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-visible = false
-clip_children = 2
-z_index = -1
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 52.0
-offset_bottom = 52.0

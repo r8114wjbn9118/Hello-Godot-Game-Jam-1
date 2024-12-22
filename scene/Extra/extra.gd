@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 
 
 func _on_ed_button_button_down() -> void:
-	GameManager.goto_scene("end")
+	GameManager.start_goto_end()
 
 
 func _on_bgm_ingame_button_button_down() -> void:

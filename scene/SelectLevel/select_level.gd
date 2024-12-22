@@ -41,9 +41,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func change_select_target(n:int):
 	var target = select_index + n
 	if target > 0 and target < button_list.size():
-		button_list[select_index].selected = false
 		select_index = target
-		button_list[select_index].selected = true
+		button_list[select_index].grab_focus()
 	else:
 		## 發出失敗音效
 		pass

@@ -57,10 +57,14 @@ var sub_worm_rotate:float
 func _ready():
 	update() ## WARNING 必須更新一次, 否則可能會出現問題
 
+	# 太大擋住畫面, 編輯時先關閉
+	ui.visible = not Engine.is_editor_hint()
+
 	if Engine.is_editor_hint():
 		main_worm_rotate = worm_manager.main_worm.rotation
 	else:
 		GameManager.current_map = self if get_parent() == get_tree().root else get_parent()
+		GameManager.prohibit_action(false)
 		
 		#SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
 		worm_manager.initialize(max_move_distance)
@@ -75,15 +79,16 @@ func _ready():
 		#await get_tree().create_timer(1).timeout
 		#game_finish()
 
-	# 太大擋住畫面, 編輯時先關閉
-	ui.visible = not Engine.is_editor_hint()
-
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		timer += delta
 		if timer > .5:
 			timer = 0
 			update()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_pressed("ui_cancel"):
+		GameManager.start_goto_select()
 
 #region 地圖編輯器
 
