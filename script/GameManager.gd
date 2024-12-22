@@ -1,9 +1,12 @@
 extends Node
 
+@onready var cutscene = preload("res://Map/cutscene.tscn").instantiate()
+
 var current_map
 
 func _ready() -> void:
 	_load_save_data()
+	add_child(cutscene)
 
 
 var LEVEL:Array = [null, ## 0留空
@@ -27,19 +30,12 @@ func goto_level(target:int):
 		return
 		
 	var path = LEVEL[target]
+	printt("GOTO LEVEL", target, path, get_tree().current_scene)
 	if path:
-		
 		if current_map:
-			var cutscene = await load("res://Map/cutscene.tscn").instantiate()
-			var map = load(path).instantiate()
-			cutscene.init(current_map, map)
-			map.visible = false
-			
-
-			get_tree().root.add_child(map)
-			get_tree().root.add_child(cutscene)
-			printt("GOTO LEVEL:", target, map.name, map, current_map.name, current_map)
-			
+			cutscene.old_map = current_map
+			cutscene.new_map = load(path).instantiate()
+			cutscene.start()
 		else:
 			get_tree().change_scene_to_file(path)
 			
@@ -59,7 +55,7 @@ var SCENE:Dictionary = {
 func goto_scene(target:String):
 	var path = SCENE.get(target, null)
 	if path:
-		printt("GOTO SCENE ", target, path)
+		printt("GOTO SCENE ", target, path, get_tree().current_scene)
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))
@@ -136,10 +132,8 @@ func finish_level(n):
 	print_rich("[color=green]Level {0} Clear ![/color]".format([n]))
 	if not n in _save_data.GetFinishedLevels():
 		_save_data.AddFinishedLevel(n)
-		_save_data.SaveSelf()
 		if is_finish_game():
 			_save_data.game_finish = true
-			_save_data.SaveSelf()
 			goto_scene("end")
 		else:
 			goto_level(n + 1)
@@ -151,7 +145,7 @@ func is_finish_game():
 
 #endregion
 
-#region 新建程式碼區域
+#region Anim
 
 func is_finished_anim(anim_name:String):
 	return _save_data.AnimIsFinished(anim_name)

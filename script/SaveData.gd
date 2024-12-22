@@ -2,8 +2,14 @@ class_name SaveData extends Resource
 
 #region Level
 
-@export var finished_level:Array[int] = [0] #NOTE 0有特殊意義 關聯LevelSelect
-@export var game_finish:bool = false # NOTE 通關
+@export var finished_level:Array[int] = [0,
+#1,2,3,4,5,6,7,8
+] #NOTE 0有特殊意義 關聯LevelSelect
+@export var game_finish:bool = false: # NOTE 通關
+	set(value):
+		game_finish = value
+		SaveSelf()
+
 func AddFinishedLevel(level:int) -> void:
 	finished_level.append(level)
 	SaveSelf()
@@ -37,13 +43,13 @@ const SAVE_PATH = "user://save.tres"
 func _init() -> void:
 	if not ResourceLoader.exists(SAVE_PATH):
 		SaveSelf()
-		printt("SaveSelf", )
 	
 
 func SaveSelf()-> void:
-	print(ResourceSaver.save(self, SAVE_PATH))
+	printt("Save", error_string(ResourceSaver.save(self, SAVE_PATH)))
 	
 static func LoadSelf()-> SaveData:
+	return SaveData.new()
 	var file = ResourceLoader.load(SAVE_PATH, "SaveData")
 	if !file: # 加載失敗返回新實例
 		print_rich("[color=red]存檔加載失敗返回新實例[/color]")

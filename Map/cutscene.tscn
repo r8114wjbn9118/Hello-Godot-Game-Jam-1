@@ -9,6 +9,8 @@ shader_parameter/min_len = 0.0
 shader_parameter/max_len = 1.0
 
 [node name="fade" type="CanvasLayer"]
+layer = 2
+visible = false
 script = ExtResource("1_qnt66")
 
 [node name="ColorRect" type="ColorRect" parent="."]
