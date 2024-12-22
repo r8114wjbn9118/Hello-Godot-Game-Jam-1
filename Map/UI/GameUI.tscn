@@ -96,6 +96,7 @@ grow_vertical = 2
 
 [node name="LevelSelectButton" type="Button" parent="Control/GamePanel/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "LevelSelect"
 
 [node name="Level" type="RichTextLabel" parent="Control/GamePanel/VBoxContainer"]
