@@ -16,7 +16,7 @@ var state = "wait" :
 
 func start_story():
 	state = "story"
-	story_index = 2
+	story_index = 0
 	img.position = Vector2.ZERO
 	await get_tree().create_timer(1).timeout
 	story()
