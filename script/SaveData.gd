@@ -5,7 +5,7 @@ class_name SaveData extends Resource
 @export var finished_level:Array[int] = [0,
 #1,2,3,4,5,6,7,8
 ] #NOTE 0有特殊意義 關聯LevelSelect
-@export var game_finish:bool = true: # NOTE 通關
+@export var game_finish:bool = false: # NOTE 通關
 	set(value):
 		game_finish = value
 		SaveSelf()
