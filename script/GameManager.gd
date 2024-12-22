@@ -151,10 +151,8 @@ func is_finished_anim(anim_name:String):
 	return _save_data.AnimIsFinished(anim_name)
 
 func finish_anim(anim_name:String):
-	print(is_finished_anim(anim_name))
 	if not is_finished_anim(anim_name):
 		_save_data.AddFinishedAnim(anim_name)
-	print(is_finished_anim(anim_name))
 
 #endregion
 

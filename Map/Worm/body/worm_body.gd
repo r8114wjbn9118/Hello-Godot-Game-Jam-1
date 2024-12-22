@@ -3,7 +3,7 @@ class_name Worm extends Node2D
 
 signal move_finish_signal()
 
-@export var move_time:float = 0.5 # TEST 替代 move_speed
+@export var move_time:float = 0.5
 
 var color_list = [
 	{
@@ -47,10 +47,7 @@ var leg_color:
 
 @onready var point_manager = %Point
 
-
-var move_speed:float = 200
 var max_move_distance:int = 8
-
 var game_pos:Vector2i
 
 #var action_distance:int = 1 # 行動距離
@@ -85,15 +82,6 @@ func set_pos(game_pos): # NOTE 由UNDO調用
 	rotation = Vector2(self.game_pos - game_pos).angle() - PI / 2
 	self.game_pos = game_pos
 	global_position = point_manager.get_tile_position(game_pos)
-
-#func move(delta):
-	#var distance = move_speed * delta
-
-	#position += position.direction_to(target_pos) * distance
-	#_pathLine.move(position)
-	#_bodyLine.move(position)
-	
-	#return not reach_destination(position, target_pos, distance)
 
 func _make_tween(target_pos):
 	var tween = get_tree().create_tween()
@@ -130,12 +118,6 @@ func Undo():
 	if _undoRedo.has_undo():
 		_undoRedo.undo()
 #endregion
-
-#func reach_destination(a, b):
-	#if a.distance_squared_to(b) < move_speed / 100:
-		#position = b
-		#return true
-	#return false
 
 func start_move(target_game_pos):
 	var target_pos = point_manager.get_tile_position(target_game_pos)

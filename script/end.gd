@@ -37,7 +37,6 @@ func shock(delta):
 
 
 func start_show():
-	print("start_show")
 	state = "show"
 	%text.text = tr("end_1")
 	$anim.play("story01")

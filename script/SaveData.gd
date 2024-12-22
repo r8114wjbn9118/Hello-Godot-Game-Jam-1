@@ -49,7 +49,6 @@ func SaveSelf()-> void:
 	printt("Save", error_string(ResourceSaver.save(self, SAVE_PATH)))
 	
 static func LoadSelf()-> SaveData:
-	return SaveData.new()
 	var file = ResourceLoader.load(SAVE_PATH, "SaveData")
 	if !file: # 加載失敗返回新實例
 		print_rich("[color=red]存檔加載失敗返回新實例[/color]")

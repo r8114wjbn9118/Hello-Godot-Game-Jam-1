@@ -114,7 +114,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(5, 15, 25, 35, 45, 55),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [ExtResource("5_awcjw"), ExtResource("6_q8b5m"), ExtResource("7_ave6w"), ExtResource("8_bbp50"), ExtResource("9_n7n54"), ExtResource("10_1rq3e")]
 }
 tracks/1/type = "value"

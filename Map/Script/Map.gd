@@ -16,10 +16,6 @@ class_name Map
 	set(value):
 		offset = value
 		update_tile()
-@export_range(1, 100, 1) var tile_scale:float = 10:
-	set(value):
-		tile_scale = value
-		update_tile()
 		
 @export var fg_img:GameManager.FG_TYPE:
 	set(value):
@@ -31,7 +27,7 @@ class_name Map
 @export_group("遊戲")
 
 @export_subgroup("路徑")
-## 可通過次數
+## 可通過次數(-1=無限)
 @export_range(-1, 1000) var max_available_count:int = -1
 
 @export_subgroup("目標")
@@ -41,8 +37,6 @@ class_name Map
 @export_range(-1, 1000) var max_check_finish_distance:int = 1
 
 @export_subgroup("角色")
-## 移動速度
-@export_range(0, 1000) var move_speed:int = 200
 ## 可移動次數
 @export_range(1, 1000) var max_move_distance:int = 7
 #endregion
@@ -70,7 +64,7 @@ func _ready():
 		main_worm_rotate = worm_manager.main_worm.rotation
 	else:
 		SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
-		worm_manager.initialize(move_speed, max_move_distance)
+		worm_manager.initialize(max_move_distance)
 		worm_manager.move_finish_signal.connect(_on_worm_move_finish)
 		
 		h_edge_manager.max_available_count = max_available_count
@@ -80,7 +74,6 @@ func _ready():
 
 	# 太大擋住畫面, 編輯時先關閉
 	ui.visible = not Engine.is_editor_hint()
-	#%Light.visible = not Engine.is_editor_hint()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -88,6 +81,7 @@ func _process(delta: float) -> void:
 		if timer > .5:
 			timer = 0
 			update()
+
 #region 地圖編輯器
 
 func update():
@@ -100,21 +94,12 @@ func update_tile():
 		ProjectSettings.get_setting("display/window/size/viewport_height")
 	)
 	var spacing = Vector2.ONE * 100
-	var new_scale = Vector2.ONE * tile_scale / 10
 	
 	var start_pos:Vector2 = offset
 	# 根據點(Point)的最大可放置數量自動調整邊距, 盡量保持置中
 	if auto_margin:
-		var new_spacing = floor(spacing * new_scale)
-		var grid = floor((window_size - Vector2(offset)) / new_spacing)
-		printt("Grid", grid, tile_scale)
-		start_pos = Vector2(window_size - (new_spacing * Vector2(grid))) / 2
-	
-	## 可能需要增加對scale的調整
-	if %Tile != null:
-		%Tile.scale = new_scale
-	if worm_manager != null:
-		worm_manager.scale = new_scale
+		var grid = floor((window_size - Vector2(offset)) / spacing)
+		start_pos = Vector2(window_size - (spacing * Vector2(grid))) / 2
 
 	if point_manager != null:
 		point_manager.tile_set.tile_size = spacing
@@ -162,6 +147,7 @@ func update_child():
 
 #endregion
 
+#region check_finish
 
 ## 廣度搜尋, 以每個眼(Eye)為起點開始檢查邊是否已完成
 func check_finish():
@@ -241,6 +227,8 @@ func check_finish():
 		if not need_check_list.is_empty():
 			return false
 	return true
+
+#endregion
 
 func _on_worm_move_finish():
 	if check_finish():

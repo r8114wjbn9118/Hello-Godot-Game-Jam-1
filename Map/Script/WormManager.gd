@@ -12,11 +12,6 @@ signal move_finish_signal()
 
 var move_path = []
 
-var move_speed:float = 200:
-	set(value):
-		main_worm.move_speed = value
-		sub_worm.move_speed = value
-		move_speed = value
 var max_move_distance:int = 8:
 	set(value):
 		main_worm.max_move_distance = value
@@ -31,8 +26,7 @@ func _ready() -> void:
 	sub_worm.move_finish_signal.connect(_on_worm_move_finish)
 	
 
-func initialize(move_speed, max_move_distance):
-	self.move_speed = move_speed
+func initialize(max_move_distance):
 	self.max_move_distance = max_move_distance
 	main_worm.init()
 	sub_worm.init()
