@@ -93,34 +93,6 @@ tracks/6/keys = {
 "values": [Vector2(66, 471)]
 }
 
-[sub_resource type="Animation" id="Animation_gpgno"]
-resource_name = "in"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Background:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("1_qcccd"), ExtResource("2_itnrs")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Control/Background:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1.53333, 1.76667, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_rdess"]
 resource_name = "button_in"
 capture_included = true
@@ -183,6 +155,34 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1076, 234), Vector2(66, 471)]
+}
+
+[sub_resource type="Animation" id="Animation_gpgno"]
+resource_name = "in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_qcccd"), ExtResource("2_itnrs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.53333, 1.76667, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_no3hk"]
@@ -300,14 +300,10 @@ trackMode = true
 
 [node name="EyeAnim2" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
 position = Vector2(278, 441)
-rotation = -0.00047862
-scale = Vector2(1.00015, 1.00015)
 trackMode = true
 
 [node name="EyeAnim3" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
 position = Vector2(652, 434)
-rotation = -0.0169367
-scale = Vector2(1.00539, 1.00539)
 trackMode = true
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
