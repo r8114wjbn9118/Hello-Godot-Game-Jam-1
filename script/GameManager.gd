@@ -56,6 +56,7 @@ func goto_scene(target:String):
 	var path = SCENE.get(target, null)
 	if path:
 		printt("GOTO SCENE ", target, path, get_tree().current_scene)
+		current_map = null
 		get_tree().change_scene_to_file(path)
 	else:
 		printerr('GameManager.goto_scene("{0}"): 無效目標'.format([target]))

@@ -14,7 +14,7 @@
 [node name="Map" type="Node2D"]
 script = ExtResource("1_anpjl")
 level = 1
-max_move_distance = 1000
+max_move_distance = 1
 
 [node name="Tile" type="Node2D" parent="."]
 unique_name_in_owner = true

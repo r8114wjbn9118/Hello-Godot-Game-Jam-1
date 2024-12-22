@@ -6,6 +6,7 @@
 
 [node name="Map" parent="." instance=ExtResource("1_atjj2")]
 level = 4
+fg_img = 1
 max_move_distance = 20
 
 [node name="HEdge" parent="Map/Tile" index="0"]
