@@ -29,13 +29,12 @@ func init(eye_manager, game_pos):
 
 @export var s_scale:float = 8.0
 func _ready() -> void:
-	_enter_anime()
+	_enter_anime(2.5)
 	($CanvasGroup.material as ShaderMaterial).\
 		set_shader_parameter("s_scale", s_scale)
 	
 	
-func _enter_anime():
-	const time = 2.5
+func _enter_anime(time:float):
 	scale = Vector2.ZERO
 	rotation = PI
 	var tween := get_tree().create_tween()
@@ -44,7 +43,17 @@ func _enter_anime():
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property(self, "rotation", 0.0, time)\
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	
+
+func _exit_anime(time:float):
+	var tween := get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2.ZERO, time)\
+		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(self, "rotation", PI, time)\
+		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
+
+
 	
 @export var trackMode:bool = false
 var _time_offset = randf_range(0.0, 30.0)
