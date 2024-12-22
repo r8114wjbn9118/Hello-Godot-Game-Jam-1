@@ -32,10 +32,14 @@ func story():
 		
 func start_eye():
 	var node := preload("res://Map/Eye/EyeAnim.tscn").instantiate()
+	node.position = Vector2(get_tree().root.size) / 2
 	add_child(node)
 	node._enter_anime(0.5)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	node._exit_anime(0.5)
+	await get_tree().create_timer(0.5).timeout
+	node.queue_free()
+	End()
 
 func _on_anim_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "start":
