@@ -22,7 +22,7 @@ func _on_click():
 	node._exit_anime(1.5)
 	await get_tree().create_timer(3.0).timeout
 	node._enter_anime(1.5)
-	await  get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(1.5).timeout
 	clicking = false
 	
 	

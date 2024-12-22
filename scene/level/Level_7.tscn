@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=4 uid="uid://b6mjobw6k0e56"]
+[gd_scene load_steps=2 format=4 uid="uid://b7k33f83fa2m6"]
 
-[ext_resource type="PackedScene" uid="uid://5jr077ljxgwi" path="res://Map/Map.tscn" id="1_kx2gg"]
+[ext_resource type="PackedScene" uid="uid://5jr077ljxgwi" path="res://Map/Map.tscn" id="1_1y58e"]
 
 [node name="Level7" type="Node2D"]
 
-[node name="Map" parent="." instance=ExtResource("1_kx2gg")]
+[node name="Map" parent="." instance=ExtResource("1_1y58e")]
 level = 7
 fg_img = 3
-max_move_distance = 20
+max_move_distance = 15
 
 [node name="HEdge" parent="Map/Tile" index="0"]
 tile_map_data = PackedByteArray("AAAAAAAAAQACAAQAAAAAAAEAAQACAAQAAAAAAAIAAQACAAQAAAAAAAQAAQACAAQAAAAAAAUAAQACAAQAAAABAAEAAQACAAQAAAABAAIAAQACAAQAAAABAAQAAQACAAQAAAACAAEAAQACAAQAAAACAAIAAQACAAQAAAACAAMAAQACAAQAAAACAAQAAQACAAQAAAADAAEAAQACAAQAAAADAAIAAQACAAQAAAADAAMAAQACAAQAAAADAAQAAQACAAQAAAADAAUAAQACAAQAAAAEAAAAAQACAAQAAAAEAAEAAQACAAQAAAAEAAIAAQACAAQAAAAEAAMAAQACAAQAAAAEAAQAAQACAAQAAAAEAAUAAQACAAQAAAAFAAAAAQACAAQAAAAFAAEAAQACAAQAAAAFAAIAAQACAAQAAAAFAAMAAQACAAQAAAAFAAQAAQACAAQAAAAFAAUAAQACAAQAAAAAAAMAAQACAAQAAAABAAMAAQACAAQAAAA=")

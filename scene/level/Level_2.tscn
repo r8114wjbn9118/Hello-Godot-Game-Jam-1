@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=4 uid="uid://c1rqvg41xr0og"]
 
-[ext_resource type="PackedScene" uid="uid://5jr077ljxgwi" path="res://Map/Map.tscn" id="1_c10sl"]
+[ext_resource type="PackedScene" uid="uid://5jr077ljxgwi" path="res://Map/Map.tscn" id="1_isk5t"]
 
 [node name="Level_2" type="Node2D"]
 
-[node name="Map" parent="." instance=ExtResource("1_c10sl")]
+[node name="Map" parent="." instance=ExtResource("1_isk5t")]
 level = 2
 max_move_distance = 20
 
