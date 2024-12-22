@@ -1,9 +1,97 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbswrcr0qf2si"]
+[gd_scene load_steps=10 format=3 uid="uid://dbswrcr0qf2si"]
 
 [ext_resource type="Script" path="res://scene/Extra/extra.gd" id="1_g3wyy"]
 [ext_resource type="Texture2D" uid="uid://1x7r1s6xa5kl" path="res://image/過關畫面/新_影格1.png" id="1_qcccd"]
 [ext_resource type="Texture2D" uid="uid://lnm55buesn82" path="res://image/過關畫面/新_影格2.png" id="2_itnrs"]
 [ext_resource type="PackedScene" uid="uid://utmygxugx6ap" path="res://Map/Eye/EyeAnim.tscn" id="3_t8lg1"]
+[ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="3_uysih"]
+
+[sub_resource type="Animation" id="Animation_uwi1k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_qcccd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Control/EDButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(836, 111)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Control/BGM_ingame_Button:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 324)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Control/BGM_game_menu_Button:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(65, 94)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Control/SongButton:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(739, 283)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Control/Button:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(66, 471)]
+}
 
 [sub_resource type="Animation" id="Animation_gpgno"]
 resource_name = "in"
@@ -33,36 +121,74 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_uwi1k"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_rdess"]
+resource_name = "button_in"
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Background:texture")
+tracks/0/path = NodePath("%Control/EDButton:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_qcccd")]
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 2,
+"values": [Vector2(1092, 66), Vector2(836, 111)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control/Background:modulate")
+tracks/1/path = NodePath("%Control/BGM_ingame_Button:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(-272, 434), Vector2(30, 324)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Control/BGM_game_menu_Button:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-241, -27), Vector2(65, 94)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Control/SongButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1021, 353), Vector2(739, 283)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Control/Button:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1076, 234), Vector2(66, 471)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_no3hk"]
 _data = {
 "RESET": SubResource("Animation_uwi1k"),
+"button_in": SubResource("Animation_rdess"),
 "in": SubResource("Animation_gpgno")
 }
 
@@ -79,6 +205,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_uysih")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -98,20 +225,117 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_qcccd")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control"]
+[node name="EDButton" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 124.0
-offset_top = 67.0
-offset_right = 153.0
-offset_bottom = 98.0
+offset_left = 836.0
+offset_top = 111.0
+offset_right = 904.0
+offset_bottom = 156.0
+rotation = -0.176069
+focus_mode = 0
+theme = ExtResource("3_uysih")
 text = "ED"
 
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/EDButton"]
+show_behind_parent = true
+position = Vector2(-142.366, -181.747)
+rotation = 0.176069
+color = Color(1, 0.55, 0.55, 1)
+polygon = PackedVector2Array(251, 104, 268, 222, 100, 187)
+
+[node name="BGM_ingame_Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 324.0
+offset_right = 188.0
+offset_bottom = 362.0
+rotation = -0.260049
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+text = "BGM:in_game"
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/BGM_ingame_Button"]
+show_behind_parent = true
+position = Vector2(142.638, -193.841)
+rotation = 0.29501
+color = Color(1, 0.54902, 0.54902, 1)
+polygon = PackedVector2Array(-106.835, 206.861, -44.4802, 301.739, 146.066, 170.999)
+
+[node name="BGM_game_menu_Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 94.0
+offset_right = 263.0
+offset_bottom = 132.0
+rotation = 0.348375
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+text = "BGM:game_menu"
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/BGM_game_menu_Button"]
+show_behind_parent = true
+color = Color(1, 0.54902, 0.54902, 1)
+polygon = PackedVector2Array(6.25665, -50.1483, -20.7904, 74.5772, 253.992, 22.6555)
+
+[node name="SongButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 739.0
+offset_top = 283.0
+offset_right = 960.0
+offset_bottom = 323.0
+rotation = 0.204297
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+text = "Eyes of the Dragon"
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/SongButton"]
+show_behind_parent = true
+position = Vector2(7.66588, 2.49664)
+color = Color(1, 0.54902, 0.54902, 1)
+polygon = PackedVector2Array(-51.6597, 16.8307, 208.165, -45.1716, 207.324, 88.7847)
+
 [node name="EyeAnim" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
-position = Vector2(468, 43)
+position = Vector2(472, 50)
 trackMode = true
+
+[node name="EyeAnim2" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
+position = Vector2(278, 441)
+rotation = -0.00047862
+scale = Vector2(1.00015, 1.00015)
+trackMode = true
+
+[node name="EyeAnim3" parent="CanvasLayer/Control" instance=ExtResource("3_t8lg1")]
+position = Vector2(652, 434)
+rotation = -0.0169367
+scale = Vector2(1.00539, 1.00539)
+trackMode = true
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 471.0
+offset_right = 193.0
+offset_bottom = 503.0
+rotation = -0.158019
+theme_override_font_sizes/font_size = 20
+text = "Back To Title"
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Control/Button"]
+show_behind_parent = true
+position = Vector2(41.9948, 448.192)
+color = Color(0, 0.792408, 0.847986, 1)
+polygon = PackedVector2Array(-97.5957, -429.712, 85.0077, -482.636, 90.2812, -388.635)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_no3hk")
 }
+playback_auto_capture_transition_type = 5
+playback_auto_capture_ease_type = 1
+
+[connection signal="button_down" from="CanvasLayer/Control/EDButton" to="." method="_on_ed_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/BGM_ingame_Button" to="." method="_on_bgm_ingame_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/BGM_game_menu_Button" to="." method="_on_bgm_game_menu_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/SongButton" to="." method="_on_song_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/Button" to="." method="_on_button_button_down"]

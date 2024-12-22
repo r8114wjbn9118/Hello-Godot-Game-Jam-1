@@ -26,18 +26,23 @@ func init(eye_manager, game_pos):
 	self.game_pos = game_pos
 	position = eye_manager.map_to_local(game_pos)
 
+
+@export var s_scale:float = 8.0
 func _ready() -> void:
 	_enter_anime()
+	($CanvasGroup.material as ShaderMaterial).\
+		set_shader_parameter("s_scale", s_scale)
+	
 	
 func _enter_anime():
 	const time = 2.5
 	scale = Vector2.ZERO
 	rotation = PI
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "scale", Vector2(1.0, 1.0), time)\
+	tween.tween_property(self, "scale", Vector2.ONE, time)\
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation", 0.0, time)\
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(self, "rotation", 0.0, time)\
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	
 	
@@ -63,9 +68,6 @@ func _process(delta: float) -> void:
 		set_shader_parameter("pup_offset", (offset/2.0 * -1.0) + Vector2(0.5, 0.5))
 	($CanvasGroup.material as ShaderMaterial).\
 		set_shader_parameter("world_position", global_position)
-
-
-
 
 
 
