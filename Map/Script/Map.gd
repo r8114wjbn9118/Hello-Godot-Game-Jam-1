@@ -155,7 +155,7 @@ func update_child():
 
 ## 廣度搜尋, 以每個眼(Eye)為起點開始檢查邊是否已完成
 func check_finish():
-	var eye_game_pos_list:Array[Vector2i] = eye_manager.get_game_pos_list()
+	var eye_game_pos_list:Array[Vector2i] = eye_manager.eye_game_pos_list
 	var space_game_pos_list:Array[Vector2i] = eye_manager.get_used_cells()
 	var h_closed_edge:Array[Vector2i] = h_edge_manager.get_closed_edge()
 	var v_closed_edge:Array[Vector2i] = v_edge_manager.get_closed_edge()
