@@ -57,12 +57,13 @@ var main_worm_rotate:float
 var sub_worm_rotate:float
 
 func _ready():
-	GameManager.current_map = self if get_parent() == get_tree().root else get_parent()
 	update() ## WARNING 必須更新一次, 否則可能會出現問題
 
 	if Engine.is_editor_hint():
 		main_worm_rotate = worm_manager.main_worm.rotation
 	else:
+		GameManager.current_map = self if get_parent() == get_tree().root else get_parent()
+		
 		#SoundManager.play_BGM(SoundManager.BGM.IN_GAME)
 		worm_manager.initialize(max_move_distance)
 		worm_manager.move_finish_signal.connect(_on_worm_move_finish)

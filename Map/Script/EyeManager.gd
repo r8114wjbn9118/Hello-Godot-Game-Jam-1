@@ -20,7 +20,6 @@ func _ready() -> void:
 	for child in get_children():
 		child.queue_free()
 
-
 func need_update_child():
 	if super.need_update_child():
 		return true
@@ -52,7 +51,7 @@ func update_child(point_list:Array[Vector2i]):
 			continue
 
 		var node = eye.instantiate()
-		node.get_eye().init(self, game_pos)
+		node.init(self, game_pos)
 		add_child(node)
 
 
