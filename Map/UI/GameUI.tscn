@@ -103,12 +103,13 @@ text = "↑"
 
 [node name="Left" type="Button" parent="Control/InputPanel"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -90.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -45.0
 offset_right = 90.0
-grow_vertical = 0
+offset_bottom = 45.0
+grow_vertical = 2
 focus_mode = 0
 text = "←"
 
@@ -129,15 +130,16 @@ text = "↓"
 
 [node name="Right" type="Button" parent="Control/InputPanel"]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -90.0
-offset_top = -90.0
+offset_top = -45.0
+offset_bottom = 45.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 focus_mode = 0
 text = "→"
 
@@ -147,10 +149,26 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -90.0
-offset_bottom = 90.0
+offset_bottom = 45.0
 grow_horizontal = 0
 focus_mode = 0
 text = "Z"
+
+[node name="OpenInput" type="Button" parent="Control/InputPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+text = "⤡"
+flat = true
 
 [node name="GamePanel" type="Panel" parent="Control"]
 unique_name_in_owner = true
@@ -199,4 +217,5 @@ text = " Move: WASD
 [connection signal="button_down" from="Control/InputPanel/Down" to="." method="_on_down_button_down"]
 [connection signal="button_down" from="Control/InputPanel/Right" to="." method="_on_right_button_down"]
 [connection signal="button_down" from="Control/InputPanel/Undo" to="." method="_on_undo_button_down"]
+[connection signal="button_down" from="Control/InputPanel/OpenInput" to="." method="_on_open_input_button_down"]
 [connection signal="button_down" from="Control/GamePanel/VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_button_down"]

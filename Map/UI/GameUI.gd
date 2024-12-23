@@ -25,8 +25,8 @@ func init(fg_img):
 	%Level.text = "[center][font_size=20][color=green]Level "+str(input.value)+"[/color][/font_size][/center]"
 
 func _ready() -> void:
-	## TEST
-	%InputPanel.visible = not OS.get_model_name() != "GenericDevice"
+	set_move_button_show(GameManager.get_touch())
+
 
 
 func _on_button_button_down() -> void: ## goto level
@@ -57,5 +57,17 @@ func _on_right_button_down() -> void:
 
 func _on_undo_button_down() -> void:
 	move_input.emit("undo")
+
+func _on_open_input_button_down() -> void:
+	var show = GameManager.switch_touch()
+	set_move_button_show(show)
+		
+func set_move_button_show(b:bool = true):
+	var button_list = %InputPanel.get_children()
+	for button in button_list:
+		if button == %OpenInput:
+			continue
+		
+		button.visible = b
 
 #endregion

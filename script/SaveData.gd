@@ -37,6 +37,21 @@ func AnimIsFinished(anim_name:String):
 
 #endregion
 
+#region 其他
+
+@export var touch = OS.get_model_name() != "GenericDevice"
+
+func SetTouch(b:bool):
+	touch = b
+	SaveSelf()
+
+func SwitchTouch():
+	SetTouch(not touch)
+	return touch
+
+#endregion
+
+
 #region SaveLoad
 
 const SAVE_PATH = "user://save.tres"
@@ -53,6 +68,7 @@ static func LoadSelf()-> SaveData:
 	print_rich("[color=green]存檔加載成功[/color] data:{")
 	print_rich(file.finished_level)
 	print_rich(file.finished_anim)
+	printt(file.game_finish, file.touch)
 	print("}")
 	return file
 	

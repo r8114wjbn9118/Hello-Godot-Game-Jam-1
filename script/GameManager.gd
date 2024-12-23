@@ -235,3 +235,13 @@ func get_fg_img(target:FG_TYPE):
 	return load(path)
 
 #endregion
+
+#region 觸控
+
+func get_touch():
+	return _save_data.touch
+
+func switch_touch():
+	return _save_data.SwitchTouch()
+
+#endregion
