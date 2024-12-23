@@ -28,11 +28,11 @@ func start_change_level():
 	start(change_level)
 
 func change_level(t):
-	var min = max(0, t - 0.7)
-	var max = t
+	var min_len = max(0, t - 0.7)
+	var max_len = t
 	
-	screen.material.set_shader_parameter("min_len", min)
-	screen.material.set_shader_parameter("max_len", max)
+	screen.material.set_shader_parameter("min_len", min_len)
+	screen.material.set_shader_parameter("max_len", max_len)
 
 	if t >= 0.5:
 		if is_instance_valid(old_map):

@@ -23,7 +23,10 @@ func init(fg_img):
 	input.value = GameManager.current_level
 	self.fg_img = fg_img
 	%Level.text = "[center][font_size=20][color=green]Level "+str(input.value)+"[/color][/font_size][/center]"
-#
+
+func _ready() -> void:
+	## TEST
+	%InputPanel.visible = not OS.get_model_name() != "GenericDevice"
 
 
 func _on_button_button_down() -> void: ## goto level

@@ -22,6 +22,7 @@ theme = ExtResource("3_cqal2")
 
 [node name="Foreground" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +33,7 @@ mouse_filter = 2
 texture = ExtResource("3_6ndgx")
 
 [node name="DEBUGPanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -78,6 +80,8 @@ offset_bottom = 22.0
 text = "DEBUGPanel"
 
 [node name="InputPanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.87451)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 620.0
@@ -94,6 +98,7 @@ offset_left = -45.0
 offset_right = 45.0
 offset_bottom = 90.0
 grow_horizontal = 2
+focus_mode = 0
 text = "↑"
 
 [node name="Left" type="Button" parent="Control/InputPanel"]
@@ -104,6 +109,7 @@ anchor_bottom = 1.0
 offset_top = -90.0
 offset_right = 90.0
 grow_vertical = 0
+focus_mode = 0
 text = "←"
 
 [node name="Down" type="Button" parent="Control/InputPanel"]
@@ -118,6 +124,7 @@ offset_top = -90.0
 offset_right = 45.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
 text = "↓"
 
 [node name="Right" type="Button" parent="Control/InputPanel"]
@@ -131,6 +138,7 @@ offset_left = -90.0
 offset_top = -90.0
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 text = "→"
 
 [node name="Undo" type="Button" parent="Control/InputPanel"]
@@ -141,9 +149,11 @@ anchor_right = 1.0
 offset_left = -90.0
 offset_bottom = 90.0
 grow_horizontal = 0
+focus_mode = 0
 text = "Z"
 
 [node name="GamePanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
