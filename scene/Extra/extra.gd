@@ -4,7 +4,7 @@ class_name Extra extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SoundManager.stop()
-	%AnimationPlayer.play("button_in")
+	#%AnimationPlayer.play("button_in")
 	#%AnimationPlayer.play_with_capture(
 		#"button_in", 1.0, 1.0, 1.0, false, Tween.TRANS_ELASTIC, Tween.EASE_OUT
 	#)

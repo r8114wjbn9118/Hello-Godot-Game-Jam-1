@@ -325,6 +325,7 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_no3hk")
 }
+autoplay = "button_in"
 playback_auto_capture_transition_type = 5
 playback_auto_capture_ease_type = 1
 
