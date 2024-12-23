@@ -9,13 +9,9 @@ class_name Title
 func _ready() -> void:
 	%ExtraButton.visible = GameManager.is_finish_game()
 	%background.texture = GameManager.get_title_background()
+	%StartButton.grab_focus()
 	anim_tree["parameters/conditions/start"] = false
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("ui_accept"):
-		anim_tree["parameters/conditions/start"] = true
-		#BGM.stop()
-	
 func goto():
 	var scene = "select"
 	if not GameManager.is_finished_anim("start"):

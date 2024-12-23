@@ -77,6 +77,72 @@ offset_right = 134.0
 offset_bottom = 22.0
 text = "DEBUGPanel"
 
+[node name="InputPanel" type="Panel" parent="Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 620.0
+offset_top = 300.0
+offset_right = 920.0
+offset_bottom = 500.0
+
+[node name="Up" type="Button" parent="Control/InputPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_right = 45.0
+offset_bottom = 90.0
+grow_horizontal = 2
+text = "↑"
+
+[node name="Left" type="Button" parent="Control/InputPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_right = 90.0
+grow_vertical = 0
+text = "←"
+
+[node name="Down" type="Button" parent="Control/InputPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -90.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "↓"
+
+[node name="Right" type="Button" parent="Control/InputPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -90.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "→"
+
+[node name="Undo" type="Button" parent="Control/InputPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_bottom = 90.0
+grow_horizontal = 0
+text = "Z"
+
 [node name="GamePanel" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -118,4 +184,9 @@ text = " Move: WASD
 
 [connection signal="button_down" from="Control/DEBUGPanel/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="Control/DEBUGPanel/VBoxContainer/ResetDataButton" to="." method="_on_reset_data_button_button_down"]
+[connection signal="button_down" from="Control/InputPanel/Up" to="." method="_on_up_button_down"]
+[connection signal="button_down" from="Control/InputPanel/Left" to="." method="_on_left_button_down"]
+[connection signal="button_down" from="Control/InputPanel/Down" to="." method="_on_down_button_down"]
+[connection signal="button_down" from="Control/InputPanel/Right" to="." method="_on_right_button_down"]
+[connection signal="button_down" from="Control/InputPanel/Undo" to="." method="_on_undo_button_down"]
 [connection signal="button_down" from="Control/GamePanel/VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_button_down"]

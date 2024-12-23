@@ -14,9 +14,18 @@ var state = "wait" :
 		state = value
 		printt("Start", state)
 		
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("ui_accept"):
-		finish()
+func _process(delta: float) -> void:
+	process_skip(delta)
+
+var skip_timer:float = 0.0
+func process_skip(delta):
+	if Input.is_action_pressed("ui_accept") \
+	or Input.is_action_pressed("click"):
+		skip_timer += delta
+		if skip_timer >= 3:
+			finish()
+	else:
+		skip_timer = 0
 
 func start_story():
 	state = "story"

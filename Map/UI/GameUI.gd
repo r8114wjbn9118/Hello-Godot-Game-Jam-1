@@ -1,5 +1,6 @@
 class_name GameUI extends CanvasLayer
 
+signal move_input
 
 func EndAnimeStart():
 	EndAnimeEnd.emit()
@@ -35,3 +36,23 @@ func _on_reset_data_button_button_down() -> void:
 
 func _on_level_select_button_button_down() -> void:
 	GameManager.goto_scene("select")
+
+
+#region 觸控輸入
+
+func _on_up_button_down() -> void:
+	move_input.emit("up")
+
+func _on_left_button_down() -> void:
+	move_input.emit("left")
+
+func _on_down_button_down() -> void:
+	move_input.emit("down")
+
+func _on_right_button_down() -> void:
+	move_input.emit("right")
+
+func _on_undo_button_down() -> void:
+	move_input.emit("undo")
+
+#endregion

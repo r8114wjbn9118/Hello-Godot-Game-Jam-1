@@ -24,7 +24,7 @@ var max_move_distance:int = 8:
 func _ready() -> void:
 	main_worm.move_finish_signal.connect(_on_worm_move_finish)
 	sub_worm.move_finish_signal.connect(_on_worm_move_finish)
-	
+	%GameUI.move_input.connect(_on_ui_move_input)
 
 func initialize(max_move_distance):
 	self.max_move_distance = max_move_distance
@@ -221,3 +221,16 @@ func _on_worm_move_finish():
 		move_finish_signal.emit()
 		return true
 	return false
+
+func _on_ui_move_input(action:String):
+	if GameManager.is_waiting():
+		if action == "up":
+			move_input(Vector2i.UP)
+		elif action == "left":
+			move_input(Vector2i.LEFT)
+		elif action == "right":
+			move_input(Vector2i.RIGHT)
+		elif action == "down":
+			move_input(Vector2i.DOWN)
+		elif action == "undo":
+			Undo()

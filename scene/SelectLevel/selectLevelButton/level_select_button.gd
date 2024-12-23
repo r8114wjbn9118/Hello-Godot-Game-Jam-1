@@ -12,4 +12,8 @@ func Init(tolevel:int):
 	text = str(tolevel)
 
 func go_level():
-	GameManager.goto_level(target_level)
+	if can_select:
+		GameManager.goto_level(target_level)
+	else:
+		## 發出失敗音效
+		pass

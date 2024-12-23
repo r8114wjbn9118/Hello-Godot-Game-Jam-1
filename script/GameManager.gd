@@ -132,6 +132,9 @@ func prohibit_action(b:bool):
 	player_action = ACTION.PROHIBIT if b else ACTION.WAIT
 	return player_action
 	
+func move_input():
+	pass
+	
 #endregion
 
 #region 關卡完成檢測
