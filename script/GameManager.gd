@@ -245,3 +245,9 @@ func switch_touch():
 	return _save_data.SwitchTouch()
 
 #endregion
+
+var _move_progress:float = 0.0 # 用於BloodShader
+func set_move_progress(new:float):
+	_move_progress = new
+func get_move_progress()->float:
+	return _move_progress

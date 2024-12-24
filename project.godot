@@ -30,6 +30,7 @@ window/stretch/mode="canvas_items"
 
 folder_colors={
 "res://Map/": "red",
+"res://Map/BloodShader/": "green",
 "res://Map/Eye/": "green",
 "res://Map/Worm/": "pink"
 }

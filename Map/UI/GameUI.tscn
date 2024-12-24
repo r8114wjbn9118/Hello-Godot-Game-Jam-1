@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2tyifmg01tlv"]
+[gd_scene load_steps=6 format=3 uid="uid://b2tyifmg01tlv"]
 
 [ext_resource type="Script" path="res://Map/UI/GameUI.gd" id="1_bmuld"]
 [ext_resource type="Texture2D" uid="uid://c3aa6okxkw00k" path="res://image/觀察箱底圖素材/黑白.png" id="3_6ndgx"]
 [ext_resource type="Theme" uid="uid://f050vq24bj7p" path="res://fonts/Theme.tres" id="3_cqal2"]
+[ext_resource type="PackedScene" uid="uid://6f6d0et021iw" path="res://Map/BloodShader/BloodShader.tscn" id="4_141x2"]
 
 [sub_resource type="Theme" id="Theme_bhsl5"]
 default_font_size = 20
@@ -209,6 +210,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = " Move: WASD
  Undo: Z"
+
+[node name="BloodShader" parent="." instance=ExtResource("4_141x2")]
 
 [connection signal="button_down" from="Control/DEBUGPanel/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="Control/DEBUGPanel/VBoxContainer/ResetDataButton" to="." method="_on_reset_data_button_button_down"]

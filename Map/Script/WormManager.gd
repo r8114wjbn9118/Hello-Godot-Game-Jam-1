@@ -92,6 +92,7 @@ func check(direction):
 		return -1
 	
 	# 最大距離限制
+	
 	print(move_path.size(), "/", max_move_distance)
 	if move_path.size() > max_move_distance:
 		SoundManager.play_ohno()
@@ -185,6 +186,8 @@ func Do( direction:Vector2i ):
 	_undo_redo.add_do_method(move.bind(target, target_sub))
 	_undo_redo.add_do_method(%MainWorm.Do)
 	_undo_redo.add_do_method(%SubWorm.Do)
+	_undo_redo.add_do_method(GameManager.set_move_progress.bind(move_path.size() / float(max_move_distance)))
+	_undo_redo.add_undo_method(GameManager.set_move_progress.bind(GameManager.get_move_progress()))
 	_undo_redo.add_undo_method(unmove.bind(unmove_target, unmove_target_sub))
 	_undo_redo.add_undo_method(%MainWorm.Undo)
 	_undo_redo.add_undo_method(%SubWorm.Undo)
