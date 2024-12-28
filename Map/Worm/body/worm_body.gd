@@ -58,6 +58,8 @@ var path_color:
 
 var max_move_distance:int = 8
 var game_pos:Vector2i
+var move_path = []
+var has_left_origin = false
 
 #var action_distance:int = 1 # 行動距離
 
@@ -73,13 +75,22 @@ func init():
 	color = color
 	
 func init_pos():
+	move_path.clear()
 	game_pos = point_manager.get_tile_game_pos(global_position)
 	global_position = point_manager.get_tile_position(game_pos)
+	move_path.append(game_pos)
+	has_left_origin = false
 	
 # 編輯地圖時隱藏身體
 func _ready() -> void:
-	%PathLine.visible = not Engine.is_editor_hint()
-	%Body.visible = not Engine.is_editor_hint()
+	set_body_visible()
+	
+func set_body_visible():
+	has_left_origin = move_path.size() > 1 and \
+			(has_left_origin or move_path[-1] != move_path[-2])
+	var new_visible = not Engine.is_editor_hint() or has_left_origin
+	%PathLine.visible = new_visible
+	%Body.visible = new_visible
 
 
 #region by DF
@@ -88,6 +99,8 @@ func _ready() -> void:
 @onready var head = %Head
 
 func set_pos(game_pos): # NOTE 由UNDO調用
+	move_path.pop_back()
+	set_body_visible()
 	rotation = Vector2(self.game_pos - game_pos).angle() - PI / 2
 	self.game_pos = game_pos
 	global_position = point_manager.get_tile_position(game_pos)
@@ -130,6 +143,8 @@ func Undo():
 
 func start_move(target_game_pos):
 	var target_pos = point_manager.get_tile_position(target_game_pos)
+	move_path.append(target_game_pos)
+	set_body_visible()
 	rotation = Vector2(game_pos - target_game_pos).angle() + PI / 2
 	_make_tween(target_pos) # TEST
 	game_pos = target_game_pos

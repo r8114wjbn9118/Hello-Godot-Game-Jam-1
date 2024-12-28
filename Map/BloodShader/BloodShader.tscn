@@ -7,12 +7,10 @@
 shader = ExtResource("1_6f2ay")
 shader_parameter/mount = -0.3
 
-[node name="BloodShader" type="Node2D"]
+[node name="BloodShader" type="CanvasLayer"]
 script = ExtResource("1_l8isx")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_p0t3d")
 anchors_preset = 15

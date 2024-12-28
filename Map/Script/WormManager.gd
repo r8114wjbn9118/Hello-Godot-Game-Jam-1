@@ -10,8 +10,9 @@ signal move_finish_signal()
 @export var main_worm:Worm
 @export var sub_worm:Worm
 
-var move_path = []
+#var move_path = []
 
+var move_distance:int = 0
 var max_move_distance:int = 8:
 	set(value):
 		main_worm.max_move_distance = value
@@ -31,7 +32,8 @@ func initialize(max_move_distance):
 	main_worm.init()
 	sub_worm.init()
 	
-	move_path = [main_worm.game_pos]
+	#move_path = [main_worm.game_pos]
+	move_distance = 0
 	
 	#create_body() # NOTE 已放進Worm
 	#PathLine.max_distance = max_move_distance
@@ -68,11 +70,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			Undo()
 			
 func move_input(direction:Vector2i):
-	var action = check(direction)
-	if action < 0: # 返回
-		Undo()
-		return true
-	if action > 0: # 正常移動
+	#var action = check(direction)
+	## 癈棄
+	#if action < 0: # 返回
+		#Undo()
+		#return true
+	if check(direction): # 正常移動
 		Do(direction)
 		return true
 	#if action == 0: # 無法移動
@@ -80,55 +83,42 @@ func move_input(direction:Vector2i):
 	return false
 
 func check(direction):
-	var map_point_list = point_manager.get_used_cells()
+	# 最大距離限制
+	print(move_distance, "/", max_move_distance)
+	if move_distance >= max_move_distance:
+		SoundManager.play_ohno()
+		return false
 
 	# 設定目標點
 	var target_map_pos = main_worm.game_pos + direction #* main_worm.action_distance
-
-	# 目標位置與最後行動的位置相同, 輸出-1以執行undo
-	# 如果有傳送效果可能需要再改?
-	# 因為往下有路徑檢測, 所以需要先運行
-	if move_path.size() > 1 and target_map_pos == move_path[-2]:
-		return -1
-	
-	# 最大距離限制
-	
-	print(move_path.size(), "/", max_move_distance)
-	if move_path.size() > max_move_distance:
-		SoundManager.play_ohno()
-		return 0
-
-	#if not target_map_pos in map_point_list:
-		#return 0
-	#if not check_edge_is_passable(main_worm.game_pos, target_map_pos):
-		#return 0
-		
 	var sub_target_map_pos = sub_worm.game_pos + direction * -1 #* sub_worm.action_distance
-	#if not sub_target_map_pos in map_point_list:
-		#return 0
-	#if not check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos):
-		#return 0
-	
-#region Test
-	# TEST 其中一隻蠑螈能走 就能走
-	var _have_point = target_map_pos in map_point_list
-	var _have_edge = check_edge_is_passable(main_worm.game_pos, target_map_pos)
-	
-	var _s_have_point = sub_target_map_pos in map_point_list
-	var _s_have_edge = check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos)
-	if (!_have_point or !_have_edge) and (!_s_have_point or !_s_have_edge):
-		return 0
-#endregion
-	
-	
-	
+
+	## 癈棄
+	## 目標位置與最後行動的位置相同, 輸出-1以執行undo
+	## 如果有傳送效果可能需要再改?
+	## 因為往下有路徑檢測, 所以需要先運行
+	#if move_path.size() > 1 and target_map_pos == move_path[-2]:
+		#return -1
+
 	# 相撞
 	if target_map_pos == sub_target_map_pos \
 	or target_map_pos == sub_worm.game_pos \
 	and sub_target_map_pos == main_worm.game_pos:
-		return 0
+		return false
+	
+#region Test
+	var map_point_list = point_manager.get_used_cells()
+	
+	# TEST 其中一隻蠑螈能走 就能走
+	var main_can_move = target_map_pos in map_point_list and \
+		check_edge_is_passable(main_worm.game_pos, target_map_pos)
+	
+	var sub_can_move = sub_target_map_pos in map_point_list and \
+		check_edge_is_passable(sub_worm.game_pos, sub_target_map_pos)
+		
+	return main_can_move or sub_can_move
+#endregion
 
-	return 1
 	
 func check_edge_is_passable(p1, p2):
 	var edge_game_pos
@@ -146,7 +136,8 @@ func check_edge_is_passable(p1, p2):
 
 
 func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操作 (不應該被直接調用)
-	move_path.append(target_map_pos) # NOTE 紀錄路徑
+	#move_path.append(target_map_pos) # NOTE 紀錄路徑
+	move_distance += 1
 	
 #region Test
 	var _have_point = target_map_pos in point_manager.get_used_cells()
@@ -165,7 +156,8 @@ func move( target_map_pos, sub_target_map_pos ): # NOTE 包含path 及 worm操�
 	GameManager.start_move()
 
 func unmove(target_map_pos, sub_target_map_pos): # NOTE move 的反向操作 (不應該被直接調用)
-	move_path.pop_back() # NOTE 紀錄路徑
+	#move_path.pop_back() # NOTE 紀錄路徑
+	move_distance -= 1
 	
 	change_edge_available_count(main_worm.game_pos, target_map_pos, -1)
 	main_worm.set_pos(target_map_pos)
@@ -186,7 +178,7 @@ func Do( direction:Vector2i ):
 	_undo_redo.add_do_method(move.bind(target, target_sub))
 	_undo_redo.add_do_method(%MainWorm.Do)
 	_undo_redo.add_do_method(%SubWorm.Do)
-	_undo_redo.add_do_method(GameManager.set_move_progress.bind(move_path.size() / float(max_move_distance)))
+	_undo_redo.add_do_method(GameManager.set_move_progress.bind(move_distance / float(max_move_distance)))
 	_undo_redo.add_undo_method(GameManager.set_move_progress.bind(GameManager.get_move_progress()))
 	_undo_redo.add_undo_method(unmove.bind(unmove_target, unmove_target_sub))
 	_undo_redo.add_undo_method(%MainWorm.Undo)

@@ -246,8 +246,17 @@ func switch_touch():
 
 #endregion
 
+#region BloodShader
+
+signal change_move_progress
+
 var _move_progress:float = 0.0 # 用於BloodShader
+
 func set_move_progress(new:float):
 	_move_progress = new
+	change_move_progress.emit()
+	
 func get_move_progress()->float:
 	return _move_progress
+	
+#endregion
