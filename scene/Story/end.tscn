@@ -1,24 +1,42 @@
-[gd_scene load_steps=19 format=3 uid="uid://cqe7ynybyj5hp"]
+[gd_scene load_steps=22 format=3 uid="uid://cqe7ynybyj5hp"]
 
-[ext_resource type="Script" path="res://script/end.gd" id="1_1cnwt"]
-[ext_resource type="Texture2D" uid="uid://cxqothrvfx6ja" path="res://image/過關畫面/影格2.png" id="1_kspbj"]
-[ext_resource type="Texture2D" uid="uid://bho4k7u6fqrmi" path="res://image/過關畫面/影格3.png" id="2_e7orx"]
-[ext_resource type="FontFile" uid="uid://cs0w3u1dnd1dh" path="res://fonts/Cubic_11.ttf" id="3_ihvni"]
-[ext_resource type="Texture2D" uid="uid://48s7wn8cbhwr" path="res://image/故事用插圖/2.png" id="6_q8b5m"]
-[ext_resource type="Texture2D" uid="uid://cw3dtlesn2822" path="res://image/故事用插圖/4.png" id="8_bbp50"]
-[ext_resource type="Texture2D" uid="uid://uqvs7kjl0d3u" path="res://image/故事用插圖/5.png" id="9_n7n54"]
-[ext_resource type="Texture2D" uid="uid://dukm8bsbsrkp0" path="res://image/故事用插圖/6.png" id="10_1rq3e"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4ay7k"]
+[ext_resource type="Script" path="res://scene/Story/script/End.gd" id="1_kojci"]
+[ext_resource type="Texture2D" uid="uid://uqvs7kjl0d3u" path="res://image/故事用插圖/5.png" id="2_grhj4"]
+[ext_resource type="Texture2D" uid="uid://cw3dtlesn2822" path="res://image/故事用插圖/4.png" id="3_rarmr"]
+[ext_resource type="Texture2D" uid="uid://dukm8bsbsrkp0" path="res://image/故事用插圖/6.png" id="4_06evn"]
+[ext_resource type="Texture2D" uid="uid://48s7wn8cbhwr" path="res://image/故事用插圖/2.png" id="5_tw561"]
+[ext_resource type="FontFile" uid="uid://cs0w3u1dnd1dh" path="res://fonts/Cubic_11.ttf" id="6_40nne"]
+[ext_resource type="Shader" path="res://Map/Shader/cutscene.gdshader" id="7_qu5ye"]
+[ext_resource type="Texture2D" uid="uid://cxqothrvfx6ja" path="res://image/過關畫面/影格2.png" id="7_ukv2g"]
+[ext_resource type="Texture2D" uid="uid://bho4k7u6fqrmi" path="res://image/過關畫面/影格3.png" id="8_gp4sh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5mqpo"]
 line_spacing = 8.0
-font = ExtResource("3_ihvni")
+font = ExtResource("6_40nne")
 font_size = 40
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 0.752941)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36vkp"]
+shader = ExtResource("7_qu5ye")
+shader_parameter/min_len = 0.3
+shader_parameter/max_len = 0.35
+
+[sub_resource type="Gradient" id="Gradient_yslpp"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_crcsa"]
+gradient = SubResource("Gradient_yslpp")
+
+[sub_resource type="Gradient" id="Gradient_gslfs"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k4oqr"]
+gradient = SubResource("Gradient_gslfs")
 
 [sub_resource type="Animation" id="Animation_6jeoe"]
 length = 0.001
@@ -82,34 +100,17 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_dsv3m"]
-resource_name = "end"
-length = 5.0
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("img:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("fg:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ExtResource("1_kspbj"), ExtResource("2_e7orx")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("img:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 3, 3.5, 4, 4.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_xqvo4"]
@@ -118,30 +119,14 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bg:color")
+tracks/0/path = NodePath("fg:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.117647, 0.117647, 0.117647, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_u5ix1"]
-resource_name = "fade to select"
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("bg:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.176471, 0.176471, 0.176471, 1)]
+"values": [Color(0, 0, 0, 0), Color(0.117647, 0.117647, 0.117647, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_et7ad"]
@@ -160,11 +145,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_ubu8o"]
-resource_name = "start"
-length = 0.001
-step = 0.5
 
 [sub_resource type="Animation" id="Animation_xk0b7"]
 resource_name = "story"
@@ -195,14 +175,41 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ow1vc"]
+[sub_resource type="Animation" id="Animation_dsv3m"]
+resource_name = "end"
+length = 5.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("img:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [ExtResource("7_ukv2g"), ExtResource("8_gp4sh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("img:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 3, 3.5, 4, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utyhr"]
 _data = {
 "RESET": SubResource("Animation_6jeoe"),
-"end": SubResource("Animation_dsv3m"),
+"enter": SubResource("Animation_dsv3m"),
 "fade to credit": SubResource("Animation_xqvo4"),
-"fade to select": SubResource("Animation_u5ix1"),
 "fadein": SubResource("Animation_et7ad"),
-"start": SubResource("Animation_ubu8o"),
 "story": SubResource("Animation_xk0b7")
 }
 
@@ -213,8 +220,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1cnwt")
-story_img = Array[Texture2D]([SubResource("CompressedTexture2D_4ay7k"), ExtResource("9_n7n54"), ExtResource("8_bbp50"), ExtResource("10_1rq3e"), ExtResource("6_q8b5m")])
+script = ExtResource("1_kojci")
+story_img = Array[Texture2D]([null, ExtResource("2_grhj4"), ExtResource("3_rarmr"), ExtResource("4_06evn"), ExtResource("5_tw561")])
+story_count = 5
+story_start_wait = 5
+story_interval = 1
+story_end_wait = 15
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
@@ -249,11 +260,36 @@ label_settings = SubResource("LabelSettings_5mqpo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="skipBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_36vkp")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 64.0
+grow_vertical = 0
+value = 100.0
+fill_mode = 5
+texture_under = SubResource("GradientTexture2D_crcsa")
+texture_progress = SubResource("GradientTexture2D_k4oqr")
+tint_under = Color(0, 0, 0, 0)
+tint_progress = Color(0.117647, 0.117647, 0.117647, 1)
+
+[node name="fg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
 [node name="anim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_ow1vc")
+"": SubResource("AnimationLibrary_utyhr")
 }
-autoplay = "end"
-
-[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
+autoplay = "enter"
