@@ -1,14 +1,17 @@
-keys,en,zh_TW
-game title,Dragon Eyes,
-Z,Undo,
-X,Clear,
+keys,en,zh_TW,zh_CN
+title,Dragon Eyes,,
+Z,Undo,,
+X,Clear,,
 start_1,"We felt the other presence that day
 Disturbed our peaceful life
 Took our friends and families
 Destroyed our home","那天，我們感受到有其他生物
 闖進了我們原本平靜的生活
 帶走了我們的同伴
-奪走了我們的家園"
+奪走了我們的家園","那天，我们感受到有其他生物
+闯进了我们原本平静的生活
+带走了我们的同伴
+夺走了我们的家园"
 start_2,"We thought of the words passed down by the older generation.
 
 When danger comes,
@@ -19,7 +22,11 @@ But that is our only way","我們想起了老一輩的人傳下來的話
 “當危險來臨，就去尋找龍之眼”
 
 我們不知道龍之眼到底是什麼
-但這是我們唯一的辦法"
+但這是我們唯一的辦法","我们想起了老一辈的人传下来的话
+“当危险来临，就去寻找龙之眼”
+
+我们不知道龙之眼到底是什麽
+但这是我们唯一的办法"
 start_3,"After we entered the sanctuary
 an earthquake hit
 
@@ -32,7 +39,13 @@ We must find each other...","我們進入聖地後
 我們與彼此走散
 現在除了找到龍之眼
 
-我們必須找到彼此……"
+我們必須找到彼此……","我们进入圣地后
+发生了地震
+
+我们与彼此走散
+现在除了找到龙之眼
+
+我们必须找到彼此……"
 end_1,"We feel our body changing
 The warmth inside makes us open our eyes
 
@@ -43,12 +56,19 @@ Soaring into the sky","一瞬間，我們的身體起了變化
 
 下一秒，我們穿過黑暗的隧道
 衝出湖面
-飛向天空"
+飛向天空","一瞬间，我们的身体起了变化
+体内的温热让我们睁开了眼睛
+
+下一秒，我们穿过黑暗的隧道
+冲出湖面
+飞向天空"
 end_2,"Those bipedal creatures look at us in fear
 Holding our friends and families trapped in crystals","那些以雙腳行走的生物驚恐地看著我們
-手裡抱著被水晶困住的同伴"
-end_3,"Flames ignited, we roar",體內燃起的火焰使我們咆哮
+手裡抱著被水晶困住的同伴","那些以双脚行走的生物惊恐地看着我们
+手里抱着被水晶困住的同伴"
+end_3,"Flames ignited, we roar",體內燃起的火焰使我們咆哮,体内燃起的火焰使我们咆哮
 end_4,"Perhaps we are no longer the way we once were
 But what we want has never changed.","也許我們不再是當初的模樣
-但我們想要的一直都沒變"
-end_5,We just want to live in peace...,我們只想安靜地活著……
+但我們想要的一直都沒變","也许我们不再是当初的模样
+但我们想要的一直都没变"
+end_5,We just want to live in peace...,我們只想安靜地活著……,我们只想安静地活着……
