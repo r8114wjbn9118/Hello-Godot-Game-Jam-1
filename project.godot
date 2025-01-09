@@ -13,7 +13,7 @@ config_version=5
 config/name="畫龍點睛"
 run/main_scene="res://scene/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://image/洞螈圖示（粉／藍）/藍藍洞螈.png"
 
 [autoload]
 
@@ -32,7 +32,8 @@ folder_colors={
 "res://Map/": "red",
 "res://Map/BloodShader/": "green",
 "res://Map/Eye/": "green",
-"res://Map/Worm/": "pink"
+"res://Map/Worm/": "pink",
+"res://_export/": "red"
 }
 
 [global_group]
@@ -108,3 +109,4 @@ locale/language_filter=["zh"]
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
