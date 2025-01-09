@@ -13,7 +13,7 @@ config_version=5
 config/name="畫龍點睛"
 run/main_scene="res://scene/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://image/洞螈圖示（粉／藍）/藍藍洞螈.png"
+config/icon="res://icon.png"
 
 [autoload]
 
