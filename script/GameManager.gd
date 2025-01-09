@@ -58,8 +58,8 @@ func goto_level(target:int):
 var SCENE:Dictionary = {
 	"title": "res://scene/title.tscn",
 	"select": "res://scene/SelectLevel/selectLevel.tscn",
-	"start": "res://scene/start.tscn",
-	"end": "res://scene/end.tscn",
+	"start": "res://scene/Story/start.tscn",
+	"end": "res://scene/Story/end.tscn",
 	"credit": "res://scene/Credit/Credit.tscn",
 	"extra": "res://scene/Extra/Extra.tscn"
 }
